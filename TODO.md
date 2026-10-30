@@ -20,8 +20,8 @@ This list grows as each page is built.
 - [ ] `TODO(audio)`: replace `public/audio/placeholder-01…04.mp3` (synthesised tones) with real demos, then regenerate waveform peaks (`npm run audio:placeholders` shows how; adapt it to the real files).
 - [ ] `TODO(audio)`: real Place names for the two home-page demos (`src/pages/index.astro`).
 - [ ] `TODO(images)`: real WORLDBUILDER screenshots for `src/components/ScreenshotFrame.astro` (home featured section uses the placeholder).
-- [ ] `TODO(images)`: replace the SVG placeholder art in `src/components/art/Atmosphere.astro` with real artwork (AVIF/WebP via `astro:assets`).
-- [ ] `TODO(og)`: `public/og/default.jpg` is a screenshot of the threshold hero. Replace with designed Open Graph images (1200×630), ideally one per page.
+- [ ] `TODO(images)`: the teaser scenes (`src/assets/art/atmosphere-*.webp`, painted by `scripts/art/atmospheres.mjs`) are stand-ins. Replace with real teaser artwork when it exists.
+- [ ] `TODO(og)`: `public/og/default.jpg` is a screenshot of the threshold hero with the brand line. Replace with designed Open Graph images (1200×630), ideally one per page.
 
 ## Copy
 - [ ] `TODO(copy)`: home: hero sub-line, intro paragraphs, WORLDBUILDER summary (`src/pages/index.astro`).

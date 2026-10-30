@@ -125,12 +125,12 @@ const space = ['3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
     <section id="threshold" class="sg-section" aria-labelledby="threshold-title">
       <div class="wrap stack">
         <h2 id="threshold-title">The threshold (home page hero)</h2>
-        <p class="lede">One horizon, two worlds: a castle and forest under a setting sun, a city of towers under the stars, and a lit doorway (our mark) standing on the seam. It's all inline SVG, about 30&nbsp;KB, with no image requests. Scroll past it to see the parallax.</p>
+        <p class="lede">One horizon, two worlds: ridges and a distant castle under a sunset, a city of towers in cool mist beneath a vast planet, and a slender lit doorway (our mark) on the seam. It is painted with SVG filters (fractal clouds, haze, mist, bloom) and rendered once by <code>npm run art</code> into a single image of about 50&nbsp;KB, served as AVIF/WebP. A tiny overlay keeps the castle candle, the beacon and a few stars alive. Scroll past it to see the drift.</p>
       </div>
       <div class="sg-hero" data-realm="threshold">
-        <ThresholdHero id="sg-threshold">
+        <ThresholdHero>
           <p class="eyebrow">Elsewhere Audio</p>
-          <p class="display hero-line">Instruments for places that don’t exist.</p>
+          <p class="display hero-line">Instruments for <em>places that don’t exist.</em></p>
           <p class="hero-sub">{/* TODO(copy): hero sub-line */}Sample instruments for film, TV and game composers. Each one is a doorway to somewhere else.</p>
           <div class="hero-ctas">
             <a class="btn btn--primary" href="#top">Enter WORLDBUILDER</a>
@@ -197,7 +197,8 @@ const space = ['3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
   @media (min-width: 70rem) { .realms { grid-template-columns: 1fr 1fr; align-items: start; } }
 
   .sg-hero { margin-top: var(--space-xl); }
-  .hero-line { font-size: var(--step-6); max-width: 15ch; line-height: 1.02; }
+  .hero-line { font-size: var(--step-6); max-width: 15ch; line-height: 1.04; }
+  .hero-line em { font-style: italic; font-weight: 300; color: #f6e7c8; }
   .hero-sub { font-size: var(--step-1); max-width: 40ch; color: var(--ink); opacity: 0.88; }
   .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-s); margin-top: var(--space-xs); }
   .sg-threshold-below { padding-block: var(--space-xl) var(--space-2xl); }

@@ -28,6 +28,7 @@ Then open <http://localhost:4321/styleguide>.
 | `npm run preview` | Serves the built `dist/` locally, the closest thing to production |
 | `npm run check` | Type-checks `.astro` and `.ts` files |
 | `npm run audio:placeholders` | Regenerates the placeholder demo audio and waveform peaks (needs `ffmpeg`) |
+| `npm run art` | Re-renders the painted artwork into `src/assets/art/` (needs Playwright, see below) |
 
 ## How the design system works
 
@@ -39,6 +40,8 @@ Then open <http://localhost:4321/styleguide>.
 - **Fonts** are open-licensed (SIL OFL) and self-hosted, bundled from npm by `src/styles/fonts.css`: Fraunces (display), Instrument Sans (body) and IBM Plex Mono (sci-fi labels).
 - **Motion** uses CSS only (scroll-driven animations) and turns off under `prefers-reduced-motion`. Audio never autoplays.
 - **Pixel art** belongs to WORLDBUILDER surfaces only (`src/components/art/TinyPlanet.astro`). Never use it in site chrome.
+
+**Artwork.** The home hero and the teaser scenes are painted in code: SVG with filters (fractal clouds, haze, mist, bloom) in `scripts/art/`. `npm run art` renders them once, using a headless browser, into WebP sources in `src/assets/art/`, and Astro serves them as responsive AVIF/WebP. Visitors download a small image (the hero is about 25 KB as AVIF), never the filters. To change the art, edit `scripts/art/*.mjs` and run `npm run art`. It needs Playwright with Chromium (`npm i -D playwright` then `npx playwright install chromium`). Real artwork can replace any of these files directly.
 
 Key components:
 

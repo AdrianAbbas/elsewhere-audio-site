@@ -123,8 +123,8 @@ a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
 }
 [data-realm='scifi'] .btn--primary { background-image: none; }
 
-/* Threshold buttons: soft pill, warm-to-cool hairline on hover */
-[data-realm='threshold'] .btn { border-radius: 999px; }
+/* Threshold buttons: square, small caps-like tracking, generous padding */
+[data-realm='threshold'] .btn { border-radius: 1px; padding: 0.95em 1.9em; font-weight: 500; }
 
 /* ── Quiet motion ─────────────────────────────────────────────────── */
 /* Reveal on scroll with CSS scroll-driven animations (no JS). Browsers

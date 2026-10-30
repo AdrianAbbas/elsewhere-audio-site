@@ -159,16 +159,16 @@
   --accent-text: #e6bd74;
   --link: #e6bd74;
   --link-hover: #f2ecdf;
-  --primary: #e8c27a;
-  --on-primary: #1a1206;
-  --primary-hover: #f2d69c;
+  --primary: #efe7d6; /* parchment: quieter than gold */
+  --on-primary: #12121c;
+  --primary-hover: #fff8ea;
   --line: rgb(242 236 223 / 0.14);
   --line-strong: #6e6a86;
   --focus: #7ee3d8;
   --scrim: rgb(11 12 24 / 0.78);
 
   --display-variation: 'SOFT' 60, 'WONK' 0;
-  --display-weight: 340;
+  --display-weight: 300;
   --display-tracking: -0.015em;
   --eyebrow-font: var(--font-body);
   --eyebrow-style: normal;
@@ -176,9 +176,9 @@
   --eyebrow-tracking: 0.22em;
   --eyebrow-size: var(--step--2);
   --btn-font: var(--font-body);
-  --btn-transform: none;
-  --btn-tracking: 0.02em;
-  --btn-size: var(--step--1);
+  --btn-transform: uppercase;
+  --btn-tracking: 0.14em;
+  --btn-size: var(--step--2);
 
   --texture:
     var(--grain-light),
