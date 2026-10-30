@@ -1,0 +1,8 @@
+---
+import StoreButton from './StoreButton.astro';
+import type { ProductKey } from '../../config/store';
+
+interface Props { product?: ProductKey; label?: string }
+const { product = 'worldbuilder', label = 'Add to cart' } = Astro.props;
+---
+<StoreButton action="add-to-cart" product={product} variant="secondary">{label}</StoreButton>

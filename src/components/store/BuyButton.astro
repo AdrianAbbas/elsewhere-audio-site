@@ -1,0 +1,18 @@
+---
+// "Buy" goes straight to checkout with the product in the cart.
+import StoreButton from './StoreButton.astro';
+import { STORE, formatPrice, type ProductKey } from '../../config/store';
+
+interface Props { product?: ProductKey; showPrice?: boolean; label?: string }
+const { product = 'worldbuilder', showPrice = true, label = 'Buy' } = Astro.props;
+const p = STORE.products[product];
+const intro = 'introPrice' in p ? p.introPrice : undefined;
+---
+<StoreButton action="checkout" product={product}>
+  <span>{label} {p.name}</span>
+  {showPrice && (
+    <span class="btn__price">
+      {intro ? <><s aria-label={`was ${formatPrice(p.price)}`}>{formatPrice(p.price)}</s> {formatPrice(intro)}</> : formatPrice(p.price)}
+    </span>
+  )}
+</StoreButton>

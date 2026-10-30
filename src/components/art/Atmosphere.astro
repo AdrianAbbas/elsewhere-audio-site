@@ -1,0 +1,95 @@
+---
+// Atmospheric placeholder art for cards (e.g. the unnamed "coming soon" worlds).
+// Inline SVG, so no image requests.
+// TODO(images): replace with real artwork (AVIF/WebP via astro:assets <Picture>) when it exists.
+import { seeded, round } from '../../lib/random';
+
+export type Scene = 'forest' | 'nebula' | 'ruins' | 'megacity';
+interface Props { scene: Scene; alt: string }
+const { scene, alt } = Astro.props;
+const uid = `atm-${scene}-${Math.floor(seeded(scene.length * 31 + scene.charCodeAt(0))() * 1e6)}`;
+const r = seeded(scene.charCodeAt(0) * 97 + scene.length);
+
+const stars = Array.from({ length: scene === 'nebula' ? 90 : 40 }, () => ({
+  x: round(r() * 400), y: round(r() * (scene === 'nebula' ? 300 : 150)), rad: round(0.3 + r() * 0.9, 2), o: round(0.3 + r() * 0.6, 2),
+}));
+const treeRows = [0, 1, 2].map((row) =>
+  Array.from({ length: 22 - row * 4 }, (_, i) => ({ x: round(i * (420 / (22 - row * 4)) - 10 + r() * 10), h: round(40 + row * 22 + r() * 30) })),
+);
+const blocks = [] as { x: number; w: number; h: number }[];
+for (let x = -5; x < 405; ) { const w = 14 + r() * 26; blocks.push({ x: round(x), w: round(w), h: round(60 + r() * 170) }); x += w + 3; }
+---
+<svg class="atmosphere" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label={alt}>
+  {scene === 'forest' && (
+    <>
+      <defs>
+        <linearGradient id={`${uid}-sky`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#16251c" /><stop offset=".6" stop-color="#3b5640" /><stop offset="1" stop-color="#c9b37a" />
+        </linearGradient>
+      </defs>
+      <rect width="400" height="300" fill={`url(#${uid}-sky)`} />
+      <circle cx="290" cy="90" r="26" fill="#f3e3b3" opacity=".85" />
+      {stars.slice(0, 18).map((s) => <circle cx={s.x} cy={s.y * 0.6} r={s.rad} fill="#f3ebd6" opacity={s.o * 0.7} />)}
+      {treeRows.map((row, i) => (
+        <g fill={['#3a5a44', '#22382b', '#0f1a13'][i]} opacity={[0.6, 0.85, 1][i]}>
+          {row.map((t) => <path d={`M${round(t.x - t.h * 0.22)} 300L${t.x} ${300 - t.h - (2 - i) * 30}L${round(t.x + t.h * 0.22)} 300Z`} />)}
+        </g>
+      ))}
+      <rect y="180" width="400" height="60" fill="#e9dcb6" opacity=".12" />
+    </>
+  )}
+  {scene === 'nebula' && (
+    <>
+      <defs>
+        <radialGradient id={`${uid}-a`} cx=".3" cy=".4" r=".6"><stop offset="0" stop-color="#8c7bff" stop-opacity=".7" /><stop offset="1" stop-color="#8c7bff" stop-opacity="0" /></radialGradient>
+        <radialGradient id={`${uid}-b`} cx=".75" cy=".7" r=".5"><stop offset="0" stop-color="#43d6c6" stop-opacity=".45" /><stop offset="1" stop-color="#43d6c6" stop-opacity="0" /></radialGradient>
+        <linearGradient id={`${uid}-p`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#bfe9ff" /><stop offset=".5" stop-color="#3b4790" /><stop offset="1" stop-color="#060a1a" /></linearGradient>
+      </defs>
+      <rect width="400" height="300" fill="#060a1a" />
+      <rect width="400" height="300" fill={`url(#${uid}-a)`} />
+      <rect width="400" height="300" fill={`url(#${uid}-b)`} />
+      {stars.map((s) => <circle cx={s.x} cy={s.y} r={s.rad} fill="#fff" opacity={s.o} />)}
+      <circle cx="300" cy="230" r="90" fill={`url(#${uid}-p)`} />
+      <path d="M180 250 A 140 26 -14 0 1 420 190" stroke="#a99dff" stroke-opacity=".5" fill="none" />
+    </>
+  )}
+  {scene === 'ruins' && (
+    <>
+      <defs>
+        <linearGradient id={`${uid}-sky`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#1a1420" /><stop offset=".7" stop-color="#4d3a4a" /><stop offset="1" stop-color="#8a6a62" />
+        </linearGradient>
+      </defs>
+      <rect width="400" height="300" fill={`url(#${uid}-sky)`} />
+      <circle cx="110" cy="80" r="34" fill="#efe2c4" opacity=".7" />
+      <g fill="#120d16">
+        <path d="M60 300V170a40 40 0 0 1 80 0V300h-14V176a26 26 0 0 0-52 0V300Z" />
+        <path d="M150 300V140a50 50 0 0 1 100 0V300h-16V148a34 34 0 0 0-68 0V300Z" />
+        <path d="M260 300V190a35 35 0 0 1 70 0v20h-12v-14a23 23 0 0 0-46 0V300Z" />
+        <path d="M200 92l-6 -40h12Z" />
+        <rect y="280" width="400" height="20" />
+      </g>
+      <rect y="230" width="400" height="70" fill="#d8c8b0" opacity=".1" />
+    </>
+  )}
+  {scene === 'megacity' && (
+    <>
+      <defs>
+        <linearGradient id={`${uid}-sky`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#03061a" /><stop offset=".7" stop-color="#1b1d58" /><stop offset="1" stop-color="#3a2e72" />
+        </linearGradient>
+      </defs>
+      <rect width="400" height="300" fill={`url(#${uid}-sky)`} />
+      {stars.map((s) => <circle cx={s.x} cy={s.y} r={s.rad * 0.8} fill="#fff" opacity={s.o * 0.8} />)}
+      <g fill="#0a0e2c">{blocks.map((b) => <rect x={b.x} y={300 - b.h} width={b.w} height={b.h} />)}</g>
+      <g fill="#6fd6cb" opacity=".7">
+        {blocks.flatMap((b, i) => Array.from({ length: Math.floor(b.h / 18) }, (_, j) => (j + i) % 3 === 0 ? <rect x={b.x + 4} y={300 - b.h + 8 + j * 18} width={b.w - 8} height="1.5" /> : null))}
+      </g>
+      <rect y="200" width="400" height="100" fill="#8c7bff" opacity=".08" />
+    </>
+  )}
+</svg>
+
+<style>
+  .atmosphere { width: 100%; height: 100%; }
+</style>

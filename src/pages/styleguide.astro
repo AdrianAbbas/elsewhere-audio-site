@@ -1,0 +1,215 @@
+---
+// INTERNAL: design direction for review. Not linked from the site,
+// excluded from the sitemap and marked noindex.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RealmPanel from '../components/styleguide/RealmPanel.astro';
+import ContrastTable from '../components/styleguide/ContrastTable.astro';
+import ThresholdHero from '../components/art/ThresholdHero.astro';
+import TinyPlanet from '../components/art/TinyPlanet.astro';
+import Ornament from '../components/Ornament.astro';
+import AudioPlayer from '../components/AudioPlayer.astro';
+
+const scale = [
+  ['--step-6', 'Hero'],
+  ['--step-5', 'Page title'],
+  ['--step-4', 'Section title'],
+  ['--step-3', 'Sub-section'],
+  ['--step-2', 'Card title'],
+  ['--step-1', 'Lede'],
+  ['--step-0', 'Body'],
+  ['--step--1', 'Small'],
+  ['--step--2', 'Labels'],
+];
+const space = ['3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
+---
+<BaseLayout
+  title="Styleguide"
+  description="Internal design direction for the Elsewhere Audio website."
+  realm="house"
+  noindex
+>
+  <div id="top" class="sg">
+    <header class="sg-intro wrap stack">
+      <p class="eyebrow">Styleguide · direction v0.1 · for review</p>
+      <h1>One house, many realms.</h1>
+      <p class="lede">
+        The house is calm, warm-paper and ink: generous space, one serif with real character, a quiet sans, and grain
+        you feel more than see. Each page then takes on the weather of its realm. Below: the house, the two realms side by
+        side, the threshold that joins them, and the one place pixel art is allowed.
+      </p>
+      <nav aria-label="Styleguide sections" class="sg-toc">
+        <a href="#house">The house</a>
+        <a href="#realms">Realms</a>
+        <a href="#threshold">Threshold hero</a>
+        <a href="#identity">Product identity</a>
+      </nav>
+    </header>
+
+    <!-- ── THE HOUSE ─────────────────────────────────────────────── -->
+    <section id="house" class="sg-section wrap" aria-labelledby="house-title">
+      <h2 id="house-title">The house</h2>
+      <p class="lede">Shared by every page. Realms change colour, texture and the serif's mood, never the spacing, scale or rhythm.</p>
+
+      <div class="sg-grid">
+        <div class="stack">
+          <h3>Typefaces</h3>
+          <div class="face">
+            <p class="face__sample display">Fraunces</p>
+            <p class="muted">Display serif, variable. Its <em>Soft</em> and <em>Wonk</em> axes give each realm its own voice from one file: softer and more classical in fantasy, crisp and light in sci-fi. SIL OFL, self-hosted.</p>
+          </div>
+          <div class="face">
+            <p class="face__sample face__sample--sans">Instrument Sans</p>
+            <p class="muted">Body and interface. Clear, slightly narrow, a little warmth in the curves. SIL OFL, self-hosted.</p>
+          </div>
+          <div class="face">
+            <p class="face__sample face__sample--mono">IBM PLEX MONO</p>
+            <p class="muted">Small labels in the sci-fi realm only. SIL OFL, self-hosted.</p>
+          </div>
+          <div class="axes" aria-label="Fraunces in each realm">
+            <p class="display" style="font-variation-settings:'SOFT' 100,'WONK' 1;font-weight:420">Elsewhere <span class="muted">fantasy</span></p>
+            <p class="display" style="font-variation-settings:'SOFT' 30,'WONK' 0;font-weight:360">Elsewhere <span class="muted">house</span></p>
+            <p class="display" style="font-variation-settings:'SOFT' 0,'WONK' 0;font-weight:300">Elsewhere <span class="muted">sci-fi</span></p>
+          </div>
+        </div>
+
+        <div class="stack">
+          <h3>Type scale (fluid)</h3>
+          <ol class="scale" role="list">
+            {scale.map(([v, use]) => (
+              <li><span class="scale__sample" style={`font-size: var(${v})`}>Places</span><code>{v}</code><span class="muted">{use}</span></li>
+            ))}
+          </ol>
+        </div>
+      </div>
+
+      <div class="sg-grid">
+        <div class="stack">
+          <h3>Space</h3>
+          <ul class="space" role="list">
+            {space.map((s) => <li><span class="space__bar" style={`width: var(--space-${s})`}></span><code>--space-{s}</code></li>)}
+          </ul>
+        </div>
+        <div class="stack">
+          <h3>Ground, grain and motion</h3>
+          <p>Every realm paints its own ground: a base colour, a fine SVG grain (generated in the browser, no image request) and, per realm, one extra layer: laid-paper lines and candle vignette in fantasy, two star fields and a faint grid in sci-fi.</p>
+          <p>Motion is quiet: content rises gently into view, the threshold hero has slow parallax, stars twinkle and castle windows flicker. All of it is CSS only and switches off with <code>prefers-reduced-motion</code>. Audio never autoplays.</p>
+          <h3>House palette &amp; contrast</h3>
+          <ContrastTable realm="house" />
+        </div>
+      </div>
+
+      <Ornament />
+    </section>
+
+    <!-- ── REALMS SIDE BY SIDE ───────────────────────────────────── -->
+    <section id="realms" class="sg-section" aria-labelledby="realms-title">
+      <div class="wrap stack">
+        <h2 id="realms-title">Two realms, side by side</h2>
+        <p class="lede">Same components, same markup. Only the <code>data-realm</code> attribute changes. Nav and footer are shown in each realm too; they collapse based on the space they have, which is why they look compact here.</p>
+      </div>
+      <div class="realms wrap-wide">
+        <RealmPanel
+          realm="fantasy"
+          name="Fantasy"
+          summary="Parchment, ink-black and candlelight gold, with deep forest for weight. Fraunces at its softest, etched ornaments, a bookplate double rule on buttons and cards."
+        />
+        <RealmPanel
+          realm="scifi"
+          name="Sci-fi"
+          summary="Deep-space navy with nebula violet and teal. Fraunces at its lightest and crispest, hairlines with corner brackets, monospace labels, faint stars and grid."
+        />
+      </div>
+    </section>
+
+    <!-- ── THRESHOLD ─────────────────────────────────────────────── -->
+    <section id="threshold" class="sg-section" aria-labelledby="threshold-title">
+      <div class="wrap stack">
+        <h2 id="threshold-title">The threshold (home page hero)</h2>
+        <p class="lede">One horizon, two worlds: a castle and forest under a setting sun, a city of towers under the stars, and a lit doorway (our mark) standing on the seam. It's all inline SVG, about 30&nbsp;KB, with no image requests. Scroll past it to see the parallax.</p>
+      </div>
+      <div class="sg-hero" data-realm="threshold">
+        <ThresholdHero id="sg-threshold">
+          <p class="eyebrow">Elsewhere Audio</p>
+          <p class="display hero-line">Instruments for places that don’t exist.</p>
+          <p class="hero-sub">{/* TODO(copy): hero sub-line */}Sample instruments for film, TV and game composers. Each one is a doorway to somewhere else.</p>
+          <div class="hero-ctas">
+            <a class="btn btn--primary" href="#top">Enter WORLDBUILDER</a>
+            <a class="btn" href="#top">Hear the places</a>
+          </div>
+        </ThresholdHero>
+        <div class="wrap sg-threshold-below">
+          <div class="sg-grid">
+            <div class="stack">
+              <h3>Threshold palette &amp; contrast</h3>
+              <p class="muted">Dusk-dark ground, warm parchment ink, candle gold for action, teal for focus. It borrows from both realms without becoming either.</p>
+              <AudioPlayer src="/audio/placeholder-02.mp3" peaks="placeholder-02" title="Crossroads at dusk" caption="Player in the threshold realm." />
+            </div>
+            <ContrastTable realm="threshold" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PRODUCT IDENTITY ──────────────────────────────────────── -->
+    <section id="identity" class="sg-section wrap" aria-labelledby="identity-title">
+      <h2 id="identity-title">Product identity inside the house</h2>
+      <p class="lede">Products bring their own accent into the house. WORLDBUILDER's pixel art lives only in its screenshots, the tiny-planet motif and small accent details on its own page. Navigation, footer, body type and every other page stay in the house style.</p>
+      <div class="identity" data-realm="scifi">
+        <div class="identity__planet"><TinyPlanet size={240} /></div>
+        <div class="stack">
+          <p class="eyebrow">Product accent · WORLDBUILDER only</p>
+          <p class="display identity__name">WORLDBUILDER</p>
+          <p class="muted">The tiny planet: grassland and a castle on one side, plating and a lit spire on the other, because WORLDBUILDER covers both. Rendered as crisp SVG pixels, so it stays sharp at any size.</p>
+          <p class="identity__rule"><span>Allowed:</span> screenshots, the planet, pixel corner accents on WORLDBUILDER sections. <span>Never:</span> nav, footer, headings, body text, other pages.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .sg-intro { padding-block: var(--space-2xl) var(--space-xl); --stack-space: var(--space-m); }
+  .sg-toc { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-l); font-size: var(--step--1); }
+  .sg-section { padding-block: var(--space-2xl); }
+  .sg-section > h2, .sg-section > .wrap > h2 { margin-bottom: var(--space-s); }
+  .sg-section > .lede { margin-bottom: var(--space-xl); }
+  .sg-grid { display: grid; gap: var(--space-xl); grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); margin-block: var(--space-xl); }
+  .sg-grid h3 { font-size: var(--step-2); }
+
+  .face { padding-block: var(--space-s); border-bottom: 1px solid var(--line); }
+  .face__sample { font-size: var(--step-4); line-height: 1.1; }
+  .face__sample--sans { font-family: var(--font-body); font-weight: 500; letter-spacing: -0.01em; }
+  .face__sample--mono { font-family: var(--font-mono); font-size: var(--step-2); letter-spacing: 0.14em; }
+  .axes p { font-size: var(--step-3); line-height: 1.25; }
+  .axes .muted { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .scale { list-style: none; padding: 0; margin: 0; }
+  .scale li { display: grid; grid-template-columns: 1fr auto 7rem; align-items: baseline; gap: var(--space-s); padding-block: 0.35rem; border-bottom: 1px solid var(--line); }
+  .scale__sample { font-family: var(--font-display); font-variation-settings: var(--display-variation); line-height: 1.15; white-space: nowrap; overflow: hidden; }
+  .scale code, .space code { font-family: var(--font-mono); font-size: var(--step--2); color: var(--ink-muted); }
+  .scale .muted { font-size: var(--step--1); }
+
+  .space { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-2xs); }
+  .space li { display: flex; align-items: center; gap: var(--space-s); }
+  .space__bar { height: 0.75rem; background: var(--accent); flex: none; }
+
+  .realms { display: grid; gap: var(--space-m); grid-template-columns: 1fr; margin-top: var(--space-xl); }
+  @media (min-width: 70rem) { .realms { grid-template-columns: 1fr 1fr; align-items: start; } }
+
+  .sg-hero { margin-top: var(--space-xl); }
+  .hero-line { font-size: var(--step-6); max-width: 15ch; line-height: 1.02; }
+  .hero-sub { font-size: var(--step-1); max-width: 40ch; color: var(--ink); opacity: 0.88; }
+  .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-s); margin-top: var(--space-xs); }
+  .sg-threshold-below { padding-block: var(--space-xl) var(--space-2xl); }
+
+  .identity {
+    display: grid; gap: var(--space-xl); align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    padding: var(--space-xl); border: 1px solid var(--line-strong);
+  }
+  .identity__planet { display: grid; place-items: center; }
+  .identity__planet :global(svg) { width: min(100%, 240px); height: auto; }
+  .identity__name { font-size: var(--step-4); letter-spacing: 0.04em; }
+  .identity__rule { font-size: var(--step--1); }
+  .identity__rule span { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-text); }
+</style>

@@ -1,0 +1,27 @@
+---
+// Shared base for the store buttons. Renders a <button> carrying everything
+// the Moonbase hook (src/scripts/store.ts) needs as data attributes.
+import { STORE, type ProductKey } from '../../config/store';
+
+interface Props {
+  action: 'checkout' | 'add-to-cart' | 'download';
+  product: ProductKey;
+  variant?: 'primary' | 'secondary';
+  class?: string;
+}
+const { action, product, variant = 'primary', class: className } = Astro.props;
+const p = STORE.products[product];
+---
+<button
+  type="button"
+  class:list={['btn', variant === 'primary' && 'btn--primary', className]}
+  data-store-action={action}
+  data-product-id={p.id}
+  data-product-name={p.name}
+>
+  <slot />
+</button>
+
+<script>
+  import '../../scripts/store';
+</script>

@@ -1,0 +1,195 @@
+/*
+  REALMS: per-page themes, applied with data-realm on <body>
+  (or on any element, which is how the styleguide shows them side by side).
+
+  Each realm defines the same set of custom properties. Components only ever
+  use these properties, so they work in every realm without changes.
+
+  Contrast: every text/background pair is checked for WCAG AA on /styleguide
+  (it reads this file at build time). If you change a colour here, check there.
+*/
+
+/* ── House (default): bone paper, ink, a little brass ─────────────── */
+:root,
+[data-realm='house'] {
+  color-scheme: light;
+  --bg: #f2efe9;
+  --bg-deep: #e7e2d8;
+  --surface: #faf8f4;
+  --surface-2: #ece7de;
+  --ink: #17161a;
+  --ink-muted: #57535c;
+  --accent: #b08d4a; /* decorative only: rules, ornaments */
+  --accent-2: #6b5ea8; /* decorative only */
+  --accent-text: #6d5222;
+  --link: #3f3470;
+  --link-hover: #17161a;
+  --primary: #17161a;
+  --on-primary: #f2efe9;
+  --primary-hover: #2e2c34;
+  --line: rgb(23 22 26 / 0.14);
+  --line-strong: #7e7884;
+  --focus: #3f3470;
+  --scrim: rgb(242 239 233 / 0.86);
+
+  --display-variation: 'SOFT' 30, 'WONK' 0;
+  --display-weight: 360;
+  --display-tracking: -0.015em;
+  --eyebrow-font: var(--font-body);
+  --eyebrow-style: normal;
+  --eyebrow-transform: uppercase;
+  --eyebrow-tracking: 0.16em;
+  --eyebrow-size: var(--step--2);
+  --btn-font: var(--font-body);
+  --btn-transform: none;
+  --btn-tracking: 0.01em;
+  --btn-size: var(--step--1);
+
+  --texture: var(--grain-dark);
+  --texture-size: 200px 200px;
+}
+
+/* ── Fantasy: parchment, ink-black, candlelight gold, deep forest ─── */
+[data-realm='fantasy'] {
+  color-scheme: light;
+  --bg: #eee5cf; /* parchment */
+  --bg-deep: #e2d5b6;
+  --surface: #f6efdd;
+  --surface-2: #e8dcc0;
+  --ink: #1d1a14; /* ink-black */
+  --ink-muted: #5a5040;
+  --accent: #b38a35; /* candlelight gold, decorative */
+  --accent-2: #2f4a37; /* forest, decorative */
+  --accent-text: #7b5517;
+  --link: #23452f;
+  --link-hover: #1d1a14;
+  --primary: #1f3a2b; /* deep forest */
+  --on-primary: #f3ebd6;
+  --primary-hover: #16291f;
+  --line: rgb(29 26 20 / 0.16);
+  --line-strong: #85744f;
+  --focus: #7a2a1c; /* oxblood: reads clearly on parchment */
+  --scrim: rgb(238 229 207 / 0.88);
+
+  /* Fraunces with soft, slightly 'wonky' classical forms */
+  --display-variation: 'SOFT' 100, 'WONK' 1;
+  --display-weight: 420;
+  --display-tracking: -0.005em;
+  --eyebrow-font: var(--font-display);
+  --eyebrow-style: italic;
+  --eyebrow-transform: none;
+  --eyebrow-tracking: 0.01em;
+  --eyebrow-size: var(--step-0);
+  --btn-font: var(--font-display);
+  --btn-transform: none;
+  --btn-tracking: 0.01em;
+  --btn-size: var(--step-0);
+
+  /* Grain + faint laid-paper lines + candlelit vignette */
+  --texture:
+    var(--grain-dark),
+    repeating-linear-gradient(0deg, rgb(90 70 30 / 0.035) 0 1px, transparent 1px 5px),
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgb(255 244 214 / 0.65), transparent 70%),
+    radial-gradient(ellipse 120% 80% at 50% 110%, rgb(110 80 30 / 0.16), transparent 60%);
+  --texture-size: 200px 200px, auto, auto, auto;
+}
+
+/* ── Sci-fi: deep-space navy, nebula violet and teal, thin lines ──── */
+[data-realm='scifi'] {
+  color-scheme: dark;
+  --bg: #060a1a;
+  --bg-deep: #03050f;
+  --surface: #0c1330;
+  --surface-2: #121b40;
+  --ink: #e7eaf6;
+  --ink-muted: #a3accf;
+  --accent: #8c7bff; /* nebula violet, decorative */
+  --accent-2: #43d6c6; /* teal, decorative */
+  --accent-text: #a99dff;
+  --link: #6fe3d6;
+  --link-hover: #e7eaf6;
+  --primary: #43d6c6;
+  --on-primary: #04111a;
+  --primary-hover: #6fe3d6;
+  --line: rgb(163 172 207 / 0.16);
+  --line-strong: #5d6aa0;
+  --focus: #f2d27a; /* warm focus ring stands out against the cool palette */
+  --scrim: rgb(6 10 26 / 0.82);
+
+  /* Crisp, light, precise */
+  --display-variation: 'SOFT' 0, 'WONK' 0;
+  --display-weight: 300;
+  --display-tracking: -0.02em;
+  --eyebrow-font: var(--font-mono);
+  --eyebrow-style: normal;
+  --eyebrow-transform: uppercase;
+  --eyebrow-tracking: 0.14em;
+  --eyebrow-size: var(--step--2);
+  --btn-font: var(--font-mono);
+  --btn-transform: uppercase;
+  --btn-tracking: 0.12em;
+  --btn-size: var(--step--2);
+
+  /* Grain + two star fields at different scales + a faint grid + nebula light */
+  --texture:
+    var(--grain-light),
+    radial-gradient(1px 1px at 23px 41px, rgb(255 255 255 / 0.55), transparent 60%),
+    radial-gradient(1px 1px at 131px 97px, rgb(200 210 255 / 0.4), transparent 60%),
+    radial-gradient(1.5px 1.5px at 71px 163px, rgb(255 255 255 / 0.5), transparent 60%),
+    radial-gradient(1px 1px at 211px 29px, rgb(180 255 245 / 0.35), transparent 60%),
+    linear-gradient(rgb(140 150 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(140 150 255 / 0.035) 1px, transparent 1px),
+    radial-gradient(ellipse 60% 50% at 85% 0%, rgb(140 123 255 / 0.16), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 0% 90%, rgb(67 214 198 / 0.08), transparent 70%);
+  --texture-size: 200px 200px, 190px 190px, 190px 190px, 260px 260px, 260px 260px, 56px 56px, 56px 56px, auto, auto;
+}
+
+/* ── Threshold (home): dusk. Warm on one side, cool on the other ─── */
+[data-realm='threshold'] {
+  color-scheme: dark;
+  --bg: #0b0c18;
+  --bg-deep: #07070f;
+  --surface: #141528;
+  --surface-2: #1c1d35;
+  --ink: #f2ecdf;
+  --ink-muted: #b6afc2;
+  --accent: #e3b566; /* candle gold, decorative */
+  --accent-2: #6fd6cb; /* teal, decorative */
+  --accent-text: #e6bd74;
+  --link: #e6bd74;
+  --link-hover: #f2ecdf;
+  --primary: #e8c27a;
+  --on-primary: #1a1206;
+  --primary-hover: #f2d69c;
+  --line: rgb(242 236 223 / 0.14);
+  --line-strong: #6e6a86;
+  --focus: #7ee3d8;
+  --scrim: rgb(11 12 24 / 0.78);
+
+  --display-variation: 'SOFT' 60, 'WONK' 0;
+  --display-weight: 340;
+  --display-tracking: -0.015em;
+  --eyebrow-font: var(--font-body);
+  --eyebrow-style: normal;
+  --eyebrow-transform: uppercase;
+  --eyebrow-tracking: 0.22em;
+  --eyebrow-size: var(--step--2);
+  --btn-font: var(--font-body);
+  --btn-transform: none;
+  --btn-tracking: 0.02em;
+  --btn-size: var(--step--1);
+
+  --texture:
+    var(--grain-light),
+    radial-gradient(ellipse 50% 40% at 0% 20%, rgb(227 181 102 / 0.07), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 100% 60%, rgb(111 214 203 / 0.06), transparent 70%);
+  --texture-size: 200px 200px, auto, auto;
+}
+
+/* Every realm container paints its own ground, so realms can sit side by side. */
+[data-realm] {
+  background-color: var(--bg);
+  background-image: var(--texture);
+  background-size: var(--texture-size);
+  color: var(--ink);
+}

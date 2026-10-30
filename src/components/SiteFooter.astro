@@ -1,0 +1,82 @@
+---
+import Logo from './Logo.astro';
+import Ornament from './Ornament.astro';
+import { NAV, LEGAL_NAV, SITE } from '../config/site';
+
+interface Props {
+  /** Render as a plain <div> (used for previews on /styleguide, to avoid duplicate landmarks). */
+  preview?: boolean;
+  id?: string;
+}
+const { preview = false, id = 'main' } = Astro.props;
+const Tag = preview ? 'div' : 'footer';
+const year = new Date().getFullYear();
+---
+<Tag class="site-footer">
+  <div class="wrap-wide">
+    <Ornament label="Elsewhere · Ontario" />
+    <div class="site-footer__grid">
+      <div class="site-footer__brand stack">
+        <Logo size="sm" />
+        <p class="muted">{SITE.tagline}</p>
+      </div>
+
+      <nav aria-label={preview ? `Footer (${id} preview)` : 'Footer'} class="site-footer__col">
+        <h2 class="site-footer__heading">Explore</h2>
+        <ul role="list">
+          {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+          <li><a href="/account">Account</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">Elsewhere</h2>
+        {/* TODO(social): real profile URLs live in src/config/site.ts */}
+        <ul role="list">
+          {SITE.social.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__legal">
+      <p>Elsewhere Audio is a business name of LJP Records Inc.</p>
+      <p>
+        <span>© {year} LJP Records Inc.</span>
+        {LEGAL_NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+      </p>
+    </div>
+  </div>
+</Tag>
+
+<style>
+  .site-footer {
+    container-type: inline-size;
+    padding-block: var(--space-xl) var(--space-l);
+    font-size: var(--step--1);
+    border-top: 1px solid var(--line);
+  }
+  .site-footer__grid { display: grid; gap: var(--space-l); grid-template-columns: 1fr; }
+  @container (min-width: 40rem) {
+    .site-footer__grid { grid-template-columns: 2fr 1fr 1fr; }
+  }
+  .site-footer__brand { --stack-space: var(--space-s); max-width: 28ch; }
+  .site-footer__heading {
+    font-family: var(--eyebrow-font); font-style: var(--eyebrow-style);
+    font-size: var(--eyebrow-size); text-transform: var(--eyebrow-transform);
+    letter-spacing: var(--eyebrow-tracking); font-weight: 500; color: var(--ink-muted);
+    margin-block-end: var(--space-xs);
+    font-variation-settings: normal;
+  }
+  .site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2xs); }
+  .site-footer a { color: var(--ink); text-decoration: none; }
+  .site-footer a:hover { text-decoration: underline; }
+  .site-footer__legal {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-s);
+    margin-block-start: var(--space-xl); padding-block-start: var(--space-m);
+    border-top: 1px solid var(--line); color: var(--ink-muted);
+  }
+  .site-footer__legal p:last-child { display: flex; flex-wrap: wrap; gap: var(--space-m); }
+  .site-footer__legal a { color: var(--ink-muted); text-decoration: underline; text-underline-offset: 0.2em; }
+  .site-footer__legal a:hover { color: var(--ink); }
+  .site-footer :global(.ornament) { margin-block: 0 var(--space-xl); }
+</style>

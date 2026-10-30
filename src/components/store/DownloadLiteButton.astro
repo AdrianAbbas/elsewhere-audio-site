@@ -1,0 +1,10 @@
+---
+// The free Lite version still goes through Moonbase, so customers get an
+// account and a licence they can upgrade later.
+import StoreButton from './StoreButton.astro';
+import type { ProductKey } from '../../config/store';
+
+interface Props { product?: ProductKey; label?: string }
+const { product = 'worldbuilderLite', label = 'Download Lite (free)' } = Astro.props;
+---
+<StoreButton action="download" product={product} variant="secondary">{label}</StoreButton>

@@ -1,0 +1,111 @@
+---
+// One realm, rendered in full for side-by-side comparison on /styleguide.
+import ContrastTable from './ContrastTable.astro';
+import Ornament from '../Ornament.astro';
+import Card from '../Card.astro';
+import AudioPlayer from '../AudioPlayer.astro';
+import SiteNav from '../SiteNav.astro';
+import SiteFooter from '../SiteFooter.astro';
+import Atmosphere from '../art/Atmosphere.astro';
+import BuyButton from '../store/BuyButton.astro';
+import AddToCartButton from '../store/AddToCartButton.astro';
+import DownloadLiteButton from '../store/DownloadLiteButton.astro';
+
+interface Props {
+  realm: 'fantasy' | 'scifi';
+  name: string;
+  summary: string;
+}
+const { realm, name, summary } = Astro.props;
+const swatches = ['bg', 'surface', 'ink', 'ink-muted', 'accent', 'accent-2', 'accent-text', 'primary', 'focus'];
+const f = realm === 'fantasy';
+---
+<section class="panel" data-realm={realm} aria-labelledby={`panel-${realm}`}>
+  <div class="panel__nav"><SiteNav preview id={realm} label={`Primary (${name} preview)`} /></div>
+
+  <div class="panel__inner">
+    <header class="panel__head stack">
+      <p class="eyebrow">data-realm="{realm}"</p>
+      <h2 id={`panel-${realm}`}>{name}</h2>
+      <p class="lede">{summary}</p>
+    </header>
+
+    <h3 class="panel__label">Palette</h3>
+    <ul class="swatches" role="list">
+      {swatches.map((s) => (
+        <li><span class="swatch" style={`background: var(--${s})`}></span><code>--{s}</code></li>
+      ))}
+    </ul>
+
+    <h3 class="panel__label">Contrast (WCAG AA)</h3>
+    <ContrastTable realm={realm} />
+
+    <h3 class="panel__label">Type</h3>
+    <div class="specimen stack">
+      <p class="eyebrow">{f ? 'A place, not a sound' : 'Sector 04 · Orbital'}</p>
+      <p class="display specimen__xl">{f ? 'The lantern is lit in the low hall.' : 'Docking lights over a quiet harbour.'}</p>
+      <p class="display specimen__l">Score a place, not a sound.</p>
+      <p class="lede">{f
+        ? 'Recorded by hand, one instrument at a time, for scenes that need to feel lived in.'
+        : 'Built for composers who need a world to answer back: loops that never seam, stems that stay out of the way.'}</p>
+      <p>Body copy sits in Instrument Sans at a comfortable measure. It should read like a letter from a small workshop, with a <a href="#top">plain link</a> where one is useful, and nothing louder than it needs to be.</p>
+    </div>
+
+    <Ornament label="Twenty-seven places" />
+
+    <h3 class="panel__label">Buttons</h3>
+    <div class="row">
+      <a class="btn btn--primary" href="#top">Primary</a>
+      <a class="btn" href="#top">Secondary</a>
+      <a class="btn btn--ghost" href="#top">Ghost link</a>
+    </div>
+    <p class="panel__note">Store buttons (Moonbase hook; clicking shows the "opens soon" note while the store is off):</p>
+    <div class="row">
+      <BuyButton />
+      <AddToCartButton />
+      <DownloadLiteButton />
+    </div>
+
+    <h3 class="panel__label">Cards</h3>
+    <div class="cards">
+      <Card title={f ? 'The Low Hall' : 'Orbital Dock'} eyebrow={f ? 'Fantasy' : 'Science fiction'} href="#top" meta={f ? 'Place no. 07' : 'Place 19 / 27'}>
+        <Atmosphere slot="media" scene={f ? 'forest' : 'nebula'} alt={f ? 'A moonlit pine forest in layered mist.' : 'A violet nebula with a pale ringed planet.'} />
+        <p>{f ? 'Fire, low strings and a hand drum in a stone room.' : 'Slow pads and metallic pulses under a docking bay.'}</p>
+      </Card>
+      <Card title="Another world" meta="Coming 2027">
+        <Atmosphere slot="media" scene={f ? 'ruins' : 'megacity'} alt={f ? 'Silhouetted gothic arches under a pale moon.' : 'A dense skyline of dark towers with thin lit bands.'} />
+        <p>Somewhere new is being recorded.</p>
+      </Card>
+    </div>
+
+    <h3 class="panel__label">Audio demo player</h3>
+    <div class="stack">
+      <AudioPlayer src={f ? '/audio/placeholder-01.mp3' : '/audio/placeholder-03.mp3'} peaks={f ? 'placeholder-01' : 'placeholder-03'} title={f ? 'The Low Hall' : 'Orbital Dock'} caption="Placeholder tone: real demo to come." />
+      <AudioPlayer compact src={f ? '/audio/placeholder-02.mp3' : '/audio/placeholder-04.mp3'} peaks={f ? 'placeholder-02' : 'placeholder-04'} title={f ? 'Crossroads at dusk (compact)' : 'Signal from the outer ring (compact)'} />
+    </div>
+  </div>
+
+  <div class="panel__footer"><SiteFooter preview id={name} /></div>
+</section>
+
+<style>
+  .panel { container-type: inline-size; border: 1px solid var(--line-strong); min-width: 0; }
+  .panel__inner { padding: var(--space-l) clamp(1rem, 4cqi, 2.5rem); }
+  .panel__head { --stack-space: var(--space-xs); margin-bottom: var(--space-l); }
+  .panel__head h2 { font-size: var(--step-5); }
+  .panel__label {
+    font-family: var(--font-body); font-variation-settings: normal; font-size: var(--step--1); font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted);
+    margin-block: var(--space-xl) var(--space-s);
+  }
+  .panel__note { font-size: var(--step--1); color: var(--ink-muted); margin-block: var(--space-m) var(--space-xs); }
+  .swatches { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr)); gap: var(--space-s); }
+  .swatches li { display: grid; gap: 0.3rem; font-size: var(--step--2); }
+  .swatches code { font-family: var(--font-mono); color: var(--ink-muted); }
+  .swatch { height: 3rem; border: 1px solid var(--line-strong); border-radius: 2px; }
+  .specimen__xl { font-size: var(--step-5); }
+  .specimen__l { font-size: var(--step-3); }
+  .row { display: flex; flex-wrap: wrap; gap: var(--space-s); align-items: center; }
+  .cards { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+  .panel__footer { margin-top: var(--space-xl); }
+</style>

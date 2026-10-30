@@ -1,0 +1,62 @@
+---
+// A section divider whose drawing depends on the realm it sits in:
+// an etched flourish in fantasy, a measured hairline in sci-fi, and a
+// quiet rule with a doorway in the house and threshold realms.
+// Both drawings are tiny inline SVGs; CSS shows the right one.
+interface Props { label?: string }
+const { label } = Astro.props;
+---
+<div class="ornament" role="presentation">
+  <svg class="ornament__fantasy" viewBox="0 0 320 24" fill="none" aria-hidden="true">
+    <g stroke="currentColor" stroke-linecap="round" stroke-width=".9">
+      <path d="M8 12h112M200 12h112" />
+      <path d="M120 12c6-7 14-7 18-2 3 4-1 8-4 6-3-1-2-5 1-5" />
+      <path d="M200 12c-6-7-14-7-18-2-3 4 1 8 4 6 3-1 2-5-1-5" />
+      <path d="M120 12c6 7 14 7 18 2M200 12c-6 7-14 7-18 2" opacity=".6" />
+      <path d="M160 3l6 9-6 9-6-9z" />
+      <path d="M160 8l2.6 4-2.6 4-2.6-4z" fill="currentColor" />
+      <path d="M8 12l-4-2.5M8 12l-4 2.5M312 12l4-2.5M312 12l4 2.5" opacity=".7" />
+      <circle cx="146" cy="12" r="1.2" fill="currentColor" stroke="none" />
+      <circle cx="174" cy="12" r="1.2" fill="currentColor" stroke="none" />
+    </g>
+  </svg>
+  <span class="ornament__scifi" aria-hidden="true">
+    <span class="ornament__line"></span>
+    {label && <span class="ornament__label">{label}</span>}
+    <span class="ornament__line"></span>
+  </span>
+  <svg class="ornament__house" viewBox="0 0 320 24" fill="none" aria-hidden="true">
+    <g stroke="currentColor" stroke-width="1">
+      <path d="M0 18h148M172 18h148" />
+      <path d="M152 18v-6a8 8 0 0 1 16 0v6" />
+      <path d="M156 18a4 4 0 0 1 8 0" />
+    </g>
+  </svg>
+</div>
+
+<style>
+  .ornament { color: var(--accent); margin-block: var(--space-xl); display: flex; justify-content: center; }
+  .ornament svg { width: min(100%, 20rem); height: auto; }
+  .ornament__fantasy, .ornament__scifi { display: none; }
+  :global([data-realm='fantasy']) .ornament__fantasy { display: block; }
+  :global([data-realm='fantasy']) .ornament__house { display: none; }
+  :global([data-realm='scifi']) .ornament__scifi { display: flex; }
+  :global([data-realm='scifi']) .ornament__house { display: none; }
+
+  .ornament__scifi { align-items: center; gap: var(--space-s); width: 100%; }
+  .ornament__line {
+    flex: 1; height: 1px;
+    background:
+      repeating-linear-gradient(90deg, var(--accent-2) 0 1px, transparent 1px 24px) 0 0 / 100% 5px no-repeat,
+      linear-gradient(var(--line-strong), var(--line-strong));
+    height: 5px;
+    background-size: 100% 5px, 100% 1px;
+    background-position: 0 0, 0 2px;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+  }
+  .ornament__label {
+    font-family: var(--font-mono); font-size: var(--step--2);
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-muted);
+  }
+</style>

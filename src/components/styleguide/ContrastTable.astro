@@ -1,0 +1,37 @@
+---
+import realmsCss from '../../styles/realms.css?raw';
+import { parseRealms, contrast, CHECKS } from '../../lib/contrast';
+
+interface Props { realm: string }
+const { realm } = Astro.props;
+const vars = parseRealms(realmsCss)[realm] ?? {};
+const rows = CHECKS.map((c) => {
+  const ratio = contrast(vars[c.fg], vars[c.bg]);
+  return { ...c, ratio, pass: ratio >= c.min };
+});
+---
+<table class="contrast">
+  <caption class="visually-hidden">WCAG AA contrast checks for the {realm} realm</caption>
+  <thead><tr><th scope="col">Pair</th><th scope="col">Use</th><th scope="col">Ratio</th></tr></thead>
+  <tbody>
+    {rows.map((r) => (
+      <tr>
+        <td>{r.min > 3
+          ? <span class="chip" style={`background:${vars[r.bg]};color:${vars[r.fg]};border-color:${vars['line-strong']}`}>Aa</span>
+          : <span class="chip chip--line" style={`background:${vars[r.bg]};border-color:${vars['line-strong']};--c:${vars[r.fg]}`} aria-hidden="true"></span>} <code>{r.fg}</code> / <code>{r.bg}</code></td>
+        <td>{r.use}</td>
+        <td class:list={['ratio', r.pass ? 'pass' : 'fail']}>{r.ratio.toFixed(1)}:1 {r.pass ? '✓' : '✗'} <span class="visually-hidden">{r.pass ? 'passes' : 'fails'} AA ({r.min}:1)</span></td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<style>
+  .contrast { width: 100%; border-collapse: collapse; font-size: var(--step--1); }
+  .contrast th { text-align: left; font-weight: 500; color: var(--ink-muted); padding-block: var(--space-2xs); border-bottom: 1px solid var(--line-strong); }
+  .contrast td { padding-block: 0.4rem; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  .contrast code { font-family: var(--font-mono); font-size: var(--step--2); }
+  .chip { display: inline-grid; place-items: center; width: 2rem; height: 1.6rem; border: 1px solid; font-weight: 600; margin-right: 0.35rem; }
+  .chip--line { background-image: linear-gradient(var(--c), var(--c)) !important; background-size: 70% 2px !important; background-position: center !important; background-repeat: no-repeat !important; vertical-align: middle; }
+  .ratio { font-family: var(--font-mono); font-size: var(--step--2); white-space: nowrap; }
+</style>

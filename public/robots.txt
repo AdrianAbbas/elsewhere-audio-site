@@ -1,0 +1,6 @@
+# TODO(domain): update the sitemap URL when the real domain is set.
+User-agent: *
+Allow: /
+Disallow: /styleguide
+
+Sitemap: https://elsewhere-audio.example/sitemap-index.xml

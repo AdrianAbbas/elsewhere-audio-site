@@ -1,0 +1,53 @@
+/*
+  THE HOUSE: tokens shared by every page, whatever its realm.
+  Realms (realms.css) only change colour, texture and typographic
+  personality. Spacing, scale and motion stay the same everywhere.
+*/
+
+:root {
+  /* Type families */
+  --font-display: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-body: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Fluid type scale (min at 360px viewport, max at 1440px), ratio ~1.25 */
+  --step--2: clamp(0.72rem, 0.7rem + 0.1vw, 0.78rem);
+  --step--1: clamp(0.84rem, 0.82rem + 0.1vw, 0.9rem);
+  --step-0: clamp(1rem, 0.96rem + 0.19vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.13rem + 0.33vw, 1.42rem);
+  --step-2: clamp(1.44rem, 1.32rem + 0.56vw, 1.8rem);
+  --step-3: clamp(1.73rem, 1.53rem + 0.9vw, 2.28rem);
+  --step-4: clamp(2.07rem, 1.75rem + 1.42vw, 2.9rem);
+  --step-5: clamp(2.49rem, 1.98rem + 2.2vw, 3.9rem);
+  --step-6: clamp(2.99rem, 2.2rem + 3.4vw, 5.4rem);
+
+  /* Space scale: generous by default */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-s: 1rem;
+  --space-m: 1.5rem;
+  --space-l: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: clamp(3.5rem, 2.8rem + 3vw, 5.5rem);
+  --space-3xl: clamp(5rem, 3.8rem + 5vw, 9rem);
+
+  /* Layout */
+  --wrap: 72rem;
+  --wrap-wide: 88rem;
+  --measure: 64ch;
+  --gutter: clamp(1rem, 0.6rem + 2.4vw, 3rem);
+  --radius: 3px;
+
+  /* Motion: quiet and slow. Durations drop to 0 under reduced motion (base.css). */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-inout: cubic-bezier(0.6, 0, 0.3, 1);
+  --dur-quick: 180ms;
+  --dur-calm: 600ms;
+  --dur-slow: 1400ms;
+
+  /* Grain tiles (SVG noise, generated in the browser, no image request).
+     Dark grain for light grounds, light grain for dark grounds. */
+  --grain-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+  --grain-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
+}
