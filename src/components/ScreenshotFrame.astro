@@ -1,0 +1,39 @@
+---
+// A window frame for product screenshots. Pass an <Image>/<Picture> in the
+// default slot; with no slot it shows a marked placeholder.
+// TODO(images): replace placeholders with real WORLDBUILDER screenshots
+// (put files in src/assets/ and use astro:assets <Picture formats={['avif','webp']}>).
+import TinyPlanet from './art/TinyPlanet.astro';
+interface Props { label?: string }
+const { label = 'WORLDBUILDER' } = Astro.props;
+const hasShot = Astro.slots.has('default');
+---
+<figure class="shot">
+  <div class="shot__bar" aria-hidden="true"><span></span><span></span><span></span><em>{label}</em></div>
+  <div class="shot__view">
+    {hasShot ? <slot /> : (
+      <div class="shot__placeholder">
+        <TinyPlanet size={132} />
+        <p>Screenshot coming soon</p>
+      </div>
+    )}
+  </div>
+</figure>
+
+<style>
+  .shot { margin: 0; border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden; background: #0a0d1f; box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.6); }
+  .shot__bar { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #151a33; border-bottom: 1px solid rgb(255 255 255 / 0.06); }
+  .shot__bar span { width: 9px; height: 9px; border-radius: 50%; background: #3a4170; }
+  .shot__bar em { margin-left: auto; margin-right: auto; font-style: normal; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; color: #a3accf; transform: translateX(-20px); }
+  .shot__view { aspect-ratio: 16 / 10; }
+  .shot__view > :global(*) { width: 100%; height: 100%; object-fit: cover; }
+  .shot__placeholder {
+    display: grid; place-content: center; justify-items: center; gap: var(--space-s); height: 100%;
+    /* pixel grid: WORLDBUILDER surfaces only */
+    background:
+      linear-gradient(rgb(111 214 203 / 0.06) 1px, transparent 1px) 0 0 / 12px 12px,
+      linear-gradient(90deg, rgb(111 214 203 / 0.06) 1px, transparent 1px) 0 0 / 12px 12px,
+      radial-gradient(ellipse at 50% 40%, #1b2050, #0a0d1f 70%);
+  }
+  .shot__placeholder p { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.14em; text-transform: uppercase; color: #a3accf; }
+</style>

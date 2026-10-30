@@ -211,10 +211,20 @@ const pine = (p: { x: number; y: number; s: number }) => {
     display: grid;
     align-items: start;
     overflow: hidden;
-    background: #0b0c18;
     view-timeline: --threshold block;
   }
-  .threshold-hero__art { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+  /* Same grain as the page, so the hero melts into what follows */
+  .threshold-hero::after {
+    content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: var(--grain-light) 0 0 / 200px 200px;
+    -webkit-mask-image: linear-gradient(#000 80%, transparent);
+    mask-image: linear-gradient(#000 80%, transparent);
+  }
+  .threshold-hero__art {
+    position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1;
+    -webkit-mask-image: linear-gradient(#000 88%, transparent);
+    mask-image: linear-gradient(#000 88%, transparent);
+  }
   .threshold-hero__content {
     padding-block: clamp(6rem, 13svh, 9rem) 16rem;
     text-align: center;

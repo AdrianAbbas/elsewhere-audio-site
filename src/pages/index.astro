@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ThresholdHero from '../components/art/ThresholdHero.astro';
+import Ornament from '../components/Ornament.astro';
+import AudioPlayer from '../components/AudioPlayer.astro';
+import ScreenshotFrame from '../components/ScreenshotFrame.astro';
+import TeaserCard from '../components/TeaserCard.astro';
+import SignupForm from '../components/SignupForm.astro';
+import DownloadLiteButton from '../components/store/DownloadLiteButton.astro';
+import { SITE } from '../config/site';
+import { STORE, formatPrice } from '../config/store';
+
+const wb = STORE.products.worldbuilder;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.name,
+  legalName: SITE.legalName,
+  url: SITE.url,
+  logo: new URL('/favicon.svg', SITE.url).href,
+  slogan: SITE.tagline,
+  address: { '@type': 'PostalAddress', addressRegion: 'ON', addressCountry: 'CA' },
+};
+---
+<BaseLayout
+  title={SITE.name}
+  description="Elsewhere Audio makes macOS instrument plugins (AU and VST3) for film, TV and game composers. Each one is a doorway to a world that doesn't exist."
+  realm="threshold"
+  overlayNav
+  schema={schema}
+>
+  <ThresholdHero label="Welcome">
+    <p class="eyebrow">Elsewhere Audio</p>
+    <h1 class="hero-line">Instruments for places that don’t exist.</h1>
+    {/* TODO(copy): hero sub-line */}
+    <p class="hero-sub">Sample instruments for film, TV and game composers. Each one is a doorway to somewhere else.</p>
+    <div class="hero-ctas">
+      <a class="btn btn--primary" href="/worldbuilder">Enter WORLDBUILDER</a>
+      <a class="btn" href="/worldbuilder#places">Hear the places</a>
+    </div>
+  </ThresholdHero>
+
+  <!-- Intro -->
+  <section class="intro wrap reveal" aria-labelledby="intro-title">
+    <p class="eyebrow">A small workshop</p>
+    <h2 id="intro-title">We don’t make sounds. We make places.</h2>
+    {/* TODO(copy): intro paragraphs */}
+    <div class="intro__text">
+      <p>A castle hall at the end of a long war. A tavern where the fire never quite goes out. A spaceport that hums at 3&nbsp;a.m. Every Elsewhere instrument starts with a place like that, and everything in it is there to help you score it.</p>
+      <p>We’re a small, independent maker in Ontario, Canada. Our instruments run on macOS as AU and VST3 plugins, on Apple Silicon and Intel.</p>
+    </div>
+    <Ornament />
+  </section>
+
+  <!-- Featured: WORLDBUILDER -->
+  <section class="featured wrap-wide reveal" aria-labelledby="wb-title">
+    <div class="featured__visual">
+      <ScreenshotFrame />
+    </div>
+    <div class="featured__text">
+      <p class="eyebrow">Our first world</p>
+      <h2 id="wb-title" class="featured__name">WORLDBUILDER</h2>
+      <p class="lede">Score a place, not a sound.</p>
+      {/* TODO(copy): WORLDBUILDER summary */}
+      <p>Twenty-seven Places, from fantasy keeps and forests to nebulae and megacities, each a complete musical setting. Write patterns, arrange them on a timeline, and export seamless loops, stems and stingers ready for your game or picture.</p>
+      <ul class="featured__points" role="list">
+        <li>27 Places, each with its own instruments and mood</li>
+        <li>Pattern editor, arrangement timeline and auto-arrange</li>
+        <li>Game-ready loops, stems and stingers</li>
+        <li>Score Intensity macro and an Inspire button for when you’re stuck</li>
+      </ul>
+      <div class="featured__demos">
+        {/* TODO(audio): real Place demos and names */}
+        <AudioPlayer compact src="/audio/placeholder-01.mp3" peaks="placeholder-01" title="Demo: a fantasy Place (placeholder)" />
+        <AudioPlayer compact src="/audio/placeholder-03.mp3" peaks="placeholder-03" title="Demo: a sci-fi Place (placeholder)" />
+      </div>
+      <p class="featured__price">
+        {/* TODO(price): confirm prices in src/config/store.ts */}
+        <span>{formatPrice(wb.introPrice)} introductory price</span>
+        <span class="muted">(then {formatPrice(wb.price)})</span>
+        <span class="muted">· free Lite version available</span>
+      </p>
+      <div class="featured__ctas">
+        <a class="btn btn--primary" href="/worldbuilder">Discover WORLDBUILDER</a>
+        <DownloadLiteButton />
+      </div>
+    </div>
+  </section>
+
+  <!-- More worlds coming -->
+  <section class="coming wrap-wide reveal" aria-labelledby="coming-title">
+    <div class="coming__head">
+      <p class="eyebrow">Elsewhere, later</p>
+      <h2 id="coming-title">More worlds are on their way.</h2>
+      <p class="muted">We’re recording the next ones now. We can’t say where they are yet.</p>
+    </div>
+    {/* TODO(images): replace placeholder art with real teaser artwork; keep them unnamed. */}
+    <div class="coming__grid">
+      <TeaserCard scene="ruins" alt="Gothic arches in silhouette under a pale moon, mist at their feet." />
+      <TeaserCard scene="megacity" alt="A dense skyline of dark towers with thin lit bands under a violet sky." />
+      <TeaserCard scene="forest" alt="A moonlit pine forest fading into layered mist." />
+    </div>
+  </section>
+
+  <!-- Sign-up -->
+  <section class="signup-section wrap reveal" aria-label="Newsletter">
+    <SignupForm />
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-line { font-size: var(--step-6); max-width: 15ch; line-height: 1.02; }
+  .hero-sub { font-size: var(--step-1); max-width: 40ch; opacity: 0.88; }
+  .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-s); margin-top: var(--space-xs); }
+
+  .intro { padding-block: var(--space-3xl) var(--space-xl); text-align: center; display: grid; justify-items: center; gap: var(--space-m); }
+  .intro h2 { max-width: 18ch; }
+  .intro__text { display: grid; gap: var(--space-s); max-width: 58ch; color: var(--ink-muted); font-size: var(--step-1); line-height: 1.55; }
+  .intro :global(.ornament) { margin-block: var(--space-xl) 0; }
+
+  .featured {
+    display: grid; gap: var(--space-2xl); align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
+    padding-block: var(--space-2xl);
+  }
+  .featured__text { display: grid; gap: var(--space-s); max-width: 36rem; }
+  .featured__name { font-size: var(--step-5); letter-spacing: 0.03em; }
+  .featured__text .lede { font-family: var(--font-display); font-style: italic; color: var(--ink); }
+  .featured__points { list-style: none; padding: 0; margin: var(--space-2xs) 0; display: grid; gap: var(--space-2xs); }
+  .featured__points li { display: flex; gap: 0.8em; align-items: baseline; }
+  /* Small square bullet: the one pixel accent allowed in a WORLDBUILDER section */
+  .featured__points li::before { content: ''; flex: none; width: 6px; height: 6px; background: var(--accent-2); translate: 0 -0.15em; }
+  .featured__demos { display: grid; gap: var(--space-xs); margin-block: var(--space-xs); }
+  .featured__price { display: flex; flex-wrap: wrap; gap: 0.4em; font-size: var(--step--1); }
+  .featured__price span:first-child { color: var(--accent-text); font-weight: 500; }
+  .featured__ctas { display: flex; flex-wrap: wrap; gap: var(--space-s); margin-top: var(--space-2xs); }
+
+  .coming { padding-block: var(--space-3xl) var(--space-2xl); }
+  .coming__head { display: grid; gap: var(--space-xs); max-width: 40rem; margin-bottom: var(--space-xl); }
+  .coming__grid { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+
+  .signup-section {
+    margin-block: var(--space-xl) var(--space-3xl);
+    padding: var(--space-xl) clamp(1.25rem, 4vw, 3rem);
+    border: 1px solid var(--line); border-radius: 12px;
+    background: radial-gradient(ellipse 60% 120% at 0% 0%, rgb(227 181 102 / 0.08), transparent 60%),
+      radial-gradient(ellipse 60% 120% at 100% 100%, rgb(111 214 203 / 0.07), transparent 60%), var(--surface);
+  }
+</style>

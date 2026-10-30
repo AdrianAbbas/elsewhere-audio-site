@@ -107,7 +107,7 @@ a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
 
 /* Fantasy buttons: a double rule, like a bookplate */
 [data-realm='fantasy'] .btn { border-radius: 1px; }
-[data-realm='fantasy'] .btn--primary { box-shadow: inset 0 0 0 3px var(--primary), inset 0 0 0 4px rgb(179 138 53 / 0.75); }
+[data-realm='fantasy'] .btn--primary { box-shadow: inset 0 0 0 3px var(--primary), inset 0 0 0 4px rgb(212 162 76 / 0.8); }
 [data-realm='fantasy'] .btn:not(.btn--primary, .btn--ghost) { box-shadow: inset 0 0 0 3px var(--bg), inset 0 0 0 4px var(--line); }
 
 /* Sci-fi buttons: crisp hairline with corner brackets */
