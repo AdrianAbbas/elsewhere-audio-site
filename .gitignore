@@ -13,3 +13,4 @@ dist/
 *.wav
 *.aif
 *.aiff
+.review/

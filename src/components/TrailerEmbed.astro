@@ -1,0 +1,58 @@
+---
+// A click-to-load video. Shows a poster until the visitor presses play;
+// only then does it load YouTube's privacy-enhanced player
+// (youtube-nocookie.com). Nothing from YouTube loads before that.
+// With no video ID yet, it shows a "coming soon" poster instead.
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props { youtubeId?: string; title: string; poster: ImageMetadata; posterAlt: string }
+const { youtubeId, title, poster, posterAlt } = Astro.props;
+const ready = Boolean(youtubeId);
+---
+<figure class="trailer" data-trailer={ready ? youtubeId : undefined} data-title={title}>
+  <Picture src={poster} formats={['avif', 'webp']} fallbackFormat="webp" widths={[640, 960, 1280]} sizes="(min-width: 64rem) 50vw, 100vw" alt={posterAlt} loading="eager" class="trailer__poster" />
+  {ready ? (
+    <button class="trailer__play" type="button" data-trailer-play>
+      <span class="trailer__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3v10l8.5-5z" fill="currentColor" /></svg></span>
+      <span>Play the trailer</span>
+      <span class="trailer__note">Loads from YouTube</span>
+    </button>
+  ) : (
+    <p class="trailer__soon"><span>Trailer coming soon</span></p>
+  )}
+</figure>
+
+<script>
+  for (const fig of document.querySelectorAll<HTMLElement>('[data-trailer]')) {
+    fig.querySelector('[data-trailer-play]')?.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(fig.dataset.trailer!)}?autoplay=1&rel=0&modestbranding=1`;
+      iframe.title = fig.dataset.title ?? 'Trailer';
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      iframe.allowFullscreen = true;
+      iframe.className = 'trailer__frame';
+      fig.replaceChildren(iframe);
+      iframe.focus();
+    }, { once: true });
+  }
+</script>
+
+<style>
+  .trailer { position: relative; margin: 0; aspect-ratio: 16 / 9; overflow: hidden; background: var(--bg-deep); border: 1px solid var(--line-strong); }
+  .trailer :global(picture), .trailer :global(.trailer__poster) { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .trailer :global(.trailer__frame) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .trailer::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(transparent 40%, rgb(3 5 15 / 0.7)); }
+  .trailer__play, .trailer__soon {
+    position: absolute; inset: auto auto var(--space-m) var(--space-m); z-index: 1;
+    display: inline-flex; align-items: center; gap: 0.8em; margin: 0;
+    font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink);
+  }
+  .trailer__play { padding: 0.6em 1.1em 0.6em 0.6em; border: 1px solid var(--line-strong); background: rgb(6 10 26 / 0.7); cursor: pointer; }
+  .trailer__play:hover { border-color: var(--accent-2); }
+  .trailer__icon { display: grid; place-items: center; width: 2.2rem; height: 2.2rem; background: var(--primary); color: var(--on-primary); }
+  .trailer__icon svg { width: 0.9rem; height: 0.9rem; }
+  .trailer__note { color: var(--ink-muted); text-transform: none; letter-spacing: 0.02em; }
+  .trailer__soon span { padding: 0.6em 1em; border: 1px solid var(--line-strong); background: rgb(6 10 26 / 0.7); }
+</style>

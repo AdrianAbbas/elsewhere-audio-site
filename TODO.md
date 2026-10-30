@@ -18,10 +18,18 @@ This list grows as each page is built.
 
 ## Media
 - [ ] `TODO(audio)`: replace `public/audio/placeholder-01…04.mp3` (synthesised tones) with real demos, then regenerate waveform peaks (`npm run audio:placeholders` shows how; adapt it to the real files).
-- [ ] `TODO(audio)`: real Place names for the two home-page demos (`src/pages/index.astro`).
+- [ ] `TODO(audio)`: a real demo for each of the 26 Places (`src/data/worldbuilder.ts` cycles four placeholder tones), plus the two home-page demos (Tavern, Nebula).
 - [ ] `TODO(images)`: real WORLDBUILDER screenshots for `src/components/ScreenshotFrame.astro` (home featured section uses the placeholder).
 - [ ] `TODO(images)`: the teaser scenes (`src/assets/art/atmosphere-*.webp`, painted by `scripts/art/atmospheres.mjs`) are stand-ins. Replace with real teaser artwork when it exists.
 - [ ] `TODO(og)`: `public/og/default.jpg` is a screenshot of the threshold hero with the brand line. Replace with designed Open Graph images (1200×630), ideally one per page.
+
+## WORLDBUILDER page (`src/data/worldbuilder.ts`)
+- [ ] `TODO(video)`: trailer YouTube ID (`TRAILER.youtubeId`). Until set, the trailer shows "coming soon".
+- [ ] `TODO(specs)`: confirm system requirements, especially tested hosts and installed size.
+- [ ] `TODO(copy)`: what WORLDBUILDER Lite includes (nothing in the plugin defines a Lite edition yet).
+- [ ] `TODO(copy)`: feature wording and FAQ answers (facts follow the plugin's README).
+- [ ] `TODO(images)`: three real screenshots (Living Globe, pattern editor, arrangement) for the screenshot frames.
+- [ ] Decide: the brief said 27 Places; the plugin has 26 (the 27th icon is the empty slot). The site says 26.
 
 ## Copy
 - [ ] `TODO(copy)`: home: hero sub-line, intro paragraphs, WORLDBUILDER summary (`src/pages/index.astro`).

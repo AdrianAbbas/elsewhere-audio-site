@@ -1,0 +1,356 @@
+---
+// WORLDBUILDER: the sci-fi realm, with fantasy touches for the fantasy Places.
+// This is the one page where WORLDBUILDER's pixel art appears (the tiny planet,
+// pixel corner accents, screenshots). Nav, footer and body type stay house style.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TrailerEmbed from '../components/TrailerEmbed.astro';
+import TinyPlanet from '../components/art/TinyPlanet.astro';
+import AudioPlayer from '../components/AudioPlayer.astro';
+import ScreenshotFrame from '../components/ScreenshotFrame.astro';
+import Ornament from '../components/Ornament.astro';
+import BuyButton from '../components/store/BuyButton.astro';
+import AddToCartButton from '../components/store/AddToCartButton.astro';
+import DownloadLiteButton from '../components/store/DownloadLiteButton.astro';
+import poster from '../assets/art/threshold.webp';
+import { SITE } from '../config/site';
+import { STORE, formatPrice } from '../config/store';
+import {
+  PLACES, PLACE_COUNT, GROUP_LABEL, FEATURES, REQUIREMENTS, FAQ, TRAILER, LITE_INCLUDES, FULL_INCLUDES, type Group,
+} from '../data/worldbuilder';
+
+const wb = STORE.products.worldbuilder;
+const groups = Object.keys(GROUP_LABEL) as Group[];
+const countIn = (g: Group) => PLACES.filter((p) => p.group === g).length;
+
+const description = `WORLDBUILDER scores a place, not a sound: ${PLACE_COUNT} Places, from castles and taverns to spaceports and nebulae, playing in your song's key and tempo. AU and VST3 for macOS.`;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'WORLDBUILDER',
+  applicationCategory: 'MultimediaApplication',
+  applicationSubCategory: 'Audio plugin (AU, VST3)',
+  operatingSystem: 'macOS 10.15 or later',
+  description,
+  url: new URL('/worldbuilder', SITE.url).href,
+  image: new URL('/og/default.jpg', SITE.url).href,
+  publisher: { '@type': 'Organization', name: SITE.name, legalName: SITE.legalName, url: SITE.url },
+  // TODO(price): keep in step with src/config/store.ts
+  offers: [
+    { '@type': 'Offer', name: 'WORLDBUILDER', price: String(wb.introPrice), priceCurrency: 'USD', url: new URL('/worldbuilder#pricing', SITE.url).href },
+    { '@type': 'Offer', name: 'WORLDBUILDER Lite', price: '0', priceCurrency: 'USD', url: new URL('/worldbuilder#pricing', SITE.url).href },
+  ],
+};
+---
+<BaseLayout title="WORLDBUILDER" description={description} realm="scifi" schema={schema}>
+  <!-- Hero -->
+  <section class="wb-hero wrap-wide" aria-labelledby="wb-title">
+    <div class="wb-hero__text">
+      <div class="wb-hero__mark">
+        <TinyPlanet size={72} class="wb-hero__planet" />
+        <p class="eyebrow">Instrument 01 · AU / VST3 · macOS</p>
+      </div>
+      <h1 id="wb-title" class="wb-hero__name">WORLDBUILDER</h1>
+      {/* TODO(copy): hero line */}
+      <p class="lede">A scoring instrument for composers who build worlds. {PLACE_COUNT} Places, from castles and taverns to spaceports and nebulae, playing in your song’s key and tempo.</p>
+      <p class="wb-price">
+        <span class="wb-price__now">{formatPrice(wb.introPrice)}</span>
+        <span class="wb-price__was">introductory price, then {formatPrice(wb.price)}</span>
+      </p>
+      <div class="wb-ctas">
+        <BuyButton />
+        <DownloadLiteButton />
+      </div>
+    </div>
+    <div class="wb-hero__media">
+      <TrailerEmbed youtubeId={TRAILER.youtubeId} title={TRAILER.title} poster={poster} posterAlt="Placeholder trailer poster: a horizon at dusk with a castle on one side and a city of towers on the other." />
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="wb-intro wrap reveal" aria-labelledby="intro-title">
+    <p class="eyebrow">How it works</p>
+    <h2 id="intro-title">Score a place, not a sound.</h2>
+    {/* TODO(copy): intro */}
+    <div class="wb-intro__text">
+      <p>Most instruments give you sounds and leave the scene to you. WORLDBUILDER starts with the scene. Choose a castle, a forge, a city at night or a nebula, and it plays music that belongs there: tonal, rhythmic and in your song’s key and tempo, over a living environment of wind, water, fire, ice and thunder.</p>
+      <p>Play up to four Places at once, shape them with one Score Intensity dial, and arrange the result into a cue you can export for picture or for a game.</p>
+    </div>
+    <dl class="wb-facts">
+      <div><dt>Places</dt><dd>{PLACE_COUNT}</dd></div>
+      <div><dt>Instruments in each</dt><dd>6</dd></div>
+      <div><dt>Characters in each</dt><dd>3</dd></div>
+      <div><dt>Playing at once</dt><dd>4</dd></div>
+    </dl>
+  </section>
+
+  <!-- Places -->
+  <section id="places" class="wb-places wrap-wide" aria-labelledby="places-title">
+    <div class="wb-section-head">
+      <p class="eyebrow">The Places</p>
+      <h2 id="places-title">{PLACE_COUNT} places to score.</h2>
+      <p class="muted">Each Place is an ensemble of six instruments with three Characters that change its patterns, harmony and sound. Press play to hear one.</p>
+    </div>
+
+    <fieldset class="wb-filter" data-place-filter>
+      <legend class="visually-hidden">Show Places from</legend>
+      <label><input type="radio" name="group" value="all" checked /> <span>All <small>{PLACE_COUNT}</small></span></label>
+      {groups.map((g) => (
+        <label><input type="radio" name="group" value={g} /> <span>{GROUP_LABEL[g]} <small>{countIn(g)}</small></span></label>
+      ))}
+    </fieldset>
+    <p class="visually-hidden" role="status" data-place-count></p>
+
+    <ul class="wb-grid" role="list">
+      {PLACES.map((p) => (
+        <li class:list={['place', `place--${p.group}`]} data-group={p.group}>
+          <div class="place__head">
+            <h3 class="place__name">{p.name}</h3>
+            <span class="place__group">{GROUP_LABEL[p.group]}</span>
+          </div>
+          <p class="place__line">{p.line}</p>
+          <p class="place__chars"><span class="visually-hidden">Characters: </span>{p.characters.join(' · ')}</p>
+          <AudioPlayer compact quiet src={`/audio/${p.demo}.mp3`} title={`${p.name} demo (placeholder)`} duration={14} />
+        </li>
+      ))}
+    </ul>
+    <p class="wb-note">Demos are placeholders until the real recordings are in.</p>
+  </section>
+
+  <!-- Features -->
+  <section class="wb-features wrap-wide reveal" aria-labelledby="features-title">
+    <div class="wb-section-head">
+      <p class="eyebrow">Inside</p>
+      <h2 id="features-title">From a place to a finished cue.</h2>
+    </div>
+    <ul class="wb-feature-grid" role="list">
+      {FEATURES.map((f) => (
+        <li class="feature px-corners">
+          <h3>{f.title}</h3>
+          <p>{f.body}</p>
+          <ul class="feature__points" role="list">{f.points.map((pt) => <li>{pt}</li>)}</ul>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Screenshots -->
+  <section class="wb-shots wrap-wide reveal" aria-labelledby="shots-title">
+    <div class="wb-section-head">
+      <p class="eyebrow">Screenshots</p>
+      <h2 id="shots-title">A 16-bit world on your desk.</h2>
+      <p class="muted">The interface is pixel art throughout, and its mood follows your Places: storybook for fantasy, neon for sci-fi, and a blend of the two when both play.</p>
+    </div>
+    {/* TODO(images): real screenshots (src/assets + <Picture>), one per frame. */}
+    <div class="wb-shot-grid">
+      <figure><ScreenshotFrame label="WORLDBUILDER · LIVING GLOBE" /><figcaption>The Living Globe: a tiny planet with your Places on its horizon.</figcaption></figure>
+      <figure><ScreenshotFrame label="WORLDBUILDER · PATTERNS" /><figcaption>The pattern editor.</figcaption></figure>
+      <figure><ScreenshotFrame label="WORLDBUILDER · ARRANGE" /><figcaption>The arrangement timeline.</figcaption></figure>
+    </div>
+  </section>
+
+  <div class="wrap-wide"><Ornament label="Specifications" /></div>
+
+  <!-- Requirements + Pricing -->
+  <section class="wb-specs wrap-wide" aria-labelledby="req-title">
+    <div>
+      <h2 id="req-title" class="wb-h2-sm">System requirements</h2>
+      <dl class="wb-req">
+        {REQUIREMENTS.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+      </dl>
+    </div>
+
+    <div id="pricing" class="wb-pricing" aria-labelledby="pricing-title">
+      <h2 id="pricing-title" class="wb-h2-sm">Pricing</h2>
+      <div class="wb-plans">
+        <article class="plan plan--full px-corners">
+          <h3>WORLDBUILDER</h3>
+          <p class="plan__price"><span>{formatPrice(wb.introPrice)}</span> <s aria-label={`was ${formatPrice(wb.price)}`}>{formatPrice(wb.price)}</s></p>
+          <p class="plan__note">Introductory price</p>
+          <ul role="list">{FULL_INCLUDES.map((x) => <li>{x}</li>)}</ul>
+          <div class="plan__ctas"><BuyButton showPrice={false} /><AddToCartButton /></div>
+        </article>
+        <article class="plan">
+          <h3>WORLDBUILDER Lite</h3>
+          <p class="plan__price"><span>Free</span></p>
+          <p class="plan__note">Try it in your own projects</p>
+          <ul role="list">{LITE_INCLUDES.map((x) => <li>{x}</li>)}</ul>
+          <div class="plan__ctas"><DownloadLiteButton /></div>
+        </article>
+      </div>
+      <p class="wb-note">Prices in US dollars. Taxes may apply at checkout.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="wb-faq wrap reveal" aria-labelledby="faq-title">
+    <h2 id="faq-title" class="wb-h2-sm">Questions</h2>
+    {FAQ.map(([q, a]) => (
+      <details class="faq">
+        <summary>{q}</summary>
+        <p>{a}</p>
+      </details>
+    ))}
+    <p class="wb-note">More answers on the <a href="/support">support page</a>.</p>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="wb-final wrap reveal" aria-labelledby="final-title">
+    <TinyPlanet size={96} />
+    <h2 id="final-title">Where will you go first?</h2>
+    <div class="wb-ctas wb-ctas--center">
+      <BuyButton />
+      <DownloadLiteButton />
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Place filter: progressive enhancement. Without JS every Place shows.
+  const filter = document.querySelector<HTMLFieldSetElement>('[data-place-filter]');
+  const status = document.querySelector<HTMLElement>('[data-place-count]');
+  const cards = [...document.querySelectorAll<HTMLElement>('.wb-grid > li')];
+  filter?.addEventListener('change', (e) => {
+    const value = (e.target as HTMLInputElement).value;
+    let shown = 0;
+    for (const card of cards) {
+      const show = value === 'all' || card.dataset.group === value;
+      card.hidden = !show;
+      if (show) shown++;
+    }
+    if (status) status.textContent = `Showing ${shown} of ${cards.length} Places`;
+  });
+</script>
+
+<style>
+  /* ── Pixel accents: WORLDBUILDER page only ───────────────────────── */
+  .px-corners { position: relative; }
+  .px-corners::before, .px-corners::after {
+    content: ''; position: absolute; width: 10px; height: 10px; pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 5' shape-rendering='crispEdges'%3E%3Cpath d='M0 0h5v1H1v4H0z' fill='%2343d6c6'/%3E%3Cpath d='M2 2h1v1H2z' fill='%238c7bff'/%3E%3C/svg%3E") 0 0 / 100% 100%;
+    image-rendering: pixelated;
+  }
+  .px-corners::before { top: -1px; left: -1px; }
+  .px-corners::after { bottom: -1px; right: -1px; transform: rotate(180deg); }
+
+  /* ── Hero ─────────────────────────────────────────────────────────── */
+  .wb-hero {
+    display: grid; gap: var(--space-xl); align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+    padding-block: var(--space-2xl) var(--space-xl);
+  }
+  .wb-hero__text { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-m); max-width: 36rem; min-width: 0; }
+  .wb-hero__media { min-width: 0; }
+  .wb-hero__mark { display: flex; align-items: center; gap: var(--space-s); }
+  .wb-hero__mark :global(.wb-hero__planet) { flex: none; }
+  .wb-hero__name { font-size: min(var(--step-6), 10.6vw); letter-spacing: 0.02em; line-height: 0.95; }
+  .wb-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6em; }
+  .wb-price__now { font-family: var(--font-display); font-size: var(--step-3); font-weight: 300; }
+  .wb-price__was { font-size: var(--step--1); color: var(--ink-muted); }
+  .wb-ctas { display: flex; flex-wrap: wrap; gap: var(--space-s); }
+  .wb-ctas--center { justify-content: center; }
+
+  /* ── Intro ────────────────────────────────────────────────────────── */
+  .wb-intro { padding-block: var(--space-2xl); display: grid; gap: var(--space-m); }
+  .wb-intro h2 { max-width: 16ch; }
+  .wb-intro__text { display: grid; gap: var(--space-s); max-width: 60ch; font-size: var(--step-1); line-height: 1.55; color: var(--ink-muted); }
+  .wb-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: var(--space-s); margin: var(--space-m) 0 0; }
+  .wb-facts div { border-top: 1px solid var(--line-strong); padding-top: var(--space-xs); display: flex; flex-direction: column-reverse; gap: 0.2rem; }
+  .wb-facts dt { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+  .wb-facts dd { margin: 0; font-family: var(--font-display); font-size: var(--step-4); font-weight: 300; line-height: 1; font-variant-numeric: tabular-nums; }
+
+  /* ── Section heads ────────────────────────────────────────────────── */
+  .wb-section-head { display: grid; gap: var(--space-xs); max-width: 44rem; margin-bottom: var(--space-l); }
+  .wb-h2-sm { font-size: var(--step-3); margin-bottom: var(--space-m); }
+  .wb-note { margin-top: var(--space-s); font-size: var(--step--1); color: var(--ink-muted); }
+
+  /* ── Places ───────────────────────────────────────────────────────── */
+  .wb-places { padding-block: var(--space-2xl); scroll-margin-top: var(--space-l); }
+  .wb-filter { display: flex; flex-wrap: wrap; gap: var(--space-2xs); border: 0; padding: 0; margin: 0 0 var(--space-m); }
+  .wb-filter label { position: relative; cursor: pointer; }
+  .wb-filter input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .wb-filter span {
+    display: inline-flex; gap: 0.5em; align-items: baseline;
+    padding: 0.5em 0.9em; border: 1px solid var(--line-strong);
+    font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .wb-filter small { color: var(--ink-muted); font-size: 1em; }
+  .wb-filter input:checked + span { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+  .wb-filter input:checked + span small { color: inherit; }
+  .wb-filter input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+  .wb-grid { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-s); grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
+  .place {
+    display: grid; gap: var(--space-2xs); align-content: start;
+    padding: var(--space-m); border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 85%, transparent);
+  }
+  .place[hidden] { display: none; }
+  .place__head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-xs); }
+  .place__name { font-size: var(--step-1); line-height: 1.2; }
+  .place__group { flex: none; font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-text); }
+  .place__line { font-size: var(--step--1); color: var(--ink); line-height: 1.45; }
+  .place__chars { font-family: var(--font-mono); font-size: var(--step--2); color: var(--ink-muted); letter-spacing: 0.04em; margin-bottom: var(--space-2xs); }
+  .place :global(.player) { margin-top: auto; }
+
+  /* Fantasy touches: candle gold, the soft serif, a gilt edge */
+  .place--fantasy { border-color: rgb(212 162 76 / 0.35); background: linear-gradient(180deg, rgb(212 162 76 / 0.07), transparent 60%), color-mix(in srgb, var(--surface) 85%, transparent); }
+  .place--fantasy .place__name { font-variation-settings: 'SOFT' 100, 'WONK' 1; font-weight: 400; }
+  .place--fantasy .place__group { font-family: var(--font-display); font-style: italic; text-transform: none; letter-spacing: 0; font-size: var(--step--1); color: #e2b260; }
+  .place--nature .place__group { color: #9fd3a6; }
+  .place--modern .place__group { color: var(--ink-muted); }
+
+  /* ── Features ─────────────────────────────────────────────────────── */
+  .wb-features { padding-block: var(--space-2xl); }
+  .wb-feature-grid { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); }
+  /* Seven features fill a 4-column grid exactly: the first one is wider. */
+  @media (min-width: 80rem) {
+    .wb-feature-grid { grid-template-columns: repeat(4, 1fr); }
+    .feature:first-child { grid-column: span 2; }
+  }
+  .feature { display: grid; gap: var(--space-xs); align-content: start; padding: var(--space-l) var(--space-m); border: 1px solid var(--line); }
+  .feature h3 { font-size: var(--step-2); }
+  .feature p { color: var(--ink-muted); font-size: var(--step--1); }
+  .feature__points { list-style: none; padding: 0; margin: var(--space-2xs) 0 0; display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
+  .feature__points li { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25em 0.6em; border: 1px solid var(--line-strong); color: var(--ink); }
+
+  /* ── Screenshots ──────────────────────────────────────────────────── */
+  .wb-shots { padding-block: var(--space-2xl); }
+  .wb-shot-grid { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+  .wb-shot-grid figure { margin: 0; display: grid; gap: var(--space-xs); }
+  .wb-shot-grid figcaption { font-size: var(--step--1); color: var(--ink-muted); }
+
+  /* ── Specs + pricing ──────────────────────────────────────────────── */
+  .wb-specs { display: grid; gap: var(--space-2xl); grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); padding-block: var(--space-l) var(--space-2xl); }
+  .wb-req { margin: 0; display: grid; }
+  .wb-req div { display: grid; grid-template-columns: 8rem 1fr; gap: var(--space-s); padding-block: var(--space-xs); border-bottom: 1px solid var(--line); }
+  .wb-req dt { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); padding-top: 0.2em; }
+  .wb-req dd { margin: 0; font-size: var(--step--1); }
+  .wb-pricing { scroll-margin-top: var(--space-l); }
+  .wb-plans { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+  .plan { display: grid; gap: var(--space-xs); align-content: start; padding: var(--space-l) var(--space-m); border: 1px solid var(--line-strong); background: color-mix(in srgb, var(--surface) 85%, transparent); }
+  .plan--full { border-color: var(--accent-2); }
+  .plan h3 { font-size: var(--step-1); letter-spacing: 0.02em; }
+  .plan__price { display: flex; align-items: baseline; gap: 0.5em; }
+  .plan__price span { font-family: var(--font-display); font-size: var(--step-4); font-weight: 300; line-height: 1; }
+  .plan__price s { color: var(--ink-muted); }
+  .plan__note { font-size: var(--step--1); color: var(--accent-text); }
+  .plan ul { list-style: none; padding: 0; margin: var(--space-xs) 0; display: grid; gap: var(--space-2xs); font-size: var(--step--1); }
+  .plan li { display: flex; gap: 0.7em; }
+  .plan li::before { content: ''; flex: none; width: 6px; height: 6px; margin-top: 0.55em; background: var(--accent-2); }
+  .plan__ctas { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-xs); }
+
+  /* ── FAQ ──────────────────────────────────────────────────────────── */
+  .wb-faq { padding-block: var(--space-xl) var(--space-2xl); }
+  .faq { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    display: flex; justify-content: space-between; gap: var(--space-s); cursor: pointer; list-style: none;
+    padding-block: var(--space-s); font-size: var(--step-0); font-weight: 500;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; font-family: var(--font-mono); color: var(--accent-2); }
+  .faq[open] summary::after { content: '−'; }
+  .faq p { padding-bottom: var(--space-s); color: var(--ink-muted); max-width: 62ch; }
+
+  /* ── Closing ──────────────────────────────────────────────────────── */
+  .wb-final { display: grid; justify-items: center; gap: var(--space-m); text-align: center; padding-block: var(--space-xl) var(--space-3xl); }
+  .wb-final h2 { font-size: var(--step-4); }
+</style>

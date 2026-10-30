@@ -80,7 +80,9 @@ a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
 .btn {
   --_bg: transparent; --_fg: var(--ink); --_bd: var(--line-strong);
   position: relative;
-  display: inline-flex; align-items: center; justify-content: center; gap: 0.6em;
+  display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.2em 0.6em;
+  max-width: 100%;
+  text-align: center;
   min-height: 2.9rem;
   padding: 0.7em 1.5em;
   border: 1px solid var(--_bd);
