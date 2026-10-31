@@ -3,12 +3,12 @@
 import StoreButton from './StoreButton.astro';
 import { STORE, formatPrice, type ProductKey } from '../../config/store';
 
-interface Props { product?: ProductKey; showPrice?: boolean; label?: string }
-const { product = 'worldbuilder', showPrice = true, label = 'Buy' } = Astro.props;
+interface Props { product?: ProductKey; showPrice?: boolean; label?: string; variant?: 'primary' | 'secondary' }
+const { product = 'worldbuilder', showPrice = true, label = 'Buy', variant = 'primary' } = Astro.props;
 const p = STORE.products[product];
 const intro = 'introPrice' in p ? p.introPrice : undefined;
 ---
-<StoreButton action="checkout" product={product}>
+<StoreButton action="checkout" product={product} variant={variant}>
   <span>{label} {p.name}</span>
   {showPrice && (
     <span class="btn__price">

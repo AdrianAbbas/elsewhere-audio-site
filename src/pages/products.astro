@@ -1,0 +1,91 @@
+---
+// All products, in the house realm. WORLDBUILDER now; the next worlds stay
+// unnamed until they are announced.
+import { Picture } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TeaserCard from '../components/TeaserCard.astro';
+import BuyButton from '../components/store/BuyButton.astro';
+import keyArt from '../assets/art/threshold.webp';
+import { STORE, formatPrice } from '../config/store';
+import { PLACE_COUNT } from '../data/worldbuilder';
+
+const wb = STORE.products.worldbuilder;
+---
+<BaseLayout
+  title="Products"
+  description="Instrument plugins for macOS (AU and VST3) from Elsewhere Audio. WORLDBUILDER is available now; more worlds are coming in 2027."
+  realm="house"
+>
+  <header class="products-head wrap-wide">
+    <p class="eyebrow">Products</p>
+    <h1>Every instrument is a place.</h1>
+    {/* TODO(copy): products intro */}
+    <p class="lede">We make a few instruments, slowly, and each one opens onto a different world. All of them run on macOS as AU and VST3 plugins, on Apple Silicon and Intel.</p>
+  </header>
+
+  <section class="wrap-wide" aria-labelledby="available-title">
+    <h2 id="available-title" class="section-label">Available now</h2>
+    <article class="product">
+      <a class="product__media" href="/worldbuilder" tabindex="-1" aria-hidden="true">
+        {/* TODO(images): WORLDBUILDER key art (the painted horizon stands in). */}
+        <Picture src={keyArt} formats={['avif', 'webp']} fallbackFormat="webp" widths={[640, 960, 1280]} sizes="(min-width: 64rem) 55vw, 100vw" alt="" loading="eager" />
+      </a>
+      <div class="product__body">
+        <p class="product__meta">Instrument 01 · AU / VST3 · macOS</p>
+        <h3 class="product__name"><a href="/worldbuilder">WORLDBUILDER</a></h3>
+        <p class="product__line">Score a place, not a sound.</p>
+        <p class="muted">{PLACE_COUNT} Places, from castles and taverns to spaceports and nebulae, each an ensemble of six instruments that plays in your song’s key and tempo. Arrange cues, travel between Locations and export loops, stems and stingers for picture or games.</p>
+        <p class="product__price"><span>{formatPrice(wb.introPrice)}</span> introductory price, then {formatPrice(wb.price)} · free Lite version</p>
+        <div class="product__ctas">
+          <a class="btn btn--primary" href="/worldbuilder">Explore WORLDBUILDER</a>
+          <BuyButton product="worldbuilder" variant="secondary" />
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="wrap-wide coming" aria-labelledby="coming-title">
+    <h2 id="coming-title" class="section-label">Coming 2027</h2>
+    <p class="muted coming__note">We’re recording the next worlds now. We’ll name them when they’re ready.</p>
+    {/* TODO(images): real teaser artwork; keep them unnamed. */}
+    <div class="coming__grid">
+      <TeaserCard scene="ruins" alt="Gothic arches in silhouette under a pale moon, mist at their feet." />
+      <TeaserCard scene="megacity" alt="A dense skyline of dark towers fading into low cloud." />
+      <TeaserCard scene="forest" alt="A moonlit pine forest fading into layered mist." />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .products-head { padding-block: var(--space-2xl) var(--space-xl); display: grid; gap: var(--space-s); }
+  .products-head h1 { font-size: var(--step-5); max-width: 18ch; }
+  .section-label {
+    font-family: var(--font-body); font-variation-settings: normal; font-size: var(--step--2); font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-muted);
+    padding-bottom: var(--space-xs); border-bottom: 1px solid var(--line); margin-bottom: var(--space-l);
+  }
+
+  .product {
+    display: grid; gap: 0; align-items: stretch;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+    background: var(--surface); border: 1px solid var(--line);
+  }
+  .product__media { display: block; min-height: 18rem; overflow: hidden; background: #0b0c18; }
+  .product__media :global(picture), .product__media :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
+  .product__media :global(img) { transition: transform var(--dur-slow) var(--ease-out); }
+  .product:hover .product__media :global(img) { transform: scale(1.03); }
+  .product__body { display: grid; gap: var(--space-s); align-content: center; padding: var(--space-xl) clamp(1.25rem, 3vw, var(--space-xl)); min-width: 0; }
+  .product__meta { font-size: var(--step--2); letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-text); }
+  .product__name { font-size: min(var(--step-4), 9vw); letter-spacing: 0.03em; }
+  .product__name a { color: inherit; text-decoration: none; }
+  .product__name a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
+  .product__line { font-family: var(--font-display); font-style: italic; font-size: var(--step-1); }
+  .product__price { font-size: var(--step--1); color: var(--ink-muted); }
+  .product__price span { color: var(--ink); font-weight: 600; }
+  .product__ctas { display: flex; flex-wrap: wrap; gap: var(--space-s); margin-top: var(--space-2xs); }
+
+  .coming { padding-block: var(--space-2xl) var(--space-3xl); }
+  .coming .section-label { margin-bottom: var(--space-xs); }
+  .coming__note { margin-bottom: var(--space-l); }
+  .coming__grid { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+</style>

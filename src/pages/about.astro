@@ -1,0 +1,135 @@
+---
+// About: the candlelit fantasy realm. The story, who makes the instruments,
+// the recordings made by hand, and LJP Records.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
+import Atmosphere from '../components/art/Atmosphere.astro';
+import SignupForm from '../components/SignupForm.astro';
+import { SITE } from '../config/site';
+
+// The materials being recorded for the instruments (from the WORLDBUILDER sample plan).
+const materials = ['Voice', 'Guitar', 'Violin', 'Kalimba', 'Breath', 'Percussion', 'Glass', 'Metal', 'Wood', 'Textures'];
+---
+<BaseLayout
+  title="About"
+  description="Elsewhere Audio is a small, independent maker of instrument plugins in Ontario, Canada, recording its own sounds by hand. A business name of LJP Records Inc."
+  realm="fantasy"
+>
+  <header class="about-head wrap">
+    <p class="eyebrow">About Elsewhere Audio</p>
+    <h1>A small workshop at the edge of the map.</h1>
+    {/* TODO(copy): about intro */}
+    <p class="lede">We make instruments for places that don’t exist: castles and taverns, forests and ruins, spaceports and nebulae. Each one is a doorway, and composers are the ones who walk through.</p>
+  </header>
+
+  <Ornament />
+
+  <!-- Story -->
+  <section class="about-story wrap" aria-labelledby="story-title">
+    <h2 id="story-title" class="visually-hidden">Our story</h2>
+    {/* TODO(copy): the real story, in your own words. Placeholder below. */}
+    <div class="prose">
+      <p class="dropcap">Elsewhere Audio began with a simple wish: to score a place rather than a sound. Film, TV and game composers spend their days building worlds, and most instruments hand them a list of patches and leave the world-building to them. We wanted instruments that start with the world.</p>
+      <p>So each instrument we make is built around somewhere. Our first, WORLDBUILDER, holds twenty-six Places, and every one is a small ensemble that plays in your key and tempo: a tavern with a fiddle and a lute, a forest with a flute and a kalimba, a spaceport humming at three in the morning.</p>
+      <p>We work slowly, on purpose. We would rather make a few instruments that feel lived in than many that feel the same.</p>
+    </div>
+  </section>
+
+  <!-- Who -->
+  <section class="about-who wrap-wide reveal" aria-labelledby="who-title">
+    <figure class="about-who__frame">
+      {/* TODO(images): a photograph of the maker, or of the recording space. */}
+      <Atmosphere scene="forest" alt="Placeholder image: a moonlit pine forest in mist, standing in for a photograph of the workshop." sizes="(min-width: 64rem) 40vw, 100vw" />
+      <figcaption>Photograph to come</figcaption>
+    </figure>
+    <div class="about-who__text">
+      <p class="eyebrow">Who makes it</p>
+      <h2 id="who-title">One maker, one room, a lot of patience.</h2>
+      {/* TODO(copy): who you are, in your own words. Name kept as a placeholder on purpose. */}
+      <p>Elsewhere Audio is [your name], a composer and developer in Ontario, Canada. [A sentence or two about your background: what you score, what you play, why you started building instruments.]</p>
+      <p>Every instrument is designed, programmed, recorded and tested here, from the first sketch to the last preset.</p>
+    </div>
+  </section>
+
+  <!-- Recorded by hand -->
+  <section class="about-hand wrap reveal" aria-labelledby="hand-title">
+    <p class="eyebrow">Recorded by hand</p>
+    <h2 id="hand-title">Our own sounds, and nobody else’s.</h2>
+    <div class="prose">
+      <p>Nothing in our instruments comes from someone else’s sample library. Where an instrument plays a recording, we made it ourselves: a classical guitar played with the fingers and reshaped into a lute and an oud, a violin bowed, plucked and struck with the wood of the bow, a seventeen-tine kalimba recorded at three strengths.</p>
+      <p>The rest is played live by the instrument itself, so it can follow your key and tempo instead of repeating a fixed loop. And the recording continues.</p>
+    </div>
+    <ul class="materials" role="list" aria-label="Sounds we record">
+      {materials.map((m) => <li>{m}</li>)}
+    </ul>
+  </section>
+
+  <Ornament />
+
+  <!-- LJP Records -->
+  <section class="about-ljp wrap reveal" aria-labelledby="ljp-title">
+    <h2 id="ljp-title">By LJP Records</h2>
+    {/* TODO(copy): anything you want to say about LJP Records. */}
+    <p>Elsewhere Audio is a business name of {SITE.legalName}, an independent company in {SITE.location}. LJP Records looks after the business side, so the workshop can stay a workshop.</p>
+  </section>
+
+  <section class="about-close wrap reveal" aria-label="Keep in touch">
+    <div class="about-close__links">
+      <a class="btn btn--primary" href="/worldbuilder">Visit WORLDBUILDER</a>
+      <a class="btn" href="/support">Contact us</a>
+    </div>
+    <SignupForm id="about-signup" />
+  </section>
+</BaseLayout>
+
+<style>
+  .about-head { padding-block: var(--space-2xl) var(--space-s); display: grid; gap: var(--space-m); text-align: center; justify-items: center; }
+  .about-head h1 { font-size: var(--step-5); max-width: 16ch; }
+  .about-head .lede { text-align: center; }
+
+  .prose { display: grid; gap: var(--space-s); max-width: 62ch; font-size: var(--step-1); line-height: 1.65; }
+  .prose p { color: var(--ink); }
+  /* A candlelit drop cap: the one flourish on the page */
+  .dropcap::first-letter {
+    float: left; font-family: var(--font-display); font-variation-settings: 'SOFT' 100, 'WONK' 1;
+    font-size: 4.1em; line-height: 0.82; margin: 0.06em 0.12em 0 0; color: var(--accent);
+  }
+  .about-story { padding-block: 0 var(--space-2xl); display: grid; }
+
+  .about-who {
+    display: grid; gap: var(--space-2xl); align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+    padding-block: var(--space-2xl);
+  }
+  .about-who__frame {
+    position: relative; margin: 0; aspect-ratio: 4 / 5; max-height: 36rem; overflow: hidden;
+    border: 1px solid var(--line-strong); box-shadow: inset 0 0 0 6px var(--bg), inset 0 0 0 7px rgb(212 162 76 / 0.5);
+  }
+  .about-who__frame :global(picture) { position: absolute; inset: 0; z-index: -1; }
+  .about-who__frame figcaption {
+    position: absolute; inset: auto 0 0; padding: var(--space-m); text-align: center;
+    font-family: var(--font-display); font-style: italic; color: var(--ink-muted);
+    background: linear-gradient(transparent, rgb(13 10 6 / 0.85));
+  }
+  .about-who__frame { isolation: isolate; }
+  .about-who__text { display: grid; gap: var(--space-s); max-width: 34rem; }
+  .about-who__text h2 { font-size: var(--step-4); }
+  .about-who__text p:not(.eyebrow) { color: var(--ink-muted); font-size: var(--step-0); }
+
+  .about-hand { padding-block: var(--space-2xl); display: grid; gap: var(--space-m); }
+  .about-hand h2 { font-size: var(--step-4); max-width: 18ch; }
+  .materials { list-style: none; padding: 0; margin: var(--space-s) 0 0; display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
+  .materials li {
+    padding: 0.35em 0.9em; border: 1px solid var(--line-strong);
+    font-family: var(--font-display); font-style: italic; color: var(--accent-text);
+  }
+
+  .about-ljp { padding-block: 0 var(--space-xl); display: grid; gap: var(--space-s); justify-items: center; text-align: center; }
+  .about-ljp h2 { font-size: var(--step-3); }
+  .about-ljp p { max-width: 52ch; color: var(--ink-muted); }
+
+  .about-close { padding-block: var(--space-xl) var(--space-3xl); display: grid; gap: var(--space-2xl); justify-items: center; }
+  .about-close__links { display: flex; flex-wrap: wrap; gap: var(--space-s); justify-content: center; }
+  .about-close :global(.signup) { text-align: center; justify-items: center; }
+  .about-close :global(.signup__row) { justify-content: center; width: 100%; }
+</style>

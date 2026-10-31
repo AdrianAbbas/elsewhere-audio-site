@@ -31,6 +31,15 @@ This list grows as each page is built.
 - [ ] `TODO(images)`: three real screenshots (Living Globe, pattern editor, arrangement) for the screenshot frames.
 - [ ] Decide: the brief said 27 Places; the plugin has 26 (the 27th icon is the empty slot). The site says 26.
 
+## About page (`src/pages/about.astro`)
+- [ ] `TODO(copy)`: the story, and who makes it, in your own words. Your name is left as `[your name]` on purpose.
+- [ ] `TODO(images)`: a photograph of the maker or the recording space (a painted forest stands in).
+- [ ] `TODO(copy)`: anything more to say about LJP Records.
+
+## Products page
+- [ ] `TODO(images)`: WORLDBUILDER key art for the product card (the painted horizon stands in).
+- [ ] `TODO(copy)`: products intro.
+
 ## Copy
 - [ ] `TODO(copy)`: home: hero sub-line, intro paragraphs, WORLDBUILDER summary (`src/pages/index.astro`).
 - [ ] `TODO(copy)`: sign-up blurb (`src/components/SignupForm.astro`).
