@@ -1,0 +1,59 @@
+---
+// Account: where the Moonbase customer portal will be embedded
+// (sign in, licence keys, downloads, offline activation).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config/site';
+---
+<BaseLayout
+  title="Account"
+  description="Sign in to your Elsewhere Audio account for licence keys, downloads and offline activation."
+  realm="house"
+  noindex
+>
+  <div class="account wrap">
+    <header class="account__head">
+      <p class="eyebrow">Your account</p>
+      <h1>Licences and downloads</h1>
+      <p class="lede">Sign in to find your licence keys, download installers and activate offline.</p>
+    </header>
+
+    {/* TODO(moonbase): the customer portal mounts here (see src/scripts/store.ts → mountAccountPortal). */}
+    <section class="portal" data-moonbase-account aria-live="polite" aria-label="Account portal">
+      <div class="portal__placeholder">
+        <svg class="portal__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path d="M8 28V14.5a8 8 0 0 1 16 0V28" stroke="currentColor" stroke-width="1.2" />
+          <path d="M3 28h26" stroke="currentColor" stroke-width="1.2" />
+          <circle cx="20.5" cy="20" r="1" fill="currentColor" />
+        </svg>
+        <h2>The account portal opens soon</h2>
+        <p class="muted">Customer accounts go live with the store. Until then, if you need a licence or a download, email <span class="nowrap">{SITE.supportEmail}</span>.</p>
+      </div>
+    </section>
+
+    <ul class="account__help" role="list">
+      <li><a href="/support#activation">Activating your licence</a></li>
+      <li><a href="/support#offline">Offline activation</a></li>
+      <li><a href="/support#installation">Installing on a new Mac</a></li>
+    </ul>
+  </div>
+</BaseLayout>
+
+<script>
+  import { mountAccountPortal } from '../scripts/store';
+  const el = document.querySelector<HTMLElement>('[data-moonbase-account]');
+  if (el) mountAccountPortal(el);
+</script>
+
+<style>
+  .account { padding-block: var(--space-2xl) var(--space-3xl); display: grid; gap: var(--space-xl); }
+  .account__head { display: grid; gap: var(--space-s); }
+  .account__head h1 { font-size: var(--step-5); }
+  .portal { min-height: 22rem; display: grid; border: 1px solid var(--line-strong); background: var(--surface); }
+  .portal[data-mounted] .portal__placeholder { display: none; }
+  .portal__placeholder { display: grid; place-content: center; justify-items: center; gap: var(--space-s); padding: var(--space-xl) var(--space-m); text-align: center; }
+  .portal__placeholder h2 { font-size: var(--step-2); }
+  .portal__placeholder p { max-width: 42ch; }
+  .portal__mark { width: 3rem; height: 3rem; color: var(--accent); }
+  .nowrap { white-space: nowrap; }
+  .account__help { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-l); font-size: var(--step--1); }
+</style>

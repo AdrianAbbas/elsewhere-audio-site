@@ -62,3 +62,15 @@ document.addEventListener('click', (e) => {
   if (!button) return;
   onStoreAction(button.dataset.storeAction as StoreAction, button.dataset.productId ?? '', button);
 });
+
+// The customer portal on /account. Moonbase renders it into the element
+// marked [data-moonbase-account] once the store is enabled.
+// TODO(moonbase): replace the call below with Moonbase's documented way to
+// embed or open the customer portal (sign in, licences, downloads).
+export function mountAccountPortal(el: HTMLElement) {
+  const moonbase = window.Moonbase as (MoonbaseStorefront & { open_account?: (target?: HTMLElement) => unknown }) | undefined;
+  if (!STORE.enabled || !moonbase?.open_account) return false;
+  moonbase.open_account(el);
+  el.dataset.mounted = 'true';
+  return true;
+}

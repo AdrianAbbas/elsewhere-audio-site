@@ -40,6 +40,12 @@ This list grows as each page is built.
 - [ ] `TODO(images)`: WORLDBUILDER key art for the product card (the painted horizon stands in).
 - [ ] `TODO(copy)`: products intro.
 
+## Support, account and legal
+- [ ] `TODO(copy)`: confirm every support answer (`src/pages/support.astro`): installer steps, activations per licence, moving a licence, offline activation steps, refund policy, reply time.
+- [ ] In the plugin repo (not this one): change the plugin's manufacturer from "Veil Audio" to "Elsewhere Audio". The support steps already say "AU Instruments → Elsewhere Audio → WORLDBUILDER".
+- [ ] `TODO(moonbase)`: embed the customer portal on /account (`mountAccountPortal` in `src/scripts/store.ts`).
+- [ ] `TODO(legal)`: replace the EULA, Privacy Policy and Terms (`src/pages/legal/`). All three are marked "DRAFT – to be replaced". Update the privacy policy when analytics, the newsletter and Moonbase are connected.
+
 ## Copy
 - [ ] `TODO(copy)`: home: hero sub-line, intro paragraphs, WORLDBUILDER summary (`src/pages/index.astro`).
 - [ ] `TODO(copy)`: sign-up blurb (`src/components/SignupForm.astro`).

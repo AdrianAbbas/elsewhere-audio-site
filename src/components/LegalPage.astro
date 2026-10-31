@@ -1,0 +1,37 @@
+---
+// Shared layout for the legal documents: a calm, readable column in the house
+// realm, clearly flagged as a draft until the real text replaces it.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { LEGAL_NAV, SITE } from '../config/site';
+
+interface Props { title: string; description: string; updated?: string }
+const { title, description, updated = 'TODO: date' } = Astro.props;
+const path = Astro.url.pathname.replace(/\.html$/, '');
+---
+<BaseLayout title={title} description={description} realm="house">
+  <article class="legal wrap">
+    <header class="legal__head">
+      <p class="eyebrow">Legal</p>
+      <h1>{title}</h1>
+      <p class="draft-flag" role="note">DRAFT – to be replaced</p>
+      <p class="muted legal__meta">{SITE.name} is a business name of {SITE.legalName}, {SITE.location}. Last updated: {updated}.</p>
+    </header>
+    <div class="doc">
+      <slot />
+    </div>
+    <p class="draft-flag legal__end" role="note">DRAFT – to be replaced. This placeholder is not legal advice and is not in force.</p>
+    <nav class="legal__nav" aria-label="Legal documents">
+      {LEGAL_NAV.map((l) => <a href={l.href} aria-current={path === l.href ? 'page' : undefined}>{l.label}</a>)}
+    </nav>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal { padding-block: var(--space-2xl) var(--space-3xl); display: grid; gap: var(--space-xl); }
+  .legal__head { display: grid; gap: var(--space-s); justify-items: start; }
+  .legal__head h1 { font-size: var(--step-5); }
+  .legal__meta { font-size: var(--step--1); }
+  .legal__end { justify-self: start; }
+  .legal__nav { display: flex; gap: var(--space-l); padding-top: var(--space-m); border-top: 1px solid var(--line); font-size: var(--step--1); }
+  .legal__nav a[aria-current='page'] { color: var(--ink); text-decoration: none; font-weight: 600; }
+</style>

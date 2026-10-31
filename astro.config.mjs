@@ -13,7 +13,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       // Internal pages never go in the sitemap.
-      filter: (page) => !page.includes('/styleguide') && !page.includes('/404'),
+      filter: (page) => !['/styleguide', '/404', '/account'].some((p) => page.includes(p)),
     }),
   ],
 });

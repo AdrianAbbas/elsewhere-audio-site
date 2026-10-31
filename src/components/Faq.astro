@@ -1,0 +1,27 @@
+---
+// Questions and answers as native <details>: keyboard and screen-reader
+// friendly with no JavaScript. Answers may contain simple HTML (links).
+interface Props { items: readonly (readonly [string, string])[]; headingLevel?: 2 | 3 }
+const { items } = Astro.props;
+---
+<div class="faq-list">
+  {items.map(([q, a]) => (
+    <details class="faq">
+      <summary>{q}</summary>
+      <div class="faq__answer" set:html={a} />
+    </details>
+  ))}
+</div>
+
+<style>
+  .faq { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    display: flex; justify-content: space-between; gap: var(--space-s); cursor: pointer; list-style: none;
+    padding-block: var(--space-s); font-size: var(--step-0); font-weight: 500;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; flex: none; font-family: var(--font-mono); color: var(--accent-text); }
+  .faq[open] summary::after { content: '−'; }
+  .faq__answer { padding-bottom: var(--space-s); color: var(--ink-muted); max-width: 62ch; display: grid; gap: var(--space-xs); }
+  :global([data-realm='scifi']) .faq summary::after { color: var(--accent-2); }
+</style>

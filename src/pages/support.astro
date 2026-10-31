@@ -1,0 +1,122 @@
+---
+// Support, in the house realm: answers first, then how to reach us.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Faq from '../components/Faq.astro';
+import { SITE } from '../config/site';
+import { REQUIREMENTS } from '../data/worldbuilder';
+
+const req = REQUIREMENTS.slice(0, 4).map(([k, v]) => `<li><strong>${k}:</strong> ${v}</li>`).join('');
+
+// TODO(copy): confirm every answer before launch. Installation steps follow
+// the plugin's install notes; activation, offline activation and refunds
+// depend on how Moonbase is set up.
+const sections = [
+  {
+    id: 'installation',
+    title: 'Installation',
+    items: [
+      ['How do I install WORLDBUILDER?', '<p>Sign in to <a href="/account">your account</a>, download the installer for macOS and run it. It installs the Audio Unit and VST3 versions for Apple Silicon and Intel Macs. Quit Logic Pro or GarageBand before you install. (TODO: confirm installer steps for the signed release.)</p>'],
+      ['How do I open it in Logic Pro?', '<p>Create a Software Instrument track and choose <strong>AU Instruments → Elsewhere Audio → WORLDBUILDER</strong> in the Instrument slot. If Logic marks it as failed, open <strong>Settings → Plug-in Manager</strong>, select it and click <strong>Reset &amp; Rescan Selection</strong>.</p>'],
+      ['How do I open it in GarageBand?', '<p>In <strong>Settings → Audio/MIDI</strong>, make sure Audio Units are on. Create a Software Instrument track, open Smart Controls (B) → Plug-ins → Instrument slot, and choose <strong>AU Instruments → Elsewhere Audio → WORLDBUILDER</strong>. Press play: it plays along with your song, no MIDI needed.</p>'],
+      ['I see sliders instead of the WORLDBUILDER window.', '<p>In the plug-in window’s view menu, switch from <strong>Controls</strong> to <strong>Editor</strong>.</p>'],
+      ['How do I uninstall it?', '<p>Delete <code>WORLDBUILDER.component</code> from <code>~/Library/Audio/Plug-Ins/Components</code> and <code>WORLDBUILDER.vst3</code> from <code>~/Library/Audio/Plug-Ins/VST3</code>. (TODO: confirm paths, or point to an uninstaller.)</p>'],
+    ],
+  },
+  {
+    id: 'activation',
+    title: 'Activation',
+    items: [
+      ['How do I activate my licence?', '<p>Open WORLDBUILDER, choose <strong>Activate</strong>, and sign in with the account you bought it with, or paste your licence key. Your key is also in <a href="/account">your account</a>. (TODO: confirm once Moonbase licensing is set up.)</p>'],
+      ['How many computers can I use it on?', '<p>TODO: the number of activations per licence.</p>'],
+      ['How do I move my licence to a new Mac?', '<p>Deactivate it on the old Mac first, from inside the plugin or from <a href="/account">your account</a>, then activate on the new one. (TODO: confirm.)</p>'],
+    ],
+  },
+  {
+    id: 'offline',
+    title: 'Offline activation',
+    items: [
+      ['My studio computer is offline. Can I still activate?', '<p>Yes. In WORLDBUILDER choose <strong>Activate offline</strong> to save an activation request file, carry it to a computer with internet, upload it in <a href="/account">your account</a>, and bring the licence file back. (TODO: confirm the exact steps with Moonbase’s offline activation.)</p>'],
+    ],
+  },
+  {
+    id: 'refunds',
+    title: 'Refunds',
+    items: [
+      ['Can I get a refund?', '<p>TODO: refund policy (for example, within 14 days of purchase if the plugin has not been activated). There is a free Lite version so you can try WORLDBUILDER in your own projects before you buy.</p>'],
+      ['How do I ask for a refund?', `<p>Email us at <span class="nowrap">${SITE.supportEmail}</span> with your order number.</p>`],
+    ],
+  },
+  {
+    id: 'requirements',
+    title: 'System requirements',
+    items: [
+      ['What do I need to run WORLDBUILDER?', `<ul>${req}</ul><p>The full list is on the <a href="/worldbuilder#req-title">WORLDBUILDER page</a>.</p>`],
+      ['Is there a Windows version?', '<p>Not yet. Our instruments are macOS only for now.</p>'],
+    ],
+  },
+] as const;
+---
+<BaseLayout
+  title="Support"
+  description="Help with installing and activating Elsewhere Audio instruments, offline activation, refunds and system requirements, and how to contact us."
+  realm="house"
+>
+  <header class="support-head wrap-wide">
+    <p class="eyebrow">Support</p>
+    <h1>How can we help?</h1>
+    <p class="lede">Most answers are below. If yours isn’t, write to us and a real person will reply, usually within two working days.</p>
+    {/* TODO(copy): confirm the reply time. */}
+    <nav class="support-toc" aria-label="Support topics">
+      {sections.map((s) => <a href={`#${s.id}`}>{s.title}</a>)}
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="support-body wrap-wide">
+    <div class="support-sections">
+      {sections.map((s) => (
+        <section id={s.id} class="support-section" aria-labelledby={`${s.id}-title`}>
+          <h2 id={`${s.id}-title`}>{s.title}</h2>
+          <Faq items={s.items} />
+        </section>
+      ))}
+    </div>
+
+    <aside id="contact" class="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <p>Email us at</p>
+      {/* TODO(email): the real support address, set in src/config/site.ts */}
+      <p class="contact__email"><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></p>
+      <p class="muted">Please include your Mac model, macOS version, your DAW and its version, and what happened. A screenshot helps.</p>
+      <p class="muted">{SITE.name} · {SITE.legalName} · {SITE.location}</p>
+    </aside>
+  </div>
+</BaseLayout>
+
+<style>
+  .support-head { padding-block: var(--space-2xl) var(--space-xl); display: grid; gap: var(--space-s); }
+  .support-head h1 { font-size: var(--step-5); }
+  .support-toc { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-l); margin-top: var(--space-s); font-size: var(--step--1); }
+
+  .support-body {
+    display: grid; gap: var(--space-2xl); align-items: start;
+    grid-template-columns: minmax(0, 1fr);
+    padding-bottom: var(--space-3xl);
+  }
+  @media (min-width: 64rem) { .support-body { grid-template-columns: minmax(0, 1fr) 20rem; } }
+  .support-sections { display: grid; gap: var(--space-2xl); }
+  .support-section { scroll-margin-top: var(--space-l); }
+  .support-section h2 { font-size: var(--step-2); padding-bottom: var(--space-xs); border-bottom: 1px solid var(--line-strong); }
+  .support-section :global(code) { font-family: var(--font-mono); font-size: 0.88em; overflow-wrap: anywhere; }
+  .support-section :global(ul) { padding-left: 1.2em; display: grid; gap: var(--space-3xs); }
+  .support-section :global(.nowrap) { white-space: nowrap; }
+
+  .contact {
+    display: grid; gap: var(--space-xs); padding: var(--space-l); scroll-margin-top: var(--space-l);
+    background: var(--surface); border: 1px solid var(--line);
+  }
+  @media (min-width: 64rem) { .contact { position: sticky; top: var(--space-l); } }
+  .contact h2 { font-size: var(--step-2); }
+  .contact__email { font-family: var(--font-display); font-size: var(--step-1); overflow-wrap: anywhere; }
+  .contact p.muted { font-size: var(--step--1); }
+</style>

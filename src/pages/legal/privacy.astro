@@ -1,0 +1,27 @@
+---
+import LegalPage from '../../components/LegalPage.astro';
+import { SITE } from '../../config/site';
+// TODO(legal): replace with the real privacy policy. The draft below describes
+// how the site is built today; update it when analytics, the newsletter and
+// Moonbase are connected.
+---
+<LegalPage title="Privacy Policy" description="How Elsewhere Audio handles personal information. Draft placeholder.">
+  <p>[DRAFT – to be replaced] This policy explains what personal information {SITE.legalName} (doing business as {SITE.name}) collects, why, and what you can do about it.</p>
+  <h2>What this website collects</h2>
+  <ul>
+    <li>No cookies and no third-party trackers or advertising.</li>
+    <li>[Placeholder: privacy-friendly, cookieless analytics, once chosen. Name the provider here.]</li>
+    <li>Our host, Cloudflare, keeps standard technical logs (such as IP addresses) to run and protect the site. [Placeholder: link to Cloudflare’s policy.]</li>
+    <li>Trailers load from YouTube’s privacy-enhanced service only after you press play.</li>
+  </ul>
+  <h2>Newsletter</h2>
+  <p>[Placeholder: if you sign up, we keep your email address to send you news, using (provider). You can unsubscribe at any time.]</p>
+  <h2>Purchases and accounts</h2>
+  <p>[Placeholder: payments, licence keys, downloads and customer accounts are handled by Moonbase. Describe what Moonbase and its payment processor collect and link to their policies.]</p>
+  <h2>Support email</h2>
+  <p>[Placeholder: when you write to us, we keep your message and email address to help you.]</p>
+  <h2>Your rights</h2>
+  <p>[Placeholder: access, correction and deletion under Canada’s PIPEDA, and GDPR rights for people in the EU and UK.]</p>
+  <h2>Contact</h2>
+  <p>[Placeholder: privacy contact. For now: {SITE.supportEmail}.]</p>
+</LegalPage>
