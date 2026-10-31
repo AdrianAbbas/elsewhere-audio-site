@@ -30,6 +30,36 @@ Then open <http://localhost:4321/styleguide>.
 | `npm run audio:placeholders` | Regenerates the placeholder demo audio and waveform peaks (needs `ffmpeg`) |
 | `npm run art` | Re-renders the painted artwork into `src/assets/art/` (needs Playwright, see below) |
 
+## Pages
+
+| Path | Realm | What it is |
+| --- | --- | --- |
+| `/` | threshold | Home: painted hero, intro, WORLDBUILDER, unnamed "Coming 2027" worlds, sign-up |
+| `/worldbuilder` | sci-fi (fantasy touches) | Product page: trailer, the 26 Places, features, screenshots, specs, pricing, FAQ |
+| `/products` | house | WORLDBUILDER plus unnamed upcoming worlds |
+| `/about` | fantasy (candlelit) | The story, who makes it, sounds recorded by hand, LJP Records |
+| `/support` | house | Installation, activation, offline activation, refunds, requirements, contact |
+| `/account` | house | Placeholder for the Moonbase customer portal (not indexed) |
+| `/legal/eula`, `/legal/privacy`, `/legal/terms` | house | Drafts, marked "DRAFT – to be replaced" |
+| `/404` | threshold | "This place doesn't exist… yet." |
+| `/styleguide` | house | Internal design reference (not linked, not indexed) |
+
+WORLDBUILDER's content (Places, features, requirements, FAQ, trailer ID) lives in `src/data/worldbuilder.ts`.
+
+## Quality checks
+
+At the last check every public page scored 96–100 for Lighthouse performance and 100 for accessibility, best practices and SEO, on mobile and desktop, with no automated accessibility (axe) violations and no horizontal scrolling at phone width. To re-check after changes:
+
+```bash
+npm run build && npm run preview
+```
+
+```bash
+npx lighthouse http://localhost:4321/ --view
+```
+
+(`/account` and the 404 page score lower on SEO only because they are deliberately set to `noindex`.)
+
 ## How the design system works
 
 **One house, many realms.**
