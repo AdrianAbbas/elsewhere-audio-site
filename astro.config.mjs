@@ -9,7 +9,8 @@ export default defineConfig({
   site: SITE.url,
   output: 'static',
   trailingSlash: 'never',
-  build: { format: 'file' },
+  // Inline the (small) CSS into each page so it never blocks the first paint.
+  build: { format: 'file', inlineStylesheets: 'always' },
   integrations: [
     sitemap({
       // Internal pages never go in the sitemap.
