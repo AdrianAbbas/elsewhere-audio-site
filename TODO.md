@@ -19,8 +19,8 @@ This list grows as each page is built.
 ## Media
 - [ ] `TODO(audio)`: replace `public/audio/placeholder-01…04.mp3` (synthesised tones) with real demos, then regenerate waveform peaks (`npm run audio:placeholders` shows how; adapt it to the real files).
 - [ ] `TODO(audio)`: a real demo for each of the 26 Places (`src/data/worldbuilder.ts` cycles four placeholder tones), plus the two home-page demos (Tavern, Nebula).
-- [ ] `TODO(images)`: real WORLDBUILDER screenshots for `src/components/ScreenshotFrame.astro` (home featured section uses the placeholder).
-- [ ] `TODO(images)`: the teaser scenes (`src/assets/art/atmosphere-*.webp`, painted by `scripts/art/atmospheres.mjs`) are stand-ins. Replace with real teaser artwork when it exists.
+- [ ] `TODO(images)`: the home page's featured WORLDBUILDER frame still shows the pixel-planet placeholder (`ScreenshotFrame` with no image). The WORLDBUILDER page now uses real captures.
+- [ ] `TODO(images)`: the painted atmosphere scenes (`src/assets/art/atmosphere-*.webp`) now only stand in on About (the maker's photo) and the 404 page.
 - [ ] `TODO(og)`: `public/og/default.jpg` is a screenshot of the threshold hero with the brand line. Replace with designed Open Graph images (1200×630), ideally one per page.
 
 ## WORLDBUILDER page (`src/data/worldbuilder.ts`)
@@ -28,7 +28,7 @@ This list grows as each page is built.
 - [ ] `TODO(specs)`: confirm system requirements, especially tested hosts and installed size.
 - [ ] `TODO(copy)`: what WORLDBUILDER Lite includes (nothing in the plugin defines a Lite edition yet).
 - [ ] `TODO(copy)`: feature wording and FAQ answers (facts follow the plugin's README).
-- [ ] `TODO(images)`: three real screenshots (Living Globe, pattern editor, arrangement) for the screenshot frames.
+- [x] Real WORLDBUILDER screenshots (from the plugin repo's own pixel-interface captures, in `public/images/worldbuilder/`).
 - [ ] Decide: the brief said 27 Places; the plugin has 26 (the 27th icon is the empty slot). The site says 26.
 
 ## About page (`src/pages/about.astro`)
@@ -40,9 +40,16 @@ This list grows as each page is built.
 - [ ] `TODO(images)`: WORLDBUILDER key art for the product card (the painted horizon stands in).
 - [ ] `TODO(copy)`: products intro.
 
+## LIMINAL, DUNGEON CRAWLER and LIGHT SEEKER (`src/data/products.ts`)
+- [ ] Decide: the original brief kept upcoming worlds unnamed. They are now named on the home page, /products and their own pages (the repos are public). To go back to unnamed teasers, remove them from `UPCOMING`.
+- [ ] `TODO(release)`: release dates (all say "Coming 2027"), prices, what each edition includes, and Moonbase product IDs (add to `src/config/store.ts` and Buy buttons when they go on sale).
+- [ ] `TODO(copy)`: product copy is drafted from each repo's README and docs; read it through.
+- [ ] `TODO(images)`: product images are the repos' own renders and interface captures (sources in `src/assets/products/SOURCES.md`). Replace with final key art, and new captures when the interfaces change.
+- [ ] Specs say "macOS 10.15 or later, Apple Silicon or Intel; AU and VST3", from the repos' build settings. Confirm before release.
+
 ## Support, account and legal
 - [ ] `TODO(copy)`: confirm every support answer (`src/pages/support.astro`): installer steps, activations per licence, moving a licence, offline activation steps, refund policy, reply time.
-- [ ] In the plugin repo (not this one): change the plugin's manufacturer from "Veil Audio" to "Elsewhere Audio". The support steps already say "AU Instruments → Elsewhere Audio → WORLDBUILDER".
+- [ ] In the plugin repos (not this one): change the manufacturer from "Veil Audio" to "Elsewhere Audio" in all four (WORLDBUILDER, LIMINAL, DUNGEON CRAWLER, LIGHT SEEKER). The support steps already say "AU Instruments → Elsewhere Audio → …".
 - [ ] `TODO(moonbase)`: embed the customer portal on /account (`mountAccountPortal` in `src/scripts/store.ts`).
 - [ ] `TODO(legal)`: replace the EULA, Privacy Policy and Terms (`src/pages/legal/`). All three are marked "DRAFT – to be replaced". Update the privacy policy when analytics, the newsletter and Moonbase are connected.
 

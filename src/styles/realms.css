@@ -187,6 +187,138 @@
   --texture-size: 200px 200px, auto, auto;
 }
 
+/* ── Product identities ───────────────────────────────────────────
+   Each later instrument brings its own weather into the house, the way
+   WORLDBUILDER brings pixel art: only on its own page and cards. */
+
+/* LIMINAL: fluorescent light in an empty building. Institutional, signage-like. */
+[data-realm='liminal'] {
+  color-scheme: light;
+  --bg: #e6ece8;
+  --bg-deep: #d7dfda;
+  --surface: #f2f5f3;
+  --surface-2: #dfe6e2;
+  --ink: #121816;
+  --ink-muted: #4b5a54;
+  --accent: #8fb3a5; /* fluorescent green, decorative */
+  --accent-2: #c8463c; /* the camcorder's REC dot, decorative */
+  --accent-text: #2f6b5a;
+  --link: #1f5a4b;
+  --link-hover: #121816;
+  --primary: #121816;
+  --on-primary: #eef2ef;
+  --primary-hover: #26302c;
+  --line: rgb(18 24 22 / 0.14);
+  --line-strong: #6f7f78;
+  --focus: #b2332a;
+  --scrim: rgb(230 236 232 / 0.86);
+
+  /* Signage: the quiet sans carries the headings here */
+  --font-display: var(--font-body);
+  --display-variation: normal;
+  --display-weight: 500;
+  --display-tracking: -0.02em;
+  --eyebrow-font: var(--font-mono);
+  --eyebrow-style: normal;
+  --eyebrow-transform: uppercase;
+  --eyebrow-tracking: 0.14em;
+  --eyebrow-size: var(--step--2);
+  --btn-font: var(--font-mono);
+  --btn-transform: uppercase;
+  --btn-tracking: 0.12em;
+  --btn-size: var(--step--2);
+
+  --texture:
+    var(--grain-dark),
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgb(236 255 246 / 0.7), transparent 70%),
+    linear-gradient(180deg, rgb(143 179 165 / 0.08), transparent 40%);
+  --texture-size: 200px 200px, auto, auto;
+}
+
+/* DUNGEON CRAWLER: a dark realm under a red moon. */
+[data-realm='dungeon'] {
+  color-scheme: dark;
+  --bg: #0b0909;
+  --bg-deep: #060505;
+  --surface: #151111;
+  --surface-2: #1d1616;
+  --ink: #ece3dc;
+  --ink-muted: #b3a59c;
+  --accent: #c4211c; /* the red moon, decorative */
+  --accent-2: #7a1612;
+  --accent-text: #ee6a5c;
+  --link: #f08a7c;
+  --link-hover: #ece3dc;
+  --primary: #a81c17;
+  --on-primary: #fbeee8;
+  --primary-hover: #c22720;
+  --line: rgb(236 227 220 / 0.13);
+  --line-strong: #7a6660;
+  --focus: #f0c070;
+  --scrim: rgb(11 9 9 / 0.85);
+
+  --display-variation: 'SOFT' 0, 'WONK' 1;
+  --display-weight: 420;
+  --display-tracking: 0.01em;
+  --eyebrow-font: var(--font-body);
+  --eyebrow-style: normal;
+  --eyebrow-transform: uppercase;
+  --eyebrow-tracking: 0.24em;
+  --eyebrow-size: var(--step--2);
+  --btn-font: var(--font-display);
+  --btn-transform: uppercase;
+  --btn-tracking: 0.1em;
+  --btn-size: var(--step--1);
+
+  --texture:
+    var(--grain-light),
+    radial-gradient(ellipse 45% 35% at 80% 0%, rgb(196 33 28 / 0.2), transparent 70%),
+    radial-gradient(ellipse 120% 90% at 50% 50%, transparent 55%, rgb(0 0 0 / 0.45));
+  --texture-size: 200px 200px, auto, auto;
+}
+
+/* LIGHT SEEKER: a sunlit realm of sky castles and crystal palaces. */
+[data-realm='radiant'] {
+  color-scheme: light;
+  --bg: #f6f1e4;
+  --bg-deep: #ece4cf;
+  --surface: #fffaf0;
+  --surface-2: #f1e8d2;
+  --ink: #1f1a10;
+  --ink-muted: #5c5240;
+  --accent: #d9a63a; /* gold, decorative */
+  --accent-2: #6fa7c9; /* sky, decorative */
+  --accent-text: #7a5a12;
+  --link: #2d5f86;
+  --link-hover: #1f1a10;
+  --primary: #7d5a14;
+  --on-primary: #fffaf0;
+  --primary-hover: #66490f;
+  --line: rgb(31 26 16 / 0.13);
+  --line-strong: #8f8166;
+  --focus: #2d5f86;
+  --scrim: rgb(246 241 228 / 0.86);
+
+  --display-variation: 'SOFT' 100, 'WONK' 0;
+  --display-weight: 360;
+  --display-tracking: -0.01em;
+  --eyebrow-font: var(--font-display);
+  --eyebrow-style: italic;
+  --eyebrow-transform: none;
+  --eyebrow-tracking: 0.01em;
+  --eyebrow-size: var(--step-0);
+  --btn-font: var(--font-display);
+  --btn-transform: none;
+  --btn-tracking: 0.01em;
+  --btn-size: var(--step-0);
+
+  --texture:
+    var(--grain-dark),
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgb(255 214 140 / 0.4), transparent 70%),
+    linear-gradient(180deg, rgb(150 200 235 / 0.14), transparent 35%);
+  --texture-size: 200px 200px, auto, auto;
+}
+
 /* Every realm container paints its own ground, so realms can sit side by side. */
 [data-realm] {
   background-color: var(--bg);

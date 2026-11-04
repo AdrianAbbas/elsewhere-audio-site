@@ -3,7 +3,8 @@
 // unnamed until they are announced.
 import { Picture } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import TeaserCard from '../components/TeaserCard.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { UPCOMING } from '../data/products';
 import BuyButton from '../components/store/BuyButton.astro';
 import keyArt from '../assets/art/threshold.webp';
 import { STORE, formatPrice } from '../config/store';
@@ -13,7 +14,7 @@ const wb = STORE.products.worldbuilder;
 ---
 <BaseLayout
   title="Products"
-  description="Instrument plugins for macOS (AU and VST3) from Elsewhere Audio. WORLDBUILDER is available now; more worlds are coming in 2027."
+  description="Instrument plugins for macOS (AU and VST3) from Elsewhere Audio: WORLDBUILDER, available now, and LIMINAL, DUNGEON CRAWLER and LIGHT SEEKER, coming in 2027."
   realm="house"
 >
   <header class="products-head wrap-wide">
@@ -45,13 +46,11 @@ const wb = STORE.products.worldbuilder;
   </section>
 
   <section class="wrap-wide coming" aria-labelledby="coming-title">
-    <h2 id="coming-title" class="section-label">Coming 2027</h2>
-    <p class="muted coming__note">We’re recording the next worlds now. We’ll name them when they’re ready.</p>
-    {/* TODO(images): real teaser artwork; keep them unnamed. */}
+    <h2 id="coming-title" class="section-label">In the workshop</h2>
+    {/* TODO(release): release dates and prices for each */}
+    <p class="muted coming__note">Three more worlds, in development now. Each page shows how far along it is.</p>
     <div class="coming__grid">
-      <TeaserCard scene="ruins" alt="Gothic arches in silhouette under a pale moon, mist at their feet." />
-      <TeaserCard scene="megacity" alt="A dense skyline of dark towers fading into low cloud." />
-      <TeaserCard scene="forest" alt="A moonlit pine forest fading into layered mist." />
+      {UPCOMING.map((p) => <ProductCard product={p} />)}
     </div>
   </section>
 </BaseLayout>
@@ -87,5 +86,5 @@ const wb = STORE.products.worldbuilder;
   .coming { padding-block: var(--space-2xl) var(--space-3xl); }
   .coming .section-label { margin-bottom: var(--space-xs); }
   .coming__note { margin-bottom: var(--space-l); }
-  .coming__grid { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+  .coming__grid { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
 </style>

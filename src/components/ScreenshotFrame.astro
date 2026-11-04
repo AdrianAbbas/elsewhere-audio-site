@@ -10,7 +10,7 @@ const hasShot = Astro.slots.has('default');
 ---
 <figure class="shot">
   <div class="shot__bar" aria-hidden="true"><span></span><span></span><span></span><em>{label}</em></div>
-  <div class="shot__view">
+  <div class:list={['shot__view', { 'shot__view--shot': hasShot }]}>
     {hasShot ? <slot /> : (
       <div class="shot__placeholder">
         <TinyPlanet size={132} />
@@ -27,6 +27,9 @@ const hasShot = Astro.slots.has('default');
   .shot__bar em { margin-left: auto; margin-right: auto; font-style: normal; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; color: #a3accf; transform: translateX(-20px); }
   .shot__view { aspect-ratio: 16 / 10; }
   .shot__view > :global(*) { width: 100%; height: 100%; object-fit: cover; }
+  /* A real screenshot keeps its own proportions; pixel art stays crisp. */
+  .shot__view--shot { aspect-ratio: auto; background: #0a0d1f; }
+  .shot__view--shot > :global(img) { height: auto; object-fit: contain; }
   .shot__placeholder {
     display: grid; place-content: center; justify-items: center; gap: var(--space-s); height: 100%;
     /* pixel grid: WORLDBUILDER surfaces only */

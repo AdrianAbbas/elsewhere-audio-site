@@ -2,6 +2,7 @@
 import Logo from './Logo.astro';
 import Ornament from './Ornament.astro';
 import { NAV, LEGAL_NAV, SITE } from '../config/site';
+import { PRODUCTS } from '../data/products';
 
 interface Props {
   /** Render as a plain <div> (used for previews on /styleguide, to avoid duplicate landmarks). */
@@ -19,6 +20,13 @@ const year = new Date().getFullYear();
       <div class="site-footer__brand stack">
         <Logo size="sm" />
         <p class="muted">{SITE.tagline}</p>
+      </div>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">Instruments</h2>
+        <ul role="list">
+          {PRODUCTS.map((p) => <li><a href={`/${p.slug}`}>{p.name}</a></li>)}
+        </ul>
       </div>
 
       <nav aria-label={preview ? `Footer (${id} preview)` : 'Footer'} class="site-footer__col">
@@ -56,8 +64,13 @@ const year = new Date().getFullYear();
     border-top: 1px solid var(--line);
   }
   .site-footer__grid { display: grid; gap: var(--space-l); grid-template-columns: 1fr; }
-  @container (min-width: 40rem) {
-    .site-footer__grid { grid-template-columns: 2fr 1fr 1fr; }
+  @container (min-width: 28rem) {
+    .site-footer__grid { grid-template-columns: repeat(3, 1fr); }
+    .site-footer__brand { grid-column: 1 / -1; }
+  }
+  @container (min-width: 52rem) {
+    .site-footer__brand { grid-column: auto; }
+    .site-footer__grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
   }
   .site-footer__brand { --stack-space: var(--space-s); max-width: 28ch; }
   .site-footer__heading {

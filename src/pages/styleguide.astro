@@ -42,6 +42,7 @@ const space = ['3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
         <a href="#realms">Realms</a>
         <a href="#threshold">Threshold hero</a>
         <a href="#identity">Product identity</a>
+        <a href="#product-realms">Product realms</a>
       </nav>
     </header>
 
@@ -164,6 +165,25 @@ const space = ['3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
         </div>
       </div>
     </section>
+
+    <!-- ── PRODUCT REALMS ────────────────────────────────────────── -->
+    <section id="product-realms" class="sg-section wrap-wide" aria-labelledby="product-realms-title">
+      <h2 id="product-realms-title">Product realms</h2>
+      <p class="lede">The later instruments each bring their own weather, used only on their own page and on their cards: LIMINAL’s fluorescent institution, DUNGEON CRAWLER’s red moon, LIGHT SEEKER’s sunlight.</p>
+      <div class="sg-products">
+        {([['liminal', 'LIMINAL', 'Pale mint under fluorescent tubes. Signage-style sans headings, camcorder mono labels, a REC-red focus ring.'],
+           ['dungeon', 'DUNGEON CRAWLER', 'Ink black under a red moon. Engraved capitals on buttons, ember-red accents, candle-gold focus.'],
+           ['radiant', 'LIGHT SEEKER', 'Sunlit ivory, gold and sky. Fraunces at its softest, rounded buttons.']] as const).map(([realm, name, note]) => (
+          <article class="sg-product" data-realm={realm}>
+            <p class="eyebrow">data-realm="{realm}"</p>
+            <p class="display sg-product__name">{name}</p>
+            <p class="muted">{note}</p>
+            <div class="row"><a class="btn btn--primary" href={`#product-realms`}>Primary</a><a class="btn" href={`#product-realms`}>Secondary</a></div>
+            <ContrastTable realm={realm} />
+          </article>
+        ))}
+      </div>
+    </section>
   </div>
 </BaseLayout>
 
@@ -203,6 +223,10 @@ const space = ['3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
   .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-s); margin-top: var(--space-xs); }
   .sg-threshold-below { padding-block: var(--space-xl) var(--space-2xl); }
 
+  .sg-products { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+  .sg-product { display: grid; gap: var(--space-s); align-content: start; padding: var(--space-l) var(--space-m); border: 1px solid var(--line-strong); min-width: 0; }
+  .sg-product__name { font-size: var(--step-3); letter-spacing: 0.03em; }
+  .sg-product .row { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
   .identity {
     display: grid; gap: var(--space-xl); align-items: center;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));

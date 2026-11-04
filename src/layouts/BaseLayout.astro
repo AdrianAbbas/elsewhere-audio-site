@@ -36,7 +36,7 @@ const {
 const fullTitle = title === SITE.name ? `${SITE.name} — ${SITE.tagline}` : `${title} · ${SITE.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogUrl = new URL(ogImage, Astro.site);
-const themeColor = { house: '#f2efe9', fantasy: '#15110b', scifi: '#060a1a', threshold: '#0b0c18' }[realm];
+const themeColor = { house: '#f2efe9', fantasy: '#15110b', scifi: '#060a1a', threshold: '#0b0c18', liminal: '#e6ece8', dungeon: '#0b0909', radiant: '#f6f1e4' }[realm];
 ---
 <!doctype html>
 <html lang="en-CA">

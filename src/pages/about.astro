@@ -7,8 +7,8 @@ import Atmosphere from '../components/art/Atmosphere.astro';
 import SignupForm from '../components/SignupForm.astro';
 import { SITE } from '../config/site';
 
-// The materials being recorded for the instruments (from the WORLDBUILDER sample plan).
-const materials = ['Voice', 'Guitar', 'Violin', 'Kalimba', 'Breath', 'Percussion', 'Glass', 'Metal', 'Wood', 'Textures'];
+// What our instruments are recorded from, across all four plugins' READMEs.
+const materials = ['Classical guitar', 'Violin', 'Kalimba', 'Piano', 'Banjo', 'Voice', 'Djembes', 'Analog synth', 'Effect pedals'];
 ---
 <BaseLayout
   title="About"
@@ -19,7 +19,7 @@ const materials = ['Voice', 'Guitar', 'Violin', 'Kalimba', 'Breath', 'Percussion
     <p class="eyebrow">About Elsewhere Audio</p>
     <h1>A small workshop at the edge of the map.</h1>
     {/* TODO(copy): about intro */}
-    <p class="lede">We make instruments for places that don’t exist: castles and taverns, forests and ruins, spaceports and nebulae. Each one is a doorway, and composers are the ones who walk through.</p>
+    <p class="lede">We make instruments for places that don’t exist: castles and taverns, spaceports and nebulae, empty buildings at night, a dark realm and a sunlit one. Each is a doorway, and composers are the ones who walk through.</p>
   </header>
 
   <Ornament />
@@ -30,7 +30,7 @@ const materials = ['Voice', 'Guitar', 'Violin', 'Kalimba', 'Breath', 'Percussion
     {/* TODO(copy): the real story, in your own words. Placeholder below. */}
     <div class="prose">
       <p class="dropcap">Elsewhere Audio began with a simple wish: to score a place rather than a sound. Film, TV and game composers spend their days building worlds, and most instruments hand them a list of patches and leave the world-building to them. We wanted instruments that start with the world.</p>
-      <p>So each instrument we make is built around somewhere. Our first, WORLDBUILDER, holds twenty-six Places, and every one is a small ensemble that plays in your key and tempo: a tavern with a fiddle and a lute, a forest with a flute and a kalimba, a spaceport humming at three in the morning.</p>
+      <p>So each instrument we make is built around somewhere. WORLDBUILDER holds twenty-six Places, each a small ensemble in your key and tempo: a tavern with a fiddle and a lute, a spaceport humming at three in the morning. LIMINAL plays fragile instruments inside empty buildings. DUNGEON CRAWLER and LIGHT SEEKER are twin realms, one under a red moon and one in full sun, with an instrument for every place.</p>
       <p>We work slowly, on purpose. We would rather make a few instruments that feel lived in than many that feel the same.</p>
     </div>
   </section>
@@ -54,10 +54,10 @@ const materials = ['Voice', 'Guitar', 'Violin', 'Kalimba', 'Breath', 'Percussion
   <!-- Recorded by hand -->
   <section class="about-hand wrap reveal" aria-labelledby="hand-title">
     <p class="eyebrow">Recorded by hand</p>
-    <h2 id="hand-title">Our own sounds, and nobody else’s.</h2>
+    <h2 id="hand-title">Our own sounds, played by hand.</h2>
     <div class="prose">
-      <p>Nothing in our instruments comes from someone else’s sample library. Where an instrument plays a recording, we made it ourselves: a classical guitar played with the fingers and reshaped into a lute and an oud, a violin bowed, plucked and struck with the wood of the bow, a seventeen-tine kalimba recorded at three strengths.</p>
-      <p>The rest is played live by the instrument itself, so it can follow your key and tempo instead of repeating a fixed loop. And the recording continues.</p>
+      <p>Where our instruments play a recording, we almost always made it ourselves: a classical guitar played with the fingers and reshaped into a lute and an oud, a violin bowed, plucked and struck with the wood of the bow, a seventeen-tine kalimba recorded at three strengths, a piano, a banjo, two djembes, a voice, an analog synth. Even some of the reverbs are our own pedals, measured and rebuilt.</p>
+      <p>The one exception is credited: LIGHT SEEKER’s brass comes from VSCO 2 Community Edition by Versilian Studios, recordings released into the public domain. Everything else is played live by the instrument itself, so it can follow your key and tempo instead of repeating a fixed loop. And the recording continues.</p>
     </div>
     <ul class="materials" role="list" aria-label="Sounds we record">
       {materials.map((m) => <li>{m}</li>)}

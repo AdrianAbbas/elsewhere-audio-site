@@ -78,7 +78,7 @@ const schema = {
     </div>
     <dl class="wb-facts">
       <div><dt>Places</dt><dd>{PLACE_COUNT}</dd></div>
-      <div><dt>Instruments in each</dt><dd>6</dd></div>
+      <div><dt>Instruments</dt><dd>156</dd></div>
       <div><dt>Characters in each</dt><dd>3</dd></div>
       <div><dt>Playing at once</dt><dd>4</dd></div>
     </dl>
@@ -141,11 +141,11 @@ const schema = {
       <h2 id="shots-title">A 16-bit world on your desk.</h2>
       <p class="muted">The interface is pixel art throughout, and its mood follows your Places: storybook for fantasy, neon for sci-fi, and a blend of the two when both play.</p>
     </div>
-    {/* TODO(images): real screenshots (src/assets + <Picture>), one per frame. */}
+    {/* Pixel screenshots from the plugin's own captures, kept lossless (public/images/worldbuilder). */}
     <div class="wb-shot-grid">
-      <figure><ScreenshotFrame label="WORLDBUILDER · LIVING GLOBE" /><figcaption>The Living Globe: a tiny planet with your Places on its horizon.</figcaption></figure>
-      <figure><ScreenshotFrame label="WORLDBUILDER · PATTERNS" /><figcaption>The pattern editor.</figcaption></figure>
-      <figure><ScreenshotFrame label="WORLDBUILDER · ARRANGE" /><figcaption>The arrangement timeline.</figcaption></figure>
+      <figure class="wb-shot--wide"><ScreenshotFrame label="WORLDBUILDER · WORLD"><img src="/images/worldbuilder/worldbuilder-world.png" width="1160" height="812" loading="lazy" decoding="async" alt="The WORLDBUILDER window in its fantasy mood: world controls on the left, the Living Globe with a castle and village on a tiny planet in the middle, the environment and the active Places on the right, Place cards below." /></ScreenshotFrame><figcaption>The world: the Living Globe, World Controls and your Places, here in the storybook fantasy mood.</figcaption></figure>
+      <figure><ScreenshotFrame label="WORLDBUILDER · PATTERNS"><img src="/images/worldbuilder/worldbuilder-patterns.png" width="826" height="574" loading="lazy" decoding="async" alt="The pattern editor for the Castle's Brass Drone: a piano roll with velocity and chance lanes and tabs for each instrument." /></ScreenshotFrame><figcaption>The pattern editor.</figcaption></figure>
+      <figure><ScreenshotFrame label="WORLDBUILDER · ARRANGE"><img src="/images/worldbuilder/worldbuilder-arrange.png" width="826" height="574" loading="lazy" decoding="async" alt="The arrangement timeline: Intro, Tension, Combat, Break and Combat II sections above a grid of every instrument in four Places." /></ScreenshotFrame><figcaption>The arrangement timeline, building a battle cue.</figcaption></figure>
     </div>
   </section>
 
@@ -297,11 +297,8 @@ const schema = {
   /* ── Features ─────────────────────────────────────────────────────── */
   .wb-features { padding-block: var(--space-2xl); }
   .wb-feature-grid { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); }
-  /* Seven features fill a 4-column grid exactly: the first one is wider. */
-  @media (min-width: 80rem) {
-    .wb-feature-grid { grid-template-columns: repeat(4, 1fr); }
-    .feature:first-child { grid-column: span 2; }
-  }
+  /* Nine features fill a 3-column grid exactly. */
+  @media (min-width: 64rem) { .wb-feature-grid { grid-template-columns: repeat(3, 1fr); } }
   .feature { display: grid; gap: var(--space-xs); align-content: start; padding: var(--space-l) var(--space-m); border: 1px solid var(--line); }
   .feature h3 { font-size: var(--step-2); }
   .feature p { color: var(--ink-muted); font-size: var(--step--1); }
@@ -311,6 +308,10 @@ const schema = {
   /* ── Screenshots ──────────────────────────────────────────────────── */
   .wb-shots { padding-block: var(--space-2xl); }
   .wb-shot-grid { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+  @media (min-width: 64rem) { .wb-shot-grid { grid-template-columns: 1fr 1fr; } .wb-shot--wide { grid-column: 1 / -1; } }
+  /* Never stretch pixel art past its native size; at 1:1 retina scales it by an exact 2x, so keep it crisp */
+  .wb-shot--wide { justify-self: center; width: 100%; max-width: calc(1160px + 2px); }
+  .wb-shot--wide :global(img) { image-rendering: pixelated; }
   .wb-shot-grid figure { margin: 0; display: grid; gap: var(--space-xs); }
   .wb-shot-grid figcaption { font-size: var(--step--1); color: var(--ink-muted); }
 

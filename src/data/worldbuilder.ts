@@ -91,6 +91,16 @@ export const FEATURES = [
     points: ['New worlds on demand', '24 factory scenes'],
   },
   {
+    title: 'Instrument mode',
+    body: 'Play any of WORLDBUILDER’s 156 instruments on its own track, from your keyboard or the piano roll, like any software instrument: the Tavern’s lute on one track, the Spaceport’s pads on another, the Castle’s timpani on a third.',
+    points: ['156 instruments', 'One per track'],
+  },
+  {
+    title: 'Drama',
+    body: 'Game scores layer up as the action does. Push Score Intensity and every Place moves through Calm, Tension, Action and Climax, changing gear on the next bar line with drums, ostinatos and stabs of its own.',
+    points: ['Calm', 'Tension', 'Action', 'Climax'],
+  },
+  {
     title: 'Separate outputs in Logic',
     body: 'Each Place slot also plays on its own stereo output in Logic Pro, so you can mix and process every Place on its own channel.',
     points: ['One stereo output per Place'],
@@ -111,12 +121,12 @@ export const REQUIREMENTS = [
 
 // TODO(copy): what Lite includes. Nothing in the plugin defines a Lite edition yet.
 export const LITE_INCLUDES = ['A selection of Places (TODO: confirm which)', 'Pattern editor and arrangement', 'Render to WAV and MIDI export', 'Upgrade to the full version at any time'];
-export const FULL_INCLUDES = ['All 26 Places, each with six instruments and three Characters', 'Pattern editor, arrangement timeline and Auto-arrange', 'Seamless loops, stems and stingers', 'Locations, Journeys, Score Intensity and Inspire', '24 factory scenes and seven planet types'];
+export const FULL_INCLUDES = ['All 26 Places, each with six instruments and three Characters', 'Instrument mode: all 156 instruments, one per track', 'Pattern editor, arrangement timeline and Auto-arrange', 'Seamless loops, stems and stingers', 'Locations, Journeys, Score Intensity, Drama and Inspire', '24 factory scenes and seven planet types'];
 
 // TODO(copy): FAQ answers to confirm.
 export const FAQ = [
   ['Do I need to know how to compose to use it?', 'No. Add a Place or load a scene and press play in your DAW: it plays in your song’s key and tempo. Score Intensity and Inspire shape it further. If you do write music, the pattern editor and timeline give you full control.'],
-  ['Is it a sample library?', 'Mostly not. Almost everything is synthesised in real time, so it follows your key and tempo. A few instruments play our own recordings, such as the Tavern’s lute and fiddle, the Forest’s kalimba and the Desert’s oud. Nothing comes from other people’s sample libraries.'],
+  ['Is it a sample library?', 'Mostly not. Almost everything is synthesised in real time, so it follows your key and tempo. A few instruments play our own recordings: guitar shaped into the Tavern’s lute and the Desert’s oud, violin, kalimba, our analog synth in the Cyberpunk Megacity, and djembe and voice in the Drama layers. Nothing comes from other people’s sample libraries.'],
   ['Can I use the music in commercial projects?', 'Yes. Music you make with WORLDBUILDER is yours to use in films, games, TV and other commercial work. See the EULA for the details.'],
   ['Does it work in my DAW?', 'WORLDBUILDER runs as an AU and VST3 plugin on macOS, on Apple Silicon and Intel Macs. It is tested in Logic Pro and GarageBand.'],
   ['Is there a Windows version?', 'Not yet. WORLDBUILDER is macOS only for now.'],

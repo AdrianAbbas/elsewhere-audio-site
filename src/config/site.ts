@@ -17,7 +17,9 @@ export const SITE = {
   ],
 } as const;
 
-export type Realm = 'house' | 'fantasy' | 'scifi' | 'threshold';
+// house/fantasy/scifi/threshold are the site's realms; liminal/dungeon/radiant are
+// product identities (LIMINAL, DUNGEON CRAWLER, LIGHT SEEKER) used on their own pages.
+export type Realm = 'house' | 'fantasy' | 'scifi' | 'threshold' | 'liminal' | 'dungeon' | 'radiant';
 
 export const NAV = [
   { label: 'Worldbuilder', href: '/worldbuilder' },

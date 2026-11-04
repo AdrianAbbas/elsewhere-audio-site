@@ -34,9 +34,12 @@ Then open <http://localhost:4321/styleguide>.
 
 | Path | Realm | What it is |
 | --- | --- | --- |
-| `/` | threshold | Home: painted hero, intro, WORLDBUILDER, unnamed "Coming 2027" worlds, sign-up |
+| `/` | threshold | Home: painted hero, intro, WORLDBUILDER, the three upcoming instruments, sign-up |
 | `/worldbuilder` | sci-fi (fantasy touches) | Product page: trailer, the 26 Places, features, screenshots, specs, pricing, FAQ |
-| `/products` | house | WORLDBUILDER plus unnamed upcoming worlds |
+| `/products` | house | WORLDBUILDER plus LIMINAL, DUNGEON CRAWLER and LIGHT SEEKER |
+| `/liminal` | liminal | LIMINAL (in development): ten empty buildings, twenty instruments |
+| `/dungeon-crawler` | dungeon | DUNGEON CRAWLER and DUNGEON CRAWLER FX (in development): forty places in a dark realm |
+| `/light-seeker` | radiant | LIGHT SEEKER and LIGHT SEEKER FX (in development): the sunlit twin |
 | `/about` | fantasy (candlelit) | The story, who makes it, sounds recorded by hand, LJP Records |
 | `/support` | house | Installation, activation, offline activation, refunds, requirements, contact |
 | `/account` | house | Placeholder for the Moonbase customer portal (not indexed) |
@@ -44,7 +47,7 @@ Then open <http://localhost:4321/styleguide>.
 | `/404` | threshold | "This place doesn't exist… yet." |
 | `/styleguide` | house | Internal design reference (not linked, not indexed) |
 
-WORLDBUILDER's content (Places, features, requirements, FAQ, trailer ID) lives in `src/data/worldbuilder.ts`.
+WORLDBUILDER's content (Places, features, requirements, FAQ, trailer ID) lives in `src/data/worldbuilder.ts`; the other instruments' content in `src/data/products.ts`, laid out by `src/components/ProductPage.astro`. Product art comes from each plugin repo's own renders (see `src/assets/products/SOURCES.md`). The later products have their own realms (`liminal`, `dungeon`, `radiant` in `src/styles/realms.css`), used only on their pages and cards.
 
 ## Quality checks
 

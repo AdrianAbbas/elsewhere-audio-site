@@ -4,7 +4,8 @@ import ThresholdHero from '../components/art/ThresholdHero.astro';
 import Ornament from '../components/Ornament.astro';
 import AudioPlayer from '../components/AudioPlayer.astro';
 import ScreenshotFrame from '../components/ScreenshotFrame.astro';
-import TeaserCard from '../components/TeaserCard.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { UPCOMING } from '../data/products';
 import SignupForm from '../components/SignupForm.astro';
 import DownloadLiteButton from '../components/store/DownloadLiteButton.astro';
 import { SITE } from '../config/site';
@@ -90,15 +91,13 @@ const schema = {
   <!-- More worlds coming -->
   <section class="coming wrap-wide reveal" aria-labelledby="coming-title">
     <div class="coming__head">
-      <p class="eyebrow">Elsewhere, later</p>
+      <p class="eyebrow">Elsewhere, next</p>
       <h2 id="coming-title">More worlds are on their way.</h2>
-      <p class="muted">We’re recording the next ones now. We can’t say where they are yet.</p>
+      {/* TODO(copy): intro to the upcoming instruments */}
+      <p class="muted">An empty building at night, a dark realm under a red moon, and its sunlit twin. Each is a world of its own, in the workshop now.</p>
     </div>
-    {/* TODO(images): replace placeholder art with real teaser artwork; keep them unnamed. */}
     <div class="coming__grid">
-      <TeaserCard scene="ruins" alt="Gothic arches in silhouette under a pale moon, mist at their feet." />
-      <TeaserCard scene="megacity" alt="A dense skyline of dark towers with thin lit bands under a violet sky." />
-      <TeaserCard scene="forest" alt="A moonlit pine forest fading into layered mist." />
+      {UPCOMING.map((p) => <ProductCard product={p} />)}
     </div>
   </section>
 
@@ -138,7 +137,7 @@ const schema = {
 
   .coming { padding-block: var(--space-3xl) var(--space-2xl); }
   .coming__head { display: grid; gap: var(--space-xs); max-width: 40rem; margin-bottom: var(--space-xl); }
-  .coming__grid { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+  .coming__grid { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
 
   .signup-section {
     margin-block: var(--space-xl) var(--space-3xl);

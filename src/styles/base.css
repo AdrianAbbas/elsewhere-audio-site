@@ -125,6 +125,11 @@ a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
 }
 [data-realm='scifi'] .btn--primary { background-image: none; }
 
+/* Product identities: LIMINAL square like signage; DUNGEON CRAWLER engraved */
+[data-realm='liminal'] .btn { border-radius: 0; }
+[data-realm='dungeon'] .btn { border-radius: 0; }
+[data-realm='radiant'] .btn { border-radius: 999px; }
+
 /* Threshold buttons: square, small caps-like tracking, generous padding */
 [data-realm='threshold'] .btn { border-radius: 1px; padding: 0.95em 1.9em; font-weight: 500; }
 

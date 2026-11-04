@@ -1,0 +1,217 @@
+---
+// The page for an instrument in development (LIMINAL, DUNGEON CRAWLER,
+// LIGHT SEEKER), built from src/data/products.ts and dressed in its own realm.
+import { Picture } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SignupForm from './SignupForm.astro';
+import ProductCard from './ProductCard.astro';
+import { SITE } from '../config/site';
+import { PRODUCTS, type ProductDetail } from '../data/products';
+
+interface Props { product: ProductDetail }
+const { product: p } = Astro.props;
+// The first shot is the hero; the last is the interface; the rest are scenes.
+const [hero, ...rest] = p.gallery;
+const ui = rest[rest.length - 1];
+const scenes = rest.slice(0, -1);
+const others = PRODUCTS.filter((o) => o.slug !== p.slug);
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: p.name,
+  applicationCategory: 'MultimediaApplication',
+  applicationSubCategory: `Audio plugin (${p.kind.toLowerCase()}, AU and VST3)`,
+  operatingSystem: 'macOS 10.15 or later',
+  description: p.summary,
+  url: new URL(`/${p.slug}`, SITE.url).href,
+  publisher: { '@type': 'Organization', name: SITE.name, legalName: SITE.legalName, url: SITE.url },
+};
+---
+<BaseLayout title={p.name} description={`${p.name}: ${p.summary}`} realm={p.realm} schema={schema}>
+  <section class="pp-hero" aria-labelledby="pp-title">
+    <div class="pp-hero__image">
+      <Picture src={hero.image} formats={['avif', 'webp']} fallbackFormat="webp" widths={[800, 1280, 1920]} sizes="100vw" alt={hero.alt} loading="eager" fetchpriority="high" />
+    </div>
+    <div class="pp-hero__text wrap-wide">
+      <p class="eyebrow">Instrument {p.number} · {p.kind} · {p.formats}</p>
+      <h1 id="pp-title" class="pp-name">{p.name}</h1>
+      <p class="pp-tagline">{p.tagline}</p>
+      <p class="lede">{p.lede}</p>
+      <div class="pp-status">
+        <span class="pp-status__badge">{p.status}</span>
+        <a class="btn btn--primary" href="#notify">Hear when it’s ready</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="pp-intro wrap-wide reveal" aria-labelledby="intro-title">
+    <div class="pp-intro__text">
+      <h2 id="intro-title">{p.intro.title}</h2>
+      {p.intro.paras.map((t) => <p>{t}</p>)}
+      <p class="pp-sound">{p.sound}</p>
+    </div>
+    <dl class="pp-facts">
+      {p.facts.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+    </dl>
+  </section>
+
+  {p.editions && (
+    <section class="pp-editions wrap-wide reveal" aria-labelledby="editions-title">
+      <h2 id="editions-title" class="pp-h2">Two plug-ins, one world</h2>
+      <div class="pp-editions__grid">
+        {p.editions.map((e) => <article class="pp-edition"><h3>{e.name}</h3><p>{e.body}</p></article>)}
+      </div>
+    </section>
+  )}
+
+  <section class="pp-gallery wrap-wide reveal" aria-labelledby="gallery-title">
+    <h2 id="gallery-title" class="pp-h2">Inside {p.name}</h2>
+    <div class="pp-gallery__grid">
+      {scenes.map((s) => (
+        <figure>
+          <Picture src={s.image} formats={['avif', 'webp']} fallbackFormat="webp" widths={[480, 800, 1200]} sizes="(min-width: 64rem) 33vw, 100vw" alt={s.alt} loading="lazy" />
+          <figcaption>{s.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <figure class="pp-gallery__ui">
+      <Picture src={ui.image} formats={['avif', 'webp']} fallbackFormat="webp" widths={[480, 960]} sizes="(min-width: 64rem) 960px, 100vw" alt={ui.alt} loading="lazy" />
+      <figcaption>{ui.caption}</figcaption>
+    </figure>
+  </section>
+
+  <section class="pp-worlds wrap-wide reveal" aria-labelledby="worlds-title">
+    <div class="pp-head">
+      <h2 id="worlds-title" class="pp-h2">{p.worlds.title}</h2>
+      <p class="muted">{p.worlds.lede}</p>
+    </div>
+    <ul class="pp-worlds__grid" role="list">
+      {p.worlds.groups.map((g) => (
+        <li class="pp-world">
+          <h3>{g.name}</h3>
+          {g.note && <p class="pp-world__note">{g.note}</p>}
+          <ul role="list" class="pp-world__items">
+            {g.items.map((i) => <li><span>{i.name}</span>{i.detail && <span class="pp-world__detail">{i.detail}</span>}</li>)}
+          </ul>
+          {g.footer && <p class="pp-world__footer"><span class="visually-hidden">Instruments: </span>{g.footer}</p>}
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {p.extra && (
+    <section class="pp-extra wrap-wide reveal" aria-labelledby="extra-title">
+      <h2 id="extra-title" class="pp-h2">{p.extra.title}</h2>
+      <p class="muted">{p.extra.lede}</p>
+      <ul class="pp-chips" role="list">{p.extra.chips.map((c) => <li>{c}</li>)}</ul>
+    </section>
+  )}
+
+  <section class="pp-features wrap-wide reveal" aria-labelledby="features-title">
+    <h2 id="features-title" class="pp-h2">What it does</h2>
+    <ul class="pp-features__grid" role="list">
+      {p.features.map((f) => <li><h3>{f.title}</h3><p>{f.body}</p></li>)}
+    </ul>
+  </section>
+
+  <section class="pp-specs wrap-wide reveal" aria-labelledby="specs-title">
+    <h2 id="specs-title" class="pp-h2">Requirements</h2>
+    <dl class="pp-req">{p.requirements.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+    <p class="muted pp-note">In development. Specifications may change before release.</p>
+  </section>
+
+  <section id="notify" class="pp-notify wrap reveal" aria-label="Get notified">
+    <SignupForm id={`${p.slug}-signup`} heading={`Hear when ${p.name} is ready.`} text="One short letter when it opens. No spam, and you can leave at any time." />
+  </section>
+
+  <section class="pp-more wrap-wide" aria-labelledby="more-title">
+    <h2 id="more-title" class="pp-h2">Other worlds</h2>
+    <div class="pp-more__grid">{others.map((o) => <ProductCard product={o} />)}</div>
+  </section>
+</BaseLayout>
+
+<style>
+  .pp-hero { position: relative; isolation: isolate; display: grid; align-items: end; min-height: clamp(30rem, 78svh, 50rem); overflow: hidden; }
+  .pp-hero__image { position: absolute; inset: 0; z-index: -1; }
+  .pp-hero__image :global(picture), .pp-hero__image :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Fade the art behind the text: down towards the page, and in from the left where the words sit */
+  .pp-hero__image::after {
+    content: ''; position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--bg) 78%, transparent) 0%, color-mix(in srgb, var(--bg) 35%, transparent) 45%, transparent 75%),
+      linear-gradient(180deg, color-mix(in srgb, var(--bg) 10%, transparent) 0%, color-mix(in srgb, var(--bg) 45%, transparent) 50%, var(--bg) 96%);
+  }
+  .pp-hero__text { display: grid; gap: var(--space-s); padding-block: var(--space-3xl) var(--space-xl); max-width: min(100% - 2 * var(--gutter), var(--wrap-wide)); }
+  .pp-hero__text > :not(.eyebrow) { max-width: 40rem; }
+  .pp-name { font-size: min(var(--step-6), 10vw); letter-spacing: 0.03em; line-height: 0.95; }
+  .pp-tagline { font-family: var(--font-display); font-variation-settings: var(--display-variation); font-size: var(--step-2); font-style: italic; }
+  :global([data-realm='liminal']) .pp-tagline { font-style: normal; font-weight: 400; }
+  .pp-hero .lede { color: var(--ink); }
+  .pp-status { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-s); margin-top: var(--space-2xs); }
+  .pp-status__badge { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.14em; text-transform: uppercase; padding: 0.55em 0.9em; border: 1px solid var(--line-strong); background: var(--scrim); }
+  :global([data-realm='liminal']) .pp-status__badge::before { content: ''; display: inline-block; width: 0.55em; height: 0.55em; margin-right: 0.6em; border-radius: 50%; background: var(--accent-2); vertical-align: 0.05em; }
+
+  .pp-h2 { font-size: var(--step-3); margin-bottom: var(--space-m); }
+  .pp-head { display: grid; gap: var(--space-2xs); margin-bottom: var(--space-l); max-width: 44rem; }
+  .pp-head .pp-h2 { margin-bottom: 0; }
+
+  .pp-intro { display: grid; gap: var(--space-2xl); grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); padding-block: var(--space-2xl); align-items: start; }
+  .pp-intro__text { display: grid; gap: var(--space-s); max-width: 40rem; }
+  .pp-intro__text h2 { font-size: var(--step-4); }
+  .pp-intro__text p { font-size: var(--step-1); line-height: 1.55; color: var(--ink-muted); }
+  .pp-intro__text .pp-sound { font-size: var(--step--1); color: var(--accent-text); }
+  .pp-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-m); margin: 0; }
+  .pp-facts div { border-top: 1px solid var(--line-strong); padding-top: var(--space-xs); display: flex; flex-direction: column-reverse; gap: 0.2rem; }
+  .pp-facts dt { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+  .pp-facts dd { margin: 0; font-family: var(--font-display); font-size: var(--step-5); font-weight: 300; line-height: 1; font-variant-numeric: tabular-nums; }
+
+  .pp-editions { padding-block: var(--space-l) var(--space-2xl); }
+  .pp-editions__grid { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+  .pp-edition { display: grid; gap: var(--space-xs); padding: var(--space-l) var(--space-m); border: 1px solid var(--line-strong); background: color-mix(in srgb, var(--surface) 80%, transparent); }
+  .pp-edition h3 { font-size: var(--step-1); letter-spacing: 0.04em; }
+  .pp-edition p { color: var(--ink-muted); font-size: var(--step--1); }
+
+  .pp-gallery { padding-block: var(--space-2xl); }
+  .pp-gallery__grid { display: grid; gap: var(--space-m); align-items: start; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+  /* The interface capture at its own size, never upscaled */
+  .pp-gallery__ui { margin: var(--space-xl) auto 0 !important; max-width: 60rem; }
+  .pp-gallery figure { margin: 0; display: grid; gap: var(--space-2xs); }
+  .pp-gallery :global(picture), .pp-gallery :global(img) { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
+  .pp-gallery figcaption { font-size: var(--step--1); color: var(--ink-muted); }
+
+  .pp-worlds { padding-block: var(--space-2xl); }
+  .pp-worlds__grid { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-s); grid-template-columns: 1fr; }
+  /* Ten locations each: 2 or 5 columns divide them evenly */
+  @media (min-width: 40rem) { .pp-worlds__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 80rem) { .pp-worlds__grid { grid-template-columns: repeat(5, 1fr); } }
+  .pp-world { display: grid; gap: var(--space-2xs); align-content: start; padding: var(--space-m); border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 80%, transparent); }
+  .pp-world h3 { font-size: var(--step-1); }
+  .pp-world__note { font-size: var(--step--1); color: var(--ink-muted); font-style: italic; }
+  .pp-world__items { list-style: none; padding: 0; margin: var(--space-3xs) 0 0; display: grid; gap: 0.3rem; font-size: var(--step--1); }
+  .pp-world__items li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 var(--space-xs); border-top: 1px solid var(--line); padding-top: 0.3rem; }
+  .pp-world__detail { color: var(--accent-text); }
+  .pp-world__footer { font-size: var(--step--1); color: var(--accent-text); border-top: 1px solid var(--line-strong); padding-top: var(--space-2xs); margin-top: var(--space-3xs); }
+
+  .pp-extra { padding-block: var(--space-xl); display: grid; gap: var(--space-xs); }
+  .pp-extra .pp-h2 { margin-bottom: 0; }
+  .pp-chips { list-style: none; padding: 0; margin: var(--space-s) 0 0; display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
+  .pp-chips li { padding: 0.35em 0.8em; border: 1px solid var(--line-strong); font-size: var(--step--1); }
+  :global([data-realm='liminal']) .pp-chips li { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .pp-features { padding-block: var(--space-2xl); }
+  .pp-features__grid { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-l) var(--space-xl); grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); }
+  .pp-features__grid li { display: grid; gap: var(--space-2xs); align-content: start; border-top: 1px solid var(--line-strong); padding-top: var(--space-s); }
+  .pp-features__grid h3 { font-size: var(--step-1); }
+  .pp-features__grid p { color: var(--ink-muted); font-size: var(--step--1); }
+
+  .pp-specs { padding-block: var(--space-xl); }
+  .pp-req { margin: 0; display: grid; max-width: 48rem; }
+  .pp-req div { display: grid; grid-template-columns: 8rem 1fr; gap: var(--space-s); padding-block: var(--space-xs); border-bottom: 1px solid var(--line); }
+  .pp-req dt { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); padding-top: 0.2em; }
+  .pp-req dd { margin: 0; font-size: var(--step--1); }
+  .pp-note { margin-top: var(--space-s); font-size: var(--step--1); }
+
+  .pp-notify { margin-block: var(--space-xl); padding: var(--space-xl) clamp(1.25rem, 4vw, 3rem); border: 1px solid var(--line-strong); background: color-mix(in srgb, var(--surface) 85%, transparent); }
+  .pp-more { padding-block: var(--space-xl) var(--space-3xl); }
+  .pp-more__grid { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+</style>
