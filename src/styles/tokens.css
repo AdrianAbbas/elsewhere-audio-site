@@ -5,6 +5,17 @@
 */
 
 :root {
+  /* Brand colours, from public/brand/README.md. Namespaced with --brand-
+     because --ink is already the realms' text colour. For the logo areas
+     and the theme colour only, for now. */
+  --brand-ink: #120e24;
+  --brand-night: #1c1636;
+  --brand-cream: #f2e8d5;
+  --brand-ember: #f28c38;
+  --brand-ember-text-on-light: #a84a0f;
+  --brand-gold: #e0a848;
+  --brand-teal: #4fd1c5;
+
   /* Type families */
   --font-display: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
   --font-body: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;

@@ -5,7 +5,7 @@ import '../styles/realms.css';
 import '../styles/base.css';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { SITE, type Realm } from '../config/site';
+import { SITE, REALM_TONE, type Realm } from '../config/site';
 import frauncesUrl from '@fontsource-variable/fraunces/files/fraunces-latin-full-normal.woff2?url';
 import instrumentUrl from '@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2?url';
 
@@ -36,7 +36,8 @@ const {
 const fullTitle = title === SITE.name ? `${SITE.name} — ${SITE.tagline}` : `${title} · ${SITE.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogUrl = new URL(ogImage, Astro.site);
-const themeColor = { house: '#f2efe9', fantasy: '#15110b', scifi: '#060a1a', threshold: '#0b0c18', liminal: '#e6ece8', dungeon: '#0b0909', radiant: '#f6f1e4' }[realm];
+// The logo's light or dark version follows the realm's ground.
+const tone = REALM_TONE[realm];
 ---
 <!doctype html>
 <html lang="en-CA">
@@ -47,8 +48,12 @@ const themeColor = { house: '#f2efe9', fantasy: '#15110b', scifi: '#060a1a', thr
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <meta name="theme-color" content={themeColor} />
+    <!-- Brand ink (--brand-ink), the same on every page -->
+    <meta name="theme-color" content="#120E24" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <meta property="og:type" content="website" />
@@ -89,10 +94,10 @@ const themeColor = { house: '#f2efe9', fantasy: '#15110b', scifi: '#060a1a', thr
   </head>
   <body data-realm={realm}>
     <a class="skip-link" href="#main">Skip to content</a>
-    <SiteNav overlay={overlayNav} />
+    <SiteNav overlay={overlayNav} tone={tone} />
     <main id="main" tabindex="-1">
       <slot />
     </main>
-    <SiteFooter />
+    <SiteFooter tone={tone} />
   </body>
 </html>
