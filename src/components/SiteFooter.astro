@@ -1,15 +1,17 @@
 ---
 import Logo from './Logo.astro';
 import Ornament from './Ornament.astro';
-import { NAV, LEGAL_NAV, SITE } from '../config/site';
+import { NAV, LEGAL_NAV, SITE, type Tone } from '../config/site';
 import { PRODUCTS } from '../data/products';
 
 interface Props {
   /** Render as a plain <div> (used for previews on /styleguide, to avoid duplicate landmarks). */
   preview?: boolean;
   id?: string;
+  /** The footer's background, for the logo's light or dark version. */
+  tone?: Tone;
 }
-const { preview = false, id = 'main' } = Astro.props;
+const { preview = false, id = 'main', tone = 'dark' } = Astro.props;
 const Tag = preview ? 'div' : 'footer';
 const year = new Date().getFullYear();
 ---
@@ -18,7 +20,7 @@ const year = new Date().getFullYear();
     <Ornament label="Elsewhere · Ontario" />
     <div class="site-footer__grid">
       <div class="site-footer__brand stack">
-        <Logo size="sm" />
+        <Logo size="sm" tone={tone} compact={false} />
         <p class="muted">{SITE.tagline}</p>
       </div>
 

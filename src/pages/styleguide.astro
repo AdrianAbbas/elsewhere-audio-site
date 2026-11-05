@@ -38,6 +38,7 @@ const space = ['3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
         side, the threshold that joins them, and the one place pixel art is allowed.
       </p>
       <nav aria-label="Styleguide sections" class="sg-toc">
+        <a href="#logo">Logo</a>
         <a href="#house">The house</a>
         <a href="#realms">Realms</a>
         <a href="#threshold">Threshold hero</a>
@@ -45,6 +46,46 @@ const space = ['3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
         <a href="#product-realms">Product realms</a>
       </nav>
     </header>
+
+    <!-- ── LOGO ────────────────────────────────────────────────────── -->
+    <section id="logo" class="sg-section wrap" aria-labelledby="logo-title">
+      <h2 id="logo-title">Logo</h2>
+      <p class="lede">The Stone Gate: a castle gateway with a gold keystone and two torches, opening onto a dusk sky. Files and rules are in <code>public/brand/</code> (see its README). Use <code>-for-dark</code> files on dark grounds and <code>-for-light</code> on light ones; below about 48&nbsp;px, use the simplified favicon.</p>
+
+      <h3 class="sg-logo__label">Horizontal lockup (header, emails, banners)</h3>
+      <div class="sg-logo__grid sg-logo__grid--2">
+        <figure class="sg-logo__tile sg-logo__tile--dark"><img src="/brand/lockup/elsewhere-horizontal-for-dark.svg" width="872" height="300" alt="Elsewhere Audio horizontal logo, version for dark backgrounds" loading="lazy" /><figcaption>elsewhere-horizontal-for-dark.svg</figcaption></figure>
+        <figure class="sg-logo__tile sg-logo__tile--light"><img src="/brand/lockup/elsewhere-horizontal-for-light.svg" width="872" height="300" alt="Elsewhere Audio horizontal logo, version for light backgrounds" loading="lazy" /><figcaption>elsewhere-horizontal-for-light.svg</figcaption></figure>
+      </div>
+
+      <h3 class="sg-logo__label">Stacked lockup (splash screens, posters, share image)</h3>
+      <div class="sg-logo__grid sg-logo__grid--2">
+        <figure class="sg-logo__tile sg-logo__tile--dark"><img class="sg-logo__stacked" src="/brand/lockup/elsewhere-stacked-for-dark.svg" width="600" height="640" alt="Elsewhere Audio stacked logo, version for dark backgrounds" loading="lazy" /><figcaption>elsewhere-stacked-for-dark.svg</figcaption></figure>
+        <figure class="sg-logo__tile sg-logo__tile--light"><img class="sg-logo__stacked" src="/brand/lockup/elsewhere-stacked-for-light.svg" width="600" height="640" alt="Elsewhere Audio stacked logo, version for light backgrounds" loading="lazy" /><figcaption>elsewhere-stacked-for-light.svg</figcaption></figure>
+      </div>
+
+      <h3 class="sg-logo__label">Mark and one-colour marks</h3>
+      <div class="sg-logo__grid sg-logo__grid--5">
+        <figure class="sg-logo__tile sg-logo__tile--dark"><img class="sg-logo__mark" src="/brand/mark/elsewhere-mark-for-dark.svg" width="300" height="300" alt="The Stone Gate mark, version for dark backgrounds" loading="lazy" /><figcaption>mark-for-dark</figcaption></figure>
+        <figure class="sg-logo__tile sg-logo__tile--light"><img class="sg-logo__mark" src="/brand/mark/elsewhere-mark-for-light.svg" width="300" height="300" alt="The Stone Gate mark, version for light backgrounds" loading="lazy" /><figcaption>mark-for-light</figcaption></figure>
+        <figure class="sg-logo__tile sg-logo__tile--light"><img class="sg-logo__mark" src="/brand/mark/elsewhere-mark-mono-ink.svg" width="300" height="300" alt="The mark in one colour: ink" loading="lazy" /><figcaption>mark-mono-ink</figcaption></figure>
+        <figure class="sg-logo__tile sg-logo__tile--dark"><img class="sg-logo__mark" src="/brand/mark/elsewhere-mark-mono-cream.svg" width="300" height="300" alt="The mark in one colour: cream" loading="lazy" /><figcaption>mark-mono-cream</figcaption></figure>
+        <figure class="sg-logo__tile sg-logo__tile--dark"><img class="sg-logo__mark" src="/brand/mark/elsewhere-mark-mono-gold.svg" width="300" height="300" alt="The mark in one colour: gold" loading="lazy" /><figcaption>mark-mono-gold</figcaption></figure>
+      </div>
+
+      <h3 class="sg-logo__label">App icon and favicon</h3>
+      <div class="sg-logo__grid sg-logo__grid--2">
+        <figure class="sg-logo__tile sg-logo__tile--light"><img class="sg-logo__app" src="/brand/icon/elsewhere-app-icon-256.png" width="256" height="256" alt="The Elsewhere Audio app icon" loading="lazy" /><figcaption>elsewhere-app-icon (1024 / 512 / 256)</figcaption></figure>
+        <figure class="sg-logo__tile sg-logo__tile--light">
+          <div class="sg-logo__favicons">
+            {[16, 32, 48].map((s) => (
+              <span><img src="/brand/icon/elsewhere-favicon.svg" width={s} height={s} alt={`The favicon at ${s} pixels`} loading="lazy" /><small>{s} px</small></span>
+            ))}
+          </div>
+          <figcaption>elsewhere-favicon.svg, simplified for small sizes (also favicon.ico)</figcaption>
+        </figure>
+      </div>
+    </section>
 
     <!-- ── THE HOUSE ─────────────────────────────────────────────── -->
     <section id="house" class="sg-section wrap" aria-labelledby="house-title">
@@ -189,6 +230,22 @@ const space = ['3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl'];
 
 <style>
   .sg-intro { padding-block: var(--space-2xl) var(--space-xl); --stack-space: var(--space-m); }
+  .sg-logo__label { font-size: var(--step-1); margin-block: var(--space-xl) var(--space-s); }
+  .sg-logo__grid { display: grid; gap: var(--space-s); grid-template-columns: 1fr; }
+  @media (min-width: 40rem) { .sg-logo__grid--2 { grid-template-columns: 1fr 1fr; } .sg-logo__grid--5 { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 64rem) { .sg-logo__grid--5 { grid-template-columns: repeat(5, 1fr); } }
+  .sg-logo__tile { margin: 0; display: grid; gap: var(--space-s); justify-items: center; align-content: center; padding: var(--space-l) var(--space-m); border-radius: var(--radius); min-width: 0; }
+  .sg-logo__tile--dark { background: var(--brand-ink); color: var(--brand-cream); }
+  .sg-logo__tile--light { background: var(--brand-cream); color: var(--brand-ink); border: 1px solid var(--line); }
+  .sg-logo__tile img { max-width: 100%; height: auto; }
+  .sg-logo__tile > img:not([class]) { width: min(100%, 26rem); }
+  .sg-logo__stacked { width: min(100%, 15rem); }
+  .sg-logo__mark { width: min(100%, 7rem); }
+  .sg-logo__app { width: 8rem; }
+  .sg-logo__tile figcaption { font-family: var(--font-mono); font-size: var(--step--2); opacity: 0.8; text-align: center; overflow-wrap: anywhere; }
+  .sg-logo__favicons { display: flex; align-items: end; gap: var(--space-l); }
+  .sg-logo__favicons span { display: grid; justify-items: center; gap: var(--space-2xs); }
+  .sg-logo__favicons small { font-family: var(--font-mono); font-size: var(--step--2); }
   .sg-toc { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-l); font-size: var(--step--1); }
   .sg-section { padding-block: var(--space-2xl); }
   .sg-section > h2, .sg-section > .wrap > h2 { margin-bottom: var(--space-s); }

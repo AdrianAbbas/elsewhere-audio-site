@@ -1,6 +1,6 @@
 ---
 import Logo from './Logo.astro';
-import { NAV } from '../config/site';
+import { NAV, type Tone } from '../config/site';
 
 interface Props {
   /** Render as a plain <div> (used for previews on /styleguide, to avoid duplicate landmarks). */
@@ -11,15 +11,17 @@ interface Props {
   id?: string;
   /** Sit transparently on top of a hero (home page). */
   overlay?: boolean;
+  /** The header's background, for the logo's light or dark version. */
+  tone?: Tone;
 }
-const { preview = false, label = 'Primary', id = 'main', overlay = false } = Astro.props;
+const { preview = false, label = 'Primary', id = 'main', overlay = false, tone = 'dark' } = Astro.props;
 const Tag = preview ? 'div' : 'header';
 const menuId = `site-menu-${id}`;
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 <Tag class:list={['site-header', { 'site-header--overlay': overlay }]}>
   <div class="site-header__inner wrap-wide">
-    <Logo />
+    <Logo tone={tone} />
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls={menuId} data-nav-toggle>
       <span class="nav-toggle__bars" aria-hidden="true"></span>
       <span>Menu</span>
