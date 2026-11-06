@@ -13,6 +13,11 @@ import BuyButton from '../components/store/BuyButton.astro';
 import AddToCartButton from '../components/store/AddToCartButton.astro';
 import DownloadLiteButton from '../components/store/DownloadLiteButton.astro';
 import poster from '../assets/art/threshold.webp';
+// The plugin's own captures at their native pixel size (it draws at 2x), as
+// lossless WebP. CSS scales them up with crisp pixels (.px-shot).
+import shotWorld from '../assets/screens/worldbuilder-world-1x.webp';
+import shotPatterns from '../assets/screens/worldbuilder-patterns-1x.webp';
+import shotArrange from '../assets/screens/worldbuilder-arrange-1x.webp';
 import { SITE } from '../config/site';
 import { STORE, formatPrice } from '../config/store';
 import {
@@ -20,6 +25,7 @@ import {
 } from '../data/worldbuilder';
 
 const wb = STORE.products.worldbuilder;
+const WORLD_ALT = 'The WORLDBUILDER window in its fantasy mood: world controls on the left, the Living Globe with a castle and village on a tiny planet in the middle, the environment and the active Places on the right, Place cards below.';
 const groups = Object.keys(GROUP_LABEL) as Group[];
 const countIn = (g: Group) => PLACES.filter((p) => p.group === g).length;
 
@@ -63,7 +69,14 @@ const schema = {
       </div>
     </div>
     <div class="wb-hero__media">
-      <TrailerEmbed youtubeId={TRAILER.youtubeId} title={TRAILER.title} poster={poster} posterAlt="Placeholder trailer poster: a horizon at dusk with a castle on one side and a city of towers on the other." />
+      {/* Until the trailer exists, the hero shows the instrument itself. */}
+      {TRAILER.youtubeId ? (
+        <TrailerEmbed youtubeId={TRAILER.youtubeId} title={TRAILER.title} poster={poster} posterAlt="Trailer poster: a horizon at dusk with a castle on one side and a city of towers on the other." />
+      ) : (
+        <div class="wb-hero__shot" style="view-transition-name: product-worldbuilder">
+          <ScreenshotFrame><img class="px-shot" src={shotWorld.src} width={shotWorld.width} height={shotWorld.height} loading="eager" fetchpriority="high" decoding="async" alt={`${WORLD_ALT}`} /></ScreenshotFrame>
+        </div>
+      )}
     </div>
   </section>
 
@@ -141,11 +154,10 @@ const schema = {
       <h2 id="shots-title">A 16-bit world on your desk.</h2>
       <p class="muted">The interface is pixel art throughout, and its mood follows your Places: storybook for fantasy, neon for sci-fi, and a blend of the two when both play.</p>
     </div>
-    {/* Pixel screenshots from the plugin's own captures, kept lossless (public/images/worldbuilder). */}
     <div class="wb-shot-grid">
-      <figure class="wb-shot--wide"><ScreenshotFrame label="WORLDBUILDER · WORLD"><img src="/images/worldbuilder/worldbuilder-world.png" width="1160" height="812" loading="lazy" decoding="async" alt="The WORLDBUILDER window in its fantasy mood: world controls on the left, the Living Globe with a castle and village on a tiny planet in the middle, the environment and the active Places on the right, Place cards below." /></ScreenshotFrame><figcaption>The world: the Living Globe, World Controls and your Places, here in the storybook fantasy mood.</figcaption></figure>
-      <figure><ScreenshotFrame label="WORLDBUILDER · PATTERNS"><img src="/images/worldbuilder/worldbuilder-patterns.png" width="826" height="574" loading="lazy" decoding="async" alt="The pattern editor for the Castle's Brass Drone: a piano roll with velocity and chance lanes and tabs for each instrument." /></ScreenshotFrame><figcaption>The pattern editor.</figcaption></figure>
-      <figure><ScreenshotFrame label="WORLDBUILDER · ARRANGE"><img src="/images/worldbuilder/worldbuilder-arrange.png" width="826" height="574" loading="lazy" decoding="async" alt="The arrangement timeline: Intro, Tension, Combat, Break and Combat II sections above a grid of every instrument in four Places." /></ScreenshotFrame><figcaption>The arrangement timeline, building a battle cue.</figcaption></figure>
+      {TRAILER.youtubeId && <figure class="wb-shot--wide"><ScreenshotFrame><img class="px-shot" src={shotWorld.src} width={shotWorld.width} height={shotWorld.height} loading="lazy" decoding="async" alt={WORLD_ALT} /></ScreenshotFrame><figcaption>The world: the Living Globe, World Controls and your Places, here in the storybook fantasy mood.</figcaption></figure>}
+      <figure><ScreenshotFrame><img class="px-shot" src={shotPatterns.src} width={shotPatterns.width} height={shotPatterns.height} loading="lazy" decoding="async" alt="The pattern editor for the Castle's Brass Drone: a piano roll with velocity and chance lanes and tabs for each instrument." /></ScreenshotFrame><figcaption>The pattern editor.</figcaption></figure>
+      <figure><ScreenshotFrame><img class="px-shot" src={shotArrange.src} width={shotArrange.width} height={shotArrange.height} loading="lazy" decoding="async" alt="The arrangement timeline: Intro, Tension, Combat, Break and Combat II sections above a grid of every instrument in four Places." /></ScreenshotFrame><figcaption>The arrangement timeline, building a battle cue.</figcaption></figure>
     </div>
   </section>
 
@@ -232,14 +244,18 @@ const schema = {
   /* ── Hero ─────────────────────────────────────────────────────────── */
   .wb-hero {
     display: grid; gap: var(--space-xl); align-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+    grid-template-columns: minmax(0, 1fr);
     padding-block: var(--space-2xl) var(--space-xl);
   }
-  .wb-hero__text { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-m); max-width: 36rem; min-width: 0; }
+  /* Wide screens: the instrument gets the larger share. */
+  @media (min-width: 64rem) { .wb-hero { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-2xl); } }
+  .wb-hero__text { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-m); max-width: 36rem; min-width: 0; container-type: inline-size; }
   .wb-hero__media { min-width: 0; }
   .wb-hero__mark { display: flex; align-items: center; gap: var(--space-s); }
   .wb-hero__mark :global(.wb-hero__planet) { flex: none; }
+  /* Sized to its column, so the name always fits beside the screenshot. */
   .wb-hero__name { font-size: min(var(--step-6), 10.6vw); letter-spacing: 0.02em; line-height: 0.95; }
+  @supports (font-size: 1cqi) { .wb-hero__name { font-size: min(var(--step-6), 11.8cqi); } }
   .wb-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6em; }
   .wb-price__now { font-family: var(--font-display); font-size: var(--step-3); font-weight: 300; }
   .wb-price__was { font-size: var(--step--1); color: var(--ink-muted); }
@@ -315,7 +331,7 @@ const schema = {
   @media (min-width: 64rem) { .wb-shot-grid { grid-template-columns: 1fr 1fr; } .wb-shot--wide { grid-column: 1 / -1; } }
   /* Never stretch pixel art past its native size; at 1:1 retina scales it by an exact 2x, so keep it crisp */
   .wb-shot--wide { justify-self: center; width: 100%; max-width: calc(1160px + 2px); }
-  .wb-shot--wide :global(img) { image-rendering: pixelated; }
+  .px-shot, :global(.px-shot) { image-rendering: pixelated; }
   .wb-shot-grid figure { margin: 0; display: grid; gap: var(--space-xs); }
   .wb-shot-grid figcaption { font-size: var(--step--1); color: var(--ink-muted); }
 
