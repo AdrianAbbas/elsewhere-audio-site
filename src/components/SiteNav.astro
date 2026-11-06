@@ -24,7 +24,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
     <Logo tone={tone} />
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls={menuId} data-nav-toggle>
       <span class="nav-toggle__bars" aria-hidden="true"></span>
-      <span>Menu</span>
+      <span data-nav-label>Menu</span>
     </button>
     <nav class="site-nav" id={menuId} aria-label={label}>
       <ul class="site-nav__list" role="list">
@@ -42,13 +42,22 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
   for (const toggle of document.querySelectorAll<HTMLButtonElement>('[data-nav-toggle]')) {
     const menu = document.getElementById(toggle.getAttribute('aria-controls') ?? '');
     if (!menu) continue;
+    const header = toggle.closest('.site-header');
+    const label = toggle.querySelector('[data-nav-label]');
     const set = (open: boolean) => {
       toggle.setAttribute('aria-expanded', String(open));
       menu.dataset.open = String(open);
+      // The open menu gets a solid ground, even over the home page's hero art.
+      header?.toggleAttribute('data-menu-open', open);
+      if (label) label.textContent = open ? 'Close' : 'Menu';
     };
     toggle.addEventListener('click', () => set(toggle.getAttribute('aria-expanded') !== 'true'));
     menu.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') { set(false); toggle.focus(); }
+    });
+    // A tap anywhere outside the header closes it.
+    document.addEventListener('click', (e) => {
+      if (toggle.getAttribute('aria-expanded') === 'true' && header && !header.contains(e.target as Node)) set(false);
     });
   }
 </script>
@@ -57,6 +66,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
   .site-header { container-type: inline-size; position: relative; z-index: 10; }
   .site-header--overlay { position: absolute; inset: 0 0 auto; background: transparent; }
   .site-header:not(.site-header--overlay) { border-bottom: 1px solid var(--line); }
+  .site-header[data-menu-open] { background: var(--bg); border-bottom: 1px solid var(--line); z-index: 20; }
   /* The nav and logo hold still while the page cross-fades (view transitions). */
   .site-header--main { view-transition-name: site-header; }
   .site-header--main :global(.logo) { view-transition-name: site-logo; }
