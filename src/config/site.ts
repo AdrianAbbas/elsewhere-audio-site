@@ -19,12 +19,8 @@ export const SITE = {
 // product identities (LIMINAL, DUNGEON CRAWLER, LIGHT SEEKER) used on their own pages.
 export type Realm = 'house' | 'fantasy' | 'scifi' | 'threshold' | 'liminal' | 'dungeon' | 'radiant';
 
-/** Whether a realm's ground is light or dark: picks the logo's -for-light or -for-dark files. */
+/** A background's tone: picks the logo's -for-light or -for-dark files. */
 export type Tone = 'light' | 'dark';
-export const REALM_TONE: Record<Realm, Tone> = {
-  house: 'light', liminal: 'light', radiant: 'light',
-  fantasy: 'dark', scifi: 'dark', threshold: 'dark', dungeon: 'dark',
-};
 
 export const NAV = [
   { label: 'Worldbuilder', href: '/worldbuilder' },

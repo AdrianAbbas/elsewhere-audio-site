@@ -29,7 +29,7 @@ const schema = {
 ---
 <BaseLayout title={p.name} description={`${p.name}: ${p.summary}`} realm={p.realm} schema={schema}>
   <section class="pp-hero" aria-labelledby="pp-title">
-    <div class="pp-hero__image">
+    <div class="pp-hero__image" style={`view-transition-name: product-${p.slug}`}>
       <Picture src={hero.image} formats={['avif', 'webp']} fallbackFormat="webp" widths={[800, 1280, 1920]} sizes="100vw" alt={hero.alt} loading="eager" fetchpriority="high" />
     </div>
     <div class="pp-hero__text wrap-wide">

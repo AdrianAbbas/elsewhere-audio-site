@@ -10,7 +10,7 @@ interface Props { youtubeId?: string; title: string; poster: ImageMetadata; post
 const { youtubeId, title, poster, posterAlt } = Astro.props;
 const ready = Boolean(youtubeId);
 ---
-<figure class="trailer" data-trailer={ready ? youtubeId : undefined} data-title={title}>
+<figure class="trailer" style="view-transition-name: product-worldbuilder" data-trailer={ready ? youtubeId : undefined} data-title={title}>
   <Picture src={poster} formats={['avif', 'webp']} fallbackFormat="webp" widths={[640, 960, 1280]} sizes="(min-width: 64rem) 50vw, 100vw" alt={posterAlt} loading="eager" fetchpriority="high" class="trailer__poster" />
   {ready ? (
     <button class="trailer__play" type="button" data-trailer-play>

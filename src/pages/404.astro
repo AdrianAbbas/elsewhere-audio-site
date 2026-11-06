@@ -5,7 +5,7 @@ import { Picture } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import nebula from '../assets/art/atmosphere-nebula.webp';
 ---
-<BaseLayout title="Place not found" description="This page doesn't exist." realm="threshold" noindex>
+<BaseLayout title="Place not found" description="This page doesn't exist." realm="house" noindex>
   <section class="lost" aria-labelledby="lost-title">
     <div class="lost__sky" aria-hidden="true">
       <Picture src={nebula} formats={['avif', 'webp']} fallbackFormat="webp" widths={[800]} sizes="100vw" alt="" loading="eager" />

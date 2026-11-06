@@ -9,43 +9,44 @@
   (it reads this file at build time). If you change a colour here, check there.
 */
 
-/* ── House (default): bone paper, ink, a little brass ─────────────── */
+/* ── House (default): the logo's palette. Every main page uses it, and so
+   do the nav and footer on every page, so the site feels like one place. */
 :root,
 [data-realm='house'] {
-  color-scheme: light;
-  --bg: #f2efe9;
-  --bg-deep: #e7e2d8;
-  --surface: #faf8f4;
-  --surface-2: #ece7de;
-  --ink: #17161a;
-  --ink-muted: #57535c;
-  --accent: #b08d4a; /* decorative only: rules, ornaments */
-  --accent-2: #6b5ea8; /* decorative only */
-  --accent-text: #6d5222;
-  --link: #3f3470;
-  --link-hover: #17161a;
-  --primary: #17161a;
-  --on-primary: #f2efe9;
-  --primary-hover: #2e2c34;
-  --line: rgb(23 22 26 / 0.14);
-  --line-strong: #7e7884;
-  --focus: #3f3470;
-  --scrim: rgb(242 239 233 / 0.86);
+  color-scheme: dark;
+  --bg: #120e24; /* ink */
+  --bg-deep: #0c0919;
+  --surface: #1c1636; /* night */
+  --surface-2: #241d44;
+  --ink: #f2e8d5; /* cream */
+  --ink-muted: #a79fc4;
+  --accent: #e0a848; /* gold: small details, rules, ornaments */
+  --accent-2: #4fd1c5; /* teal: sparingly */
+  --accent-text: #f28c38; /* ember: eyebrows, labels, highlights */
+  --link: #f28c38;
+  --link-hover: #f2e8d5;
+  --primary: #f28c38; /* ember buttons */
+  --on-primary: #120e24;
+  --primary-hover: #f6a35e;
+  --line: #332b55; /* card edges and dividers */
+  --line-strong: #776c9e; /* control borders: 3:1 or more on every surface */
+  --focus: #4fd1c5;
+  --scrim: rgb(18 14 36 / 0.82);
 
-  --display-variation: 'SOFT' 30, 'WONK' 0;
-  --display-weight: 360;
+  --display-variation: 'SOFT' 50, 'WONK' 0;
+  --display-weight: 340;
   --display-tracking: -0.015em;
   --eyebrow-font: var(--font-body);
   --eyebrow-style: normal;
   --eyebrow-transform: uppercase;
-  --eyebrow-tracking: 0.16em;
+  --eyebrow-tracking: 0.22em;
   --eyebrow-size: var(--step--2);
   --btn-font: var(--font-body);
-  --btn-transform: none;
-  --btn-tracking: 0.01em;
-  --btn-size: var(--step--1);
+  --btn-transform: uppercase;
+  --btn-tracking: 0.14em;
+  --btn-size: var(--step--2);
 
-  --texture: var(--grain-dark);
+  --texture: var(--grain-light);
   --texture-size: 200px 200px;
 }
 

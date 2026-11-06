@@ -3,10 +3,10 @@
 // an etched flourish in fantasy, a measured hairline in sci-fi, and a
 // quiet rule with a doorway in the house and threshold realms.
 // Both drawings are tiny inline SVGs; CSS shows the right one.
-interface Props { label?: string }
-const { label } = Astro.props;
+interface Props { label?: string; /** Always draw the house version (the footer). */ house?: boolean }
+const { label, house = false } = Astro.props;
 ---
-<div class="ornament" role="presentation">
+<div class:list={['ornament', { 'ornament--house': house }]} role="presentation">
   <svg class="ornament__fantasy" viewBox="0 0 320 24" fill="none" aria-hidden="true">
     <g stroke="currentColor" stroke-linecap="round" stroke-width=".9">
       <path d="M8 12h112M200 12h112" />
@@ -42,6 +42,9 @@ const { label } = Astro.props;
   :global([data-realm='fantasy']) .ornament__house { display: none; }
   :global([data-realm='scifi']) .ornament__scifi { display: flex; }
   :global([data-realm='scifi']) .ornament__house { display: none; }
+
+  .ornament--house .ornament__fantasy, .ornament--house .ornament__scifi { display: none !important; }
+  .ornament--house .ornament__house { display: block !important; }
 
   .ornament__scifi { align-items: center; gap: var(--space-s); width: 100%; }
   .ornament__line {

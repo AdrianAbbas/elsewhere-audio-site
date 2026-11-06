@@ -17,7 +17,7 @@ const twinkles = Array.from({ length: 14 }, () => ({
   x: round(900 + r() * 680), y: round(30 + r() * 300), rad: round(0.5 + r() * 0.5, 2), d: round(-r() * 5, 2),
 }));
 ---
-<section class="threshold-hero" aria-label={label}>
+<section class="threshold-hero" aria-label={label} data-ambient>
   <div class="threshold-hero__art">
     <Picture
       src={art}

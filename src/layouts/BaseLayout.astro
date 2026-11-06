@@ -3,9 +3,10 @@ import '../styles/fonts.css';
 import '../styles/tokens.css';
 import '../styles/realms.css';
 import '../styles/base.css';
+import '../styles/motion.css';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { SITE, REALM_TONE, type Realm } from '../config/site';
+import { SITE, type Realm } from '../config/site';
 import frauncesUrl from '@fontsource-variable/fraunces/files/fraunces-latin-full-normal.woff2?url';
 import instrumentUrl from '@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2?url';
 
@@ -36,8 +37,6 @@ const {
 const fullTitle = title === SITE.name ? `${SITE.name} — ${SITE.tagline}` : `${title} · ${SITE.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogUrl = new URL(ogImage, Astro.site);
-// The logo's light or dark version follows the realm's ground.
-const tone = REALM_TONE[realm];
 ---
 <!doctype html>
 <html lang="en-CA">
@@ -93,11 +92,15 @@ const tone = REALM_TONE[realm];
     -->
   </head>
   <body data-realm={realm}>
+    <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
     <a class="skip-link" href="#main">Skip to content</a>
-    <SiteNav overlay={overlayNav} tone={tone} />
+    <SiteNav overlay={overlayNav} />
     <main id="main" tabindex="-1">
       <slot />
     </main>
-    <SiteFooter tone={tone} />
+    <SiteFooter />
+    <script>
+      import '../scripts/motion';
+    </script>
   </body>
 </html>
