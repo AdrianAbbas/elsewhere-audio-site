@@ -1,4 +1,4 @@
-// The Elsewhere Audio line-up. Facts follow each plugin's own repository
+// The Windward Audio line-up. Facts follow each plugin's own repository
 // (README and docs, read on 2026-11-04). Release dates and prices are not
 // set yet for the newer instruments: see TODO.md.
 import type { ImageMetadata } from 'astro';

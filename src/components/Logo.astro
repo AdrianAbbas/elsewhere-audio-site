@@ -1,37 +1,46 @@
 ---
+// The Windward Audio logo, linking home. The horizontal lockup by default;
+// in a tight container (the phone nav) the small mark beside the wordmark.
+// Files come from public/brand/ (see its README); `tone` picks the version
+// for a light or dark background.
 import LogoMark from './LogoMark.astro';
-interface Props { href?: string; size?: 'sm' | 'md' }
-const { href = '/', size = 'md' } = Astro.props;
+import type { Tone } from '../config/site';
+
+interface Props {
+  href?: string;
+  size?: 'sm' | 'md';
+  tone?: Tone;
+  /** Swap to mark + wordmark when the surrounding container is narrow. */
+  compact?: boolean;
+}
+const { href = '/', size = 'md', tone = 'dark', compact = size === 'md' } = Astro.props;
 ---
-<a class:list={['logo', `logo--${size}`]} href={href} aria-label="Elsewhere Audio, home">
-  <LogoMark size={size === 'sm' ? 24 : 30} class="logo__mark" />
-  <span class="logo__word" aria-hidden="true">Elsewhere <span class="logo__sub">Audio</span></span>
+<a class:list={['logo', `logo--${size}`, { 'logo--compactable': compact }]} href={href} aria-label="Windward Audio, home">
+  <img class="logo__full" src={`/brand/lockup/windward-horizontal-for-${tone}.svg`} width="864" height="300" alt="Windward Audio" loading="eager" decoding="async" />
+  {compact && (
+    <span class="logo__compact">
+      <LogoMark size={32} tone={tone} class="logo__mark" />
+      <img class="logo__name" src={`/brand/lockup/windward-wordmark-for-${tone}.svg`} width="505" height="190" alt="Windward Audio" loading="eager" decoding="async" />
+    </span>
+  )}
 </a>
 
 <style>
-  .logo {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    color: var(--ink); text-decoration: none; line-height: 1;
-  }
-  .logo:hover { color: var(--ink); }
-  .logo__mark { color: var(--accent); flex: none; }
-  .logo__word {
-    font-family: var(--font-display);
-    font-variation-settings: var(--display-variation);
-    font-weight: 400;
-    font-size: 1.3rem;
-    letter-spacing: -0.01em;
-    white-space: nowrap;
-  }
-  .logo--sm .logo__word { font-size: 1.1rem; }
-  .logo__sub {
-    font-family: var(--font-body);
-    font-size: 0.56em;
-    font-weight: 500;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    vertical-align: 0.2em;
-    margin-inline-start: 0.15em;
-    color: var(--ink-muted);
+  .logo { display: inline-flex; align-items: center; flex: none; line-height: 0; text-decoration: none; border-radius: 2px; }
+  .logo img { display: block; width: auto; max-width: none; }
+  .logo--md .logo__full { height: 44px; }
+  /* The header's height is set by the old 30 px logo row; let the taller lockup
+     use the padding instead of pushing the nav taller. */
+  .logo--md { margin-block: -7px; }
+  .logo--sm .logo__full { height: 32px; }
+  .logo__compact { display: none; align-items: center; gap: 0.5rem; }
+  .logo__compact :global(.logo__mark) { width: 32px; height: 32px; }
+  .logo__name { height: 28px; }
+
+  /* Narrow nav (phones, and the compact previews on /styleguide): mark + name */
+  @container (max-width: 46rem) {
+    .logo--compactable .logo__full { display: none; }
+    .logo--compactable .logo__compact { display: inline-flex; }
+    .logo--md.logo--compactable { margin-block: -1px; }
   }
 </style>

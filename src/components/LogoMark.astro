@@ -1,13 +1,26 @@
 ---
-// The mark: a doorway standing on a horizon, with a sun (or a planet) setting
-// inside it. Drawn in currentColor so it takes the colour of its realm.
-interface Props { size?: number; class?: string }
-const { size = 28, class: className } = Astro.props;
+// The Stone Gate mark, from public/brand/. Below about 48 px the brand rules
+// call for the simplified favicon drawing, so small marks use that file.
+import type { Tone } from '../config/site';
+
+interface Props {
+  size?: number;
+  /** Background the mark sits on. */
+  tone?: Tone;
+  class?: string;
+  /** Leave empty for a decorative repeat (it is then hidden from screen readers). */
+  alt?: string;
+}
+const { size = 28, tone = 'dark', class: className, alt = '' } = Astro.props;
+const src = size < 48 ? '/brand/icon/windward-favicon.svg' : `/brand/mark/windward-mark-for-${tone}.svg`;
 ---
-<svg class={className} width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
-  <path d="M8 28V14.5a8 8 0 0 1 16 0V28" stroke="currentColor" stroke-width="1.5" />
-  <path d="M8 22h16" stroke="currentColor" stroke-width="1" opacity=".55" />
-  <path d="M13 22a3 3 0 0 1 6 0" stroke="currentColor" stroke-width="1.5" />
-  <circle cx="20.5" cy="12.5" r=".9" fill="currentColor" />
-  <path d="M3 28h26" stroke="currentColor" stroke-width="1.5" />
-</svg>
+<img
+  class={className}
+  src={src}
+  width={size}
+  height={size}
+  alt={alt}
+  aria-hidden={alt ? undefined : 'true'}
+  loading="lazy"
+  decoding="async"
+/>

@@ -5,8 +5,8 @@ Every placeholder in the code carries a `TODO(tag)` comment. Search for a tag
 This list grows as each page is built.
 
 ## Domain and contact
-- [ ] `TODO(domain)`: real production domain. Set in `src/config/site.ts` (`SITE.url`) and `public/robots.txt` (sitemap line).
-- [ ] `TODO(email)`: real support address. Currently `support@[domain]`, in `src/config/site.ts`.
+- [x] Domain: windwardaudio.ca (`SITE.url` in `src/config/site.ts`, `public/robots.txt`).
+- [x] Support email: general@windwardaudio.ca (`src/config/site.ts`).
 - [ ] `TODO(social)`: real YouTube / Instagram / Bluesky URLs, or remove unused ones. In `src/config/site.ts`, shown in the footer.
 
 ## Store (Moonbase)
@@ -49,7 +49,7 @@ This list grows as each page is built.
 
 ## Support, account and legal
 - [ ] `TODO(copy)`: confirm every support answer (`src/pages/support.astro`): installer steps, activations per licence, moving a licence, offline activation steps, refund policy, reply time.
-- [ ] In the plugin repos (not this one): change the manufacturer from "Veil Audio" to "Elsewhere Audio" in all four (WORLDBUILDER, LIMINAL, DUNGEON CRAWLER, LIGHT SEEKER). The support steps already say "AU Instruments → Elsewhere Audio → …".
+- [ ] In the plugin repos (not this one): change the manufacturer from "Veil Audio" to "Windward Audio" in all four (WORLDBUILDER, LIMINAL, DUNGEON CRAWLER, LIGHT SEEKER). The support steps already say "AU Instruments → Windward Audio → …".
 - [ ] `TODO(moonbase)`: embed the customer portal on /account (`mountAccountPortal` in `src/scripts/store.ts`).
 - [ ] `TODO(legal)`: replace the EULA, Privacy Policy and Terms (`src/pages/legal/`). All three are marked "DRAFT – to be replaced". Update the privacy policy when analytics, the newsletter and Moonbase are connected.
 

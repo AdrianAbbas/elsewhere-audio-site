@@ -1,22 +1,21 @@
 ---
 // About: the candlelit fantasy realm. The story, who makes the instruments,
-// the recordings made by hand, and LJP Records.
+// the recordings made by hand.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Ornament from '../components/Ornament.astro';
 import Atmosphere from '../components/art/Atmosphere.astro';
 import SignupForm from '../components/SignupForm.astro';
-import { SITE } from '../config/site';
 
 // What our instruments are recorded from, across all four plugins' READMEs.
 const materials = ['Classical guitar', 'Violin', 'Kalimba', 'Piano', 'Banjo', 'Voice', 'Djembes', 'Analog synth', 'Effect pedals'];
 ---
 <BaseLayout
   title="About"
-  description="Elsewhere Audio is a small, independent maker of instrument plugins in Ontario, Canada, recording its own sounds by hand. A business name of LJP Records Inc."
+  description="Windward Audio is a small, independent maker of instrument plugins in Ontario, Canada, recording its own sounds by hand."
   realm="fantasy"
 >
   <header class="about-head wrap">
-    <p class="eyebrow">About Elsewhere Audio</p>
+    <p class="eyebrow">About Windward Audio</p>
     <h1>A small workshop at the edge of the map.</h1>
     {/* TODO(copy): about intro */}
     <p class="lede">We make instruments for places that don’t exist: castles and taverns, spaceports and nebulae, empty buildings at night, a dark realm and a sunlit one. Each is a doorway, and composers are the ones who walk through.</p>
@@ -29,7 +28,7 @@ const materials = ['Classical guitar', 'Violin', 'Kalimba', 'Piano', 'Banjo', 'V
     <h2 id="story-title" class="visually-hidden">Our story</h2>
     {/* TODO(copy): the real story, in your own words. Placeholder below. */}
     <div class="prose">
-      <p class="dropcap">Elsewhere Audio began with a simple wish: to score a place rather than a sound. Film, TV and game composers spend their days building worlds, and most instruments hand them a list of patches and leave the world-building to them. We wanted instruments that start with the world.</p>
+      <p class="dropcap">Windward Audio began with a simple wish: to score a place rather than a sound. Film, TV and game composers spend their days building worlds, and most instruments hand them a list of patches and leave the world-building to them. We wanted instruments that start with the world.</p>
       <p>So each instrument we make is built around somewhere. WORLDBUILDER holds twenty-six Places, each a small ensemble in your key and tempo: a tavern with a fiddle and a lute, a spaceport humming at three in the morning. LIMINAL plays fragile instruments inside empty buildings. DUNGEON CRAWLER and LIGHT SEEKER are twin realms, one under a red moon and one in full sun, with an instrument for every place.</p>
       <p>We work slowly, on purpose. We would rather make a few instruments that feel lived in than many that feel the same.</p>
     </div>
@@ -46,7 +45,7 @@ const materials = ['Classical guitar', 'Violin', 'Kalimba', 'Piano', 'Banjo', 'V
       <p class="eyebrow">Who makes it</p>
       <h2 id="who-title">One maker, one room, a lot of patience.</h2>
       {/* TODO(copy): who you are, in your own words. Name kept as a placeholder on purpose. */}
-      <p>Elsewhere Audio is [your name], a composer and developer in Ontario, Canada. [A sentence or two about your background: what you score, what you play, why you started building instruments.]</p>
+      <p>Windward Audio is [your name], a composer and developer in Ontario, Canada. [A sentence or two about your background: what you score, what you play, why you started building instruments.]</p>
       <p>Every instrument is designed, programmed, recorded and tested here, from the first sketch to the last preset.</p>
     </div>
   </section>
@@ -66,12 +65,6 @@ const materials = ['Classical guitar', 'Violin', 'Kalimba', 'Piano', 'Banjo', 'V
 
   <Ornament />
 
-  <!-- LJP Records -->
-  <section class="about-ljp wrap reveal" aria-labelledby="ljp-title">
-    <h2 id="ljp-title">By LJP Records</h2>
-    {/* TODO(copy): anything you want to say about LJP Records. */}
-    <p>Elsewhere Audio is a business name of {SITE.legalName}, an independent company in {SITE.location}. LJP Records looks after the business side, so the workshop can stay a workshop.</p>
-  </section>
 
   <section class="about-close wrap reveal" aria-label="Keep in touch">
     <div class="about-close__links">
@@ -124,9 +117,6 @@ const materials = ['Classical guitar', 'Violin', 'Kalimba', 'Piano', 'Banjo', 'V
     font-family: var(--font-display); font-style: italic; color: var(--accent-text);
   }
 
-  .about-ljp { padding-block: 0 var(--space-xl); display: grid; gap: var(--space-s); justify-items: center; text-align: center; }
-  .about-ljp h2 { font-size: var(--step-3); }
-  .about-ljp p { max-width: 52ch; color: var(--ink-muted); }
 
   .about-close { padding-block: var(--space-xl) var(--space-3xl); display: grid; gap: var(--space-2xl); justify-items: center; }
   .about-close__links { display: flex; flex-wrap: wrap; gap: var(--space-s); justify-content: center; }

@@ -1,24 +1,26 @@
 ---
 import Logo from './Logo.astro';
 import Ornament from './Ornament.astro';
-import { NAV, LEGAL_NAV, SITE } from '../config/site';
+import { NAV, LEGAL_NAV, SITE, type Tone } from '../config/site';
 import { PRODUCTS } from '../data/products';
 
 interface Props {
   /** Render as a plain <div> (used for previews on /styleguide, to avoid duplicate landmarks). */
   preview?: boolean;
   id?: string;
+  /** The footer's background, for the logo's light or dark version. */
+  tone?: Tone;
 }
-const { preview = false, id = 'main' } = Astro.props;
+const { preview = false, id = 'main', tone = 'dark' } = Astro.props;
 const Tag = preview ? 'div' : 'footer';
 const year = new Date().getFullYear();
 ---
 <Tag class="site-footer">
   <div class="wrap-wide">
-    <Ornament label="Elsewhere · Ontario" />
+    <Ornament label="Windward · Ontario" />
     <div class="site-footer__grid">
       <div class="site-footer__brand stack">
-        <Logo size="sm" />
+        <Logo size="sm" tone={tone} compact={false} />
         <p class="muted">{SITE.tagline}</p>
       </div>
 
@@ -38,7 +40,7 @@ const year = new Date().getFullYear();
       </nav>
 
       <div class="site-footer__col">
-        <h2 class="site-footer__heading">Elsewhere</h2>
+        <h2 class="site-footer__heading">Windward</h2>
         {/* TODO(social): real profile URLs live in src/config/site.ts */}
         <ul role="list">
           {SITE.social.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
@@ -47,9 +49,9 @@ const year = new Date().getFullYear();
     </div>
 
     <div class="site-footer__legal">
-      <p>Elsewhere Audio is a business name of LJP Records Inc.</p>
+      <p>Windward Audio is a business name of {SITE.legalName}</p>
       <p>
-        <span>© {year} LJP Records Inc.</span>
+        <span>© {year} {SITE.legalName}</span>
         {LEGAL_NAV.map((item) => <a href={item.href}>{item.label}</a>)}
       </p>
     </div>

@@ -10,6 +10,7 @@ import Atmosphere from '../art/Atmosphere.astro';
 import BuyButton from '../store/BuyButton.astro';
 import AddToCartButton from '../store/AddToCartButton.astro';
 import DownloadLiteButton from '../store/DownloadLiteButton.astro';
+import { REALM_TONE } from '../../config/site';
 
 interface Props {
   realm: 'fantasy' | 'scifi';
@@ -21,7 +22,7 @@ const swatches = ['bg', 'surface', 'ink', 'ink-muted', 'accent', 'accent-2', 'ac
 const f = realm === 'fantasy';
 ---
 <section class="panel" data-realm={realm} aria-labelledby={`panel-${realm}`}>
-  <div class="panel__nav"><SiteNav preview id={realm} label={`Primary (${name} preview)`} /></div>
+  <div class="panel__nav"><SiteNav preview id={realm} label={`Primary (${name} preview)`} tone={REALM_TONE[realm]} /></div>
 
   <div class="panel__inner">
     <header class="panel__head stack">
@@ -85,7 +86,7 @@ const f = realm === 'fantasy';
     </div>
   </div>
 
-  <div class="panel__footer"><SiteFooter preview id={name} /></div>
+  <div class="panel__footer"><SiteFooter preview id={name} tone={REALM_TONE[realm]} /></div>
 </section>
 
 <style>

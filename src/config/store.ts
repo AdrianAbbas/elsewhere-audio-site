@@ -13,7 +13,7 @@ export const STORE = {
   // polite "store opens soon" message instead of calling Moonbase.
   enabled: false,
 
-  // TODO(moonbase): your Moonbase storefront URL, e.g. https://elsewhere.moonbase.sh
+  // TODO(moonbase): your Moonbase storefront URL, e.g. https://windward.moonbase.sh
   moonbaseAccountUrl: 'https://TODO-account.moonbase.sh',
 
   currency: 'USD',

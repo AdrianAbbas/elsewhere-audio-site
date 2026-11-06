@@ -16,8 +16,8 @@ const sections = [
     title: 'Installation',
     items: [
       ['How do I install WORLDBUILDER?', '<p>Sign in to <a href="/account">your account</a>, download the installer for macOS and run it. It installs the Audio Unit and VST3 versions for Apple Silicon and Intel Macs. Quit Logic Pro or GarageBand before you install. (TODO: confirm installer steps for the signed release.)</p>'],
-      ['How do I open it in Logic Pro?', '<p>Create a Software Instrument track and choose <strong>AU Instruments → Elsewhere Audio → WORLDBUILDER</strong> in the Instrument slot. If Logic marks it as failed, open <strong>Settings → Plug-in Manager</strong>, select it and click <strong>Reset &amp; Rescan Selection</strong>.</p>'],
-      ['How do I open it in GarageBand?', '<p>In <strong>Settings → Audio/MIDI</strong>, make sure Audio Units are on. Create a Software Instrument track, open Smart Controls (B) → Plug-ins → Instrument slot, and choose <strong>AU Instruments → Elsewhere Audio → WORLDBUILDER</strong>. Press play: it plays along with your song, no MIDI needed.</p>'],
+      ['How do I open it in Logic Pro?', '<p>Create a Software Instrument track and choose <strong>AU Instruments → Windward Audio → WORLDBUILDER</strong> in the Instrument slot. If Logic marks it as failed, open <strong>Settings → Plug-in Manager</strong>, select it and click <strong>Reset &amp; Rescan Selection</strong>.</p>'],
+      ['How do I open it in GarageBand?', '<p>In <strong>Settings → Audio/MIDI</strong>, make sure Audio Units are on. Create a Software Instrument track, open Smart Controls (B) → Plug-ins → Instrument slot, and choose <strong>AU Instruments → Windward Audio → WORLDBUILDER</strong>. Press play: it plays along with your song, no MIDI needed.</p>'],
       ['I see sliders instead of the WORLDBUILDER window.', '<p>In the plug-in window’s view menu, switch from <strong>Controls</strong> to <strong>Editor</strong>.</p>'],
       ['How do I uninstall it?', '<p>Delete <code>WORLDBUILDER.component</code> from <code>~/Library/Audio/Plug-Ins/Components</code> and <code>WORLDBUILDER.vst3</code> from <code>~/Library/Audio/Plug-Ins/VST3</code>. (TODO: confirm paths, or point to an uninstaller.)</p>'],
     ],
@@ -58,7 +58,7 @@ const sections = [
 ---
 <BaseLayout
   title="Support"
-  description="Help with installing and activating Elsewhere Audio instruments, offline activation, refunds and system requirements, and how to contact us."
+  description="Help with installing and activating Windward Audio instruments, offline activation, refunds and system requirements, and how to contact us."
   realm="house"
 >
   <header class="support-head wrap-wide">
@@ -88,7 +88,7 @@ const sections = [
       {/* TODO(email): the real support address, set in src/config/site.ts */}
       <p class="contact__email"><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></p>
       <p class="muted">Please include your Mac model, macOS version, your DAW and its version, and what happened. A screenshot helps.</p>
-      <p class="muted">{SITE.name} · {SITE.legalName} · {SITE.location}</p>
+      <p class="muted">{SITE.name} · {SITE.location}</p>
     </aside>
   </div>
 </BaseLayout>

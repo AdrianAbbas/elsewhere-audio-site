@@ -1,13 +1,11 @@
 // Site-wide settings. Every TODO here is listed in TODO.md.
 
 export const SITE = {
-  name: 'Elsewhere Audio',
-  legalName: 'LJP Records Inc.',
+  name: 'Windward Audio',
+  legalName: 'LJP RECORDS INC.',
   tagline: "Instruments for places that don't exist.",
-  // TODO(domain): replace with the real production domain before launch.
-  url: 'https://elsewhere-audio.example',
-  // TODO(email): replace once the domain and mailbox exist.
-  supportEmail: 'support@[domain]',
+  url: 'https://windwardaudio.ca',
+  supportEmail: 'general@windwardaudio.ca',
   location: 'Ontario, Canada',
   // TODO(social): replace with real profile URLs (or remove entries we don't use).
   social: [
@@ -20,6 +18,13 @@ export const SITE = {
 // house/fantasy/scifi/threshold are the site's realms; liminal/dungeon/radiant are
 // product identities (LIMINAL, DUNGEON CRAWLER, LIGHT SEEKER) used on their own pages.
 export type Realm = 'house' | 'fantasy' | 'scifi' | 'threshold' | 'liminal' | 'dungeon' | 'radiant';
+
+/** Whether a realm's ground is light or dark: picks the logo's -for-light or -for-dark files. */
+export type Tone = 'light' | 'dark';
+export const REALM_TONE: Record<Realm, Tone> = {
+  house: 'light', liminal: 'light', radiant: 'light',
+  fantasy: 'dark', scifi: 'dark', threshold: 'dark', dungeon: 'dark',
+};
 
 export const NAV = [
   { label: 'Worldbuilder', href: '/worldbuilder' },
