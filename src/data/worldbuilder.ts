@@ -77,7 +77,7 @@ export const FEATURES = [
   },
   {
     title: 'Locations and Journeys',
-    body: 'Save up to eight complete versions of your world as Locations, then travel between them. It sounds like moving through a place, not a crossfade.',
+    body: 'Save up to eight complete versions of your world as Locations, then travel between them. The music changes the way it would if you walked from one to the next.',
     points: ['Up to eight Locations', 'Journeys between them'],
   },
   {
@@ -131,7 +131,7 @@ export const FAQ = [
   ['Is there a Windows version?', 'Not yet. WORLDBUILDER is macOS only for now.'],
   ['What is the difference between Lite and the full version?', 'Lite is free and includes a selection of Places. The full version unlocks all 26 Places and every feature. You can upgrade from Lite at any time.'],
   ['How does activation work?', 'You receive a licence key when you buy or download. Activate once in the plugin. Offline activation is available for studio computers without internet.'],
-  ['Can I get a refund?', 'See the refund policy on the support page.'],
+  ['Can I get a refund?', 'Yes, within 14 days of purchase, no questions asked. See the refund policy for the details.'],
 ] as const;
 
 // TODO(video): the trailer's YouTube ID (the part after watch?v=). While empty,

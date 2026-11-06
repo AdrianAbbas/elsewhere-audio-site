@@ -1,0 +1,27 @@
+---
+import LegalPage from '../../components/LegalPage.astro';
+import { SITE } from '../../config/site';
+// Third-party material used by this website, and the licence for each.
+// Add a row whenever a new font, image, icon or library ships to visitors.
+const fonts = [
+  { name: 'Fraunces', by: '2020 The Fraunces Project Authors', src: 'https://github.com/undercasetype/Fraunces' },
+  { name: 'Instrument Sans', by: '2022 The Instrument Sans Project Authors', src: 'https://github.com/Instrument/instrument-sans' },
+  { name: 'IBM Plex Mono', by: '2017 IBM Corp.', src: 'https://github.com/IBM/plex' },
+];
+---
+<LegalPage title="Licences & Credits" description="The fonts, artwork and software this website uses, and the licence for each.">
+  <h2>Fonts</h2>
+  <p>This website uses three typefaces, served from our own server. Each is licensed under the <a href="https://openfontlicense.org/">SIL Open Font License, Version 1.1</a>, which allows use on websites.</p>
+  <ul>
+    {fonts.map((f) => <li><strong translate="no">{f.name}</strong>, copyright {f.by}. <a href={f.src}>Source</a>.</li>)}
+  </ul>
+
+  <h2>Artwork and screenshots</h2>
+  <p>The logo, the painted scenes, the pixel art and the product screenshots are made by {SITE.name} and belong to {SITE.legalName}. Please ask before using them, except to write about or review our instruments.</p>
+
+  <h2>Software</h2>
+  <p>The site is built with <a href="https://astro.build">Astro</a> (MIT License). The code that runs in your browser is our own.</p>
+
+  <h2>Our instruments</h2>
+  <p>Credits for the instruments themselves are in the <a href="/legal/eula">EULA</a>.</p>
+</LegalPage>

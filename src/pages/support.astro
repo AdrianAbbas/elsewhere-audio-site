@@ -42,7 +42,7 @@ const sections = [
     id: 'refunds',
     title: 'Refunds',
     items: [
-      ['Can I get a refund?', '<p>TODO: refund policy (for example, within 14 days of purchase if the plugin has not been activated). There is a free Lite version so you can try WORLDBUILDER in your own projects before you buy.</p>'],
+      ['Can I get a refund?', '<p>Yes. Ask within 14 days of your purchase for a full refund, no questions asked. The details are in our <a href="/legal/refunds">refund policy</a>. There is also a free Lite version, so you can try WORLDBUILDER in your own projects before you buy.</p>'],
       ['How do I ask for a refund?', `<p>Email us at <span class="nowrap">${SITE.supportEmail}</span> with your order number.</p>`],
     ],
   },
@@ -64,7 +64,7 @@ const sections = [
   <header class="support-head wrap-wide">
     <p class="eyebrow">Support</p>
     <h1>How can we help?</h1>
-    <p class="lede">Most answers are below. If yours isn’t, write to us and a real person will reply, usually within two working days.</p>
+    <p class="lede">Most answers are below. If yours isn’t there, write to us and we’ll reply by email.</p>
     {/* TODO(copy): confirm the reply time. */}
     <nav class="support-toc" aria-label="Support topics">
       {sections.map((s) => <a href={`#${s.id}`}>{s.title}</a>)}
@@ -88,7 +88,9 @@ const sections = [
       {/* TODO(email): the real support address, set in src/config/site.ts */}
       <p class="contact__email"><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></p>
       <p class="muted">Please include your Mac model, macOS version, your DAW and its version, and what happened. A screenshot helps.</p>
-      <p class="muted">{SITE.name} · {SITE.location}</p>
+      <h3 class="contact__sub">Business details</h3>
+      <p class="muted">{SITE.name} is a business name of {SITE.legalName}, {SITE.location}.{SITE.mailingAddress && <><br />{SITE.mailingAddress}</>}</p>
+      <p class="muted"><a href="/legal/refunds">Refund policy</a> · <a href="/legal/privacy">Privacy</a> · <a href="/legal/terms">Terms</a></p>
     </aside>
   </div>
 </BaseLayout>
@@ -117,6 +119,7 @@ const sections = [
   }
   @media (min-width: 64rem) { .contact { position: sticky; top: var(--space-l); } }
   .contact h2 { font-size: var(--step-2); }
+  .contact__sub { font-family: var(--font-body); font-size: var(--step--1); font-weight: 600; margin-top: var(--space-xs); }
   .contact__email { font-family: var(--font-display); font-size: var(--step-1); overflow-wrap: anywhere; }
   .contact p.muted { font-size: var(--step--1); }
 </style>

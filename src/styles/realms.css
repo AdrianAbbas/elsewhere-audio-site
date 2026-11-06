@@ -19,7 +19,7 @@
   --surface: #1c1636; /* night */
   --surface-2: #241d44;
   --ink: #f2e8d5; /* cream */
-  --ink-muted: #a79fc4;
+  --ink-muted: #b4aa98; /* warm grey, from cream */
   --accent: #e0a848; /* gold: small details, rules, ornaments */
   --accent-2: #4fd1c5; /* teal: sparingly */
   --accent-text: #f28c38; /* ember: eyebrows, labels, highlights */
@@ -28,8 +28,8 @@
   --primary: #f28c38; /* ember buttons */
   --on-primary: #120e24;
   --primary-hover: #f6a35e;
-  --line: #332b55; /* card edges and dividers */
-  --line-strong: #776c9e; /* control borders: 3:1 or more on every surface */
+  --line: rgb(242 232 213 / 0.12); /* card edges and dividers */
+  --line-strong: #857c6c; /* control borders: 3:1 or more on every surface */
   --focus: #4fd1c5;
   --scrim: rgb(18 14 36 / 0.82);
 
@@ -86,17 +86,15 @@
   --btn-tracking: 0.01em;
   --btn-size: var(--step-0);
 
-  /* Grain + faint laid-paper lines + a pool of candlelight from above + dark edges */
+  /* Grain + faint laid-paper lines + candlelight from above */
   --texture:
     var(--grain-light),
     repeating-linear-gradient(0deg, rgb(240 228 200 / 0.018) 0 1px, transparent 1px 5px),
-    radial-gradient(ellipse 70% 45% at 50% 0%, rgb(255 184 92 / 0.13), transparent 70%),
-    radial-gradient(ellipse 40% 30% at 12% 35%, rgb(255 184 92 / 0.05), transparent 70%),
-    radial-gradient(ellipse 120% 90% at 50% 50%, transparent 55%, rgb(0 0 0 / 0.35));
-  --texture-size: 200px 200px, auto, auto, auto, auto;
+    linear-gradient(180deg, rgb(255 184 92 / 0.07), transparent 40rem);
+  --texture-size: 200px 200px, auto, auto;
 }
 
-/* ── Sci-fi: deep-space navy, nebula violet and teal, thin lines ──── */
+/* ── Sci-fi: deep-space navy, star blue and teal, thin lines ─────── */
 [data-realm='scifi'] {
   color-scheme: dark;
   --bg: #060a1a;
@@ -105,9 +103,9 @@
   --surface-2: #121b40;
   --ink: #e7eaf6;
   --ink-muted: #a3accf;
-  --accent: #8c7bff; /* nebula violet, decorative */
+  --accent: #8fb0ff; /* star blue, decorative */
   --accent-2: #43d6c6; /* teal, decorative */
-  --accent-text: #a99dff;
+  --accent-text: #9db4ff;
   --link: #6fe3d6;
   --link-hover: #e7eaf6;
   --primary: #43d6c6;
@@ -132,18 +130,11 @@
   --btn-tracking: 0.12em;
   --btn-size: var(--step--2);
 
-  /* Grain + two star fields at different scales + a faint grid + nebula light */
+  /* Grain + a cold wash of light from above */
   --texture:
     var(--grain-light),
-    radial-gradient(1px 1px at 23px 41px, rgb(255 255 255 / 0.55), transparent 60%),
-    radial-gradient(1px 1px at 131px 97px, rgb(200 210 255 / 0.4), transparent 60%),
-    radial-gradient(1.5px 1.5px at 71px 163px, rgb(255 255 255 / 0.5), transparent 60%),
-    radial-gradient(1px 1px at 211px 29px, rgb(180 255 245 / 0.35), transparent 60%),
-    linear-gradient(rgb(140 150 255 / 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(140 150 255 / 0.035) 1px, transparent 1px),
-    radial-gradient(ellipse 60% 50% at 85% 0%, rgb(140 123 255 / 0.16), transparent 70%),
-    radial-gradient(ellipse 50% 50% at 0% 90%, rgb(67 214 198 / 0.08), transparent 70%);
-  --texture-size: 200px 200px, 190px 190px, 190px 190px, 260px 260px, 260px 260px, 56px 56px, 56px 56px, auto, auto;
+    linear-gradient(180deg, rgb(143 176 255 / 0.06), transparent 36rem);
+  --texture-size: 200px 200px, auto;
 }
 
 /* ── Threshold (home): dusk. Warm on one side, cool on the other ─── */
@@ -183,9 +174,8 @@
 
   --texture:
     var(--grain-light),
-    radial-gradient(ellipse 50% 40% at 0% 20%, rgb(227 181 102 / 0.07), transparent 70%),
-    radial-gradient(ellipse 50% 40% at 100% 60%, rgb(111 214 203 / 0.06), transparent 70%);
-  --texture-size: 200px 200px, auto, auto;
+    linear-gradient(90deg, rgb(227 181 102 / 0.05), transparent 35%, transparent 65%, rgb(111 214 203 / 0.04));
+  --texture-size: 200px 200px, auto;
 }
 
 /* ── Product identities ───────────────────────────────────────────
@@ -231,9 +221,8 @@
 
   --texture:
     var(--grain-dark),
-    radial-gradient(ellipse 70% 40% at 50% 0%, rgb(236 255 246 / 0.7), transparent 70%),
-    linear-gradient(180deg, rgb(143 179 165 / 0.08), transparent 40%);
-  --texture-size: 200px 200px, auto, auto;
+    linear-gradient(180deg, rgb(143 179 165 / 0.1), transparent 40%);
+  --texture-size: 200px 200px, auto;
 }
 
 /* DUNGEON CRAWLER: a dark realm under a red moon. */
@@ -273,9 +262,8 @@
 
   --texture:
     var(--grain-light),
-    radial-gradient(ellipse 45% 35% at 80% 0%, rgb(196 33 28 / 0.2), transparent 70%),
-    radial-gradient(ellipse 120% 90% at 50% 50%, transparent 55%, rgb(0 0 0 / 0.45));
-  --texture-size: 200px 200px, auto, auto;
+    linear-gradient(180deg, rgb(196 33 28 / 0.08), transparent 36rem);
+  --texture-size: 200px 200px, auto;
 }
 
 /* LIGHT SEEKER: a sunlit realm of sky castles and crystal palaces. */
@@ -315,9 +303,8 @@
 
   --texture:
     var(--grain-dark),
-    radial-gradient(ellipse 60% 40% at 50% 0%, rgb(255 214 140 / 0.4), transparent 70%),
     linear-gradient(180deg, rgb(150 200 235 / 0.14), transparent 35%);
-  --texture-size: 200px 200px, auto, auto;
+  --texture-size: 200px 200px, auto;
 }
 
 /* Every realm container paints its own ground, so realms can sit side by side. */

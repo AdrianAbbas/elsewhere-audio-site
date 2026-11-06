@@ -34,7 +34,7 @@ const wb = STORE.products.worldbuilder;
       <div class="product__body">
         <p class="product__meta">Instrument 01 · AU / VST3 · macOS</p>
         <h3 class="product__name"><a href="/worldbuilder">WORLDBUILDER</a></h3>
-        <p class="product__line">Score a place, not a sound.</p>
+        <p class="product__line">A place to score, in your key and tempo.</p>
         <p class="muted">{PLACE_COUNT} Places, from castles and taverns to spaceports and nebulae, each an ensemble of six instruments that plays in your song’s key and tempo. Arrange cues, travel between Locations and export loops, stems and stingers for picture or games.</p>
         <p class="product__price"><span>{formatPrice(wb.introPrice)}</span> introductory price, then {formatPrice(wb.price)} · free Lite version</p>
         <div class="product__ctas">
@@ -48,7 +48,7 @@ const wb = STORE.products.worldbuilder;
   <section class="wrap-wide coming" aria-labelledby="coming-title">
     <h2 id="coming-title" class="section-label">In the workshop</h2>
     {/* TODO(release): release dates and prices for each */}
-    <p class="muted coming__note">Three more worlds, in development now. Each page shows how far along it is.</p>
+    <p class="muted coming__note">3 more worlds, in development now. Each page shows how far along it is.</p>
     <div class="coming__grid">
       {UPCOMING.map((p) => <ProductCard product={p} />)}
     </div>
@@ -71,8 +71,6 @@ const wb = STORE.products.worldbuilder;
   }
   .product__media { display: block; min-height: 18rem; overflow: hidden; background: #0b0c18; }
   .product__media :global(picture), .product__media :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
-  .product__media :global(img) { transition: transform var(--dur-slow) var(--ease-out); }
-  .product:hover .product__media :global(img) { transform: scale(1.03); }
   .product__body { display: grid; gap: var(--space-s); align-content: center; padding: var(--space-xl) clamp(1.25rem, 3vw, var(--space-xl)); min-width: 0; }
   .product__meta { font-size: var(--step--2); letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-text); }
   .product__name { font-size: min(var(--step-4), 9vw); letter-spacing: 0.03em; }

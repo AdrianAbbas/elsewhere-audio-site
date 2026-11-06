@@ -48,7 +48,7 @@
   --wrap-wide: 88rem;
   --measure: 64ch;
   --gutter: clamp(1rem, 0.6rem + 2.4vw, 3rem);
-  --radius: 3px;
+  --radius: 2px;
 
   /* Motion: quiet and slow. Durations drop to 0 under reduced motion (base.css). */
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);

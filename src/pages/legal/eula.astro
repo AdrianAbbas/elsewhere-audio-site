@@ -1,23 +1,51 @@
 ---
 import LegalPage from '../../components/LegalPage.astro';
-// TODO(legal): replace this whole document with the real EULA.
+import { SITE } from '../../config/site';
+// TODO(legal): have a lawyer review this draft. Confirm the number of
+// computers per licence (section 1) against how Moonbase activations are set up.
+// Third-party credits for the instruments go in section 9, only where a
+// licence requires one (VSCO 2 CE is CC0 and needs none).
 ---
-<LegalPage title="End User Licence Agreement" description="The licence agreement for Windward Audio software. Draft placeholder.">
-  <p>[DRAFT – to be replaced] This End User Licence Agreement is between you and LJP RECORDS INC., doing business as Windward Audio, and covers WORLDBUILDER and any other Windward Audio software you install.</p>
-  <h2>1. Licence</h2>
-  <p>[Placeholder: what the licence lets you do, for example install and use the software on a set number of your own computers.]</p>
-  <h2>2. Music you make</h2>
-  <p>[Placeholder: you own the music you create with the software and may use it in commercial projects such as films, games and TV, royalty free.]</p>
+<LegalPage title="End User Licence Agreement" description="The licence for Windward Audio software: what you may do with it, the music you make, and the limits.">
+  <p>This agreement is between you and {SITE.legalName}, doing business as {SITE.name}. It covers WORLDBUILDER, WORLDBUILDER Lite and any other {SITE.name} software you install, with its sounds, presets and documentation (the “software”). By installing or using the software, you agree to it.</p>
+
+  <h2>1. Your licence</h2>
+  {/* TODO(legal): confirm the activation limit. */}
+  <p>We give you a personal, non-exclusive, non-transferable licence to install and use the software on up to [three] computers that you own or control, for your own work, including commercial work.</p>
+
+  <h2>2. The music you make</h2>
+  <p>You own the music you create with the software. You may use it, royalty free, in any project, including commercial films, TV, games, adverts, recordings and live performances, without crediting us.</p>
+
   <h2>3. What you may not do</h2>
-  <p>[Placeholder: for example, redistribute or resell the software, extract and sell its recordings as a sample library, or share licence keys.]</p>
-  <h2>4. Free and Lite versions</h2>
-  <p>[Placeholder: terms that apply to WORLDBUILDER Lite.]</p>
+  <ul>
+    <li>Share, sell, rent or give away the software or your licence key.</li>
+    <li>Extract the software’s sounds, samples or presets and distribute them on their own, or use them to build a sample library, instrument or sound set for others.</li>
+    <li>Reverse engineer, decompile or change the software, except where the law allows it regardless of this agreement.</li>
+    <li>Get around the licence check.</li>
+  </ul>
+
+  <h2>4. WORLDBUILDER Lite and other free versions</h2>
+  <p>Free versions are covered by this agreement too. You may use them in commercial work. They may include fewer features, and we may change or stop offering them.</p>
+
+  {/* TODO(legal): confirm the update promise. */}
   <h2>5. Updates and support</h2>
-  <p>[Placeholder.]</p>
-  <h2>6. Warranty and liability</h2>
-  <p>[Placeholder.]</p>
-  <h2>7. Governing law</h2>
-  <p>[Placeholder: for example, the laws of the Province of Ontario and the federal laws of Canada.]</p>
-  <h2>8. Contact</h2>
-  <p>[Placeholder: how to reach us about this agreement.]</p>
+  <p>Updates within the same major version are free. We provide support by email at <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>.</p>
+
+  <h2>6. Ending the licence</h2>
+  <p>You can end this agreement by uninstalling the software. It ends automatically if you break it, or if you receive a refund. When it ends, you must stop using and uninstall the software. Music you made while your licence was valid stays yours.</p>
+
+  <h2>7. Warranty</h2>
+  <p>We test the software carefully, but it is provided “as is”. To the extent the law allows, we don’t promise that it will be free of errors or work with every host. If it doesn’t work for you, our <a href="/legal/refunds">refund policy</a> applies.</p>
+
+  <h2>8. Liability</h2>
+  <p>To the extent the law allows, we are not liable for lost data, lost profits or other indirect losses, and our total liability is limited to the price you paid for the software. Nothing here limits liability that cannot be limited by law.</p>
+
+  <h2>9. Third-party material</h2>
+  <p>The current software includes no third-party material whose licence asks for a credit. If that changes, the credit will be listed here.</p>
+
+  <h2>10. Law</h2>
+  <p>This agreement is governed by the laws of the Province of Ontario and the federal laws of Canada that apply there. If you are a consumer living elsewhere, you also keep any protections the laws of your country give you.</p>
+
+  <h2>11. Contact</h2>
+  <p>Questions about this agreement go to <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>.</p>
 </LegalPage>

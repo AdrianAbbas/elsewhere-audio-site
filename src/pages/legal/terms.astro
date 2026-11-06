@@ -1,21 +1,47 @@
 ---
 import LegalPage from '../../components/LegalPage.astro';
-// TODO(legal): replace with the real terms of sale and use.
+import { SITE } from '../../config/site';
+// TODO(legal): have a lawyer review this draft before the store opens, and
+// confirm with Moonbase whether it acts as merchant of record (section 3).
 ---
-<LegalPage title="Terms" description="Terms of sale and use for the Windward Audio website and store. Draft placeholder.">
-  <p>[DRAFT – to be replaced] These terms cover using this website and buying from the Windward Audio store.</p>
+<LegalPage title="Terms of Service" description="The terms for using the Windward Audio website and buying from its store: who we are, prices, payment, delivery, refunds and the law that applies.">
+  <p>These terms apply when you use this website or buy from the {SITE.name} store. By buying, you agree to them. Please read them with the <a href="/legal/eula">End User Licence Agreement</a> (EULA), which covers how you may use the software itself.</p>
+
   <h2>1. Who we are</h2>
-  <p>[Placeholder: Windward Audio is a business name of LJP RECORDS INC., Ontario, Canada.]</p>
-  <h2>2. Buying</h2>
-  <p>[Placeholder: prices in US dollars, taxes, payment through Moonbase, delivery of licence keys and downloads.]</p>
-  <h2>3. Refunds</h2>
-  <p>[Placeholder: refund policy, matching the support page.]</p>
-  <h2>4. Using the software</h2>
-  <p>[Placeholder: use is governed by the <a href="/legal/eula">EULA</a>.]</p>
-  <h2>5. Using this website</h2>
-  <p>[Placeholder.]</p>
-  <h2>6. Changes to these terms</h2>
-  <p>[Placeholder.]</p>
-  <h2>7. Contact</h2>
-  <p>[Placeholder.]</p>
+  <p>{SITE.name} is a business name of {SITE.legalName}, a company in {SITE.location}.</p>
+  <ul>
+    <li>Email: <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></li>
+    {SITE.mailingAddress && <li>Mailing address: {SITE.mailingAddress}</li>}
+  </ul>
+
+  <h2>2. What we sell</h2>
+  <p>We sell licences to use downloadable software instruments (plugins). You buy a licence to use the software under the EULA; you don’t buy the software itself. Each product page lists what is included and the system requirements. Please check them before you buy, or try the free Lite version first.</p>
+
+  <h2>3. Prices and payment</h2>
+  <p>Prices are shown in US dollars. Sales tax, where it applies, is calculated from your location, added at checkout and shown before you pay. There are no subscriptions, automatic renewals or hidden fees. Payment is handled securely by our store provider, Moonbase, and its payment processor; we never see your full card number.</p>
+  <p>An introductory price is shown as such, with the regular price next to it. If we make a pricing mistake, we will tell you and give you the choice of paying the correct price or cancelling for a full refund.</p>
+
+  <h2>4. Delivery</h2>
+  <p>After payment, you receive a licence key and a download link by email and in <a href="/account">your account</a>, normally right away. If you don’t receive them within a day, check your spam folder, then write to us.</p>
+
+  <h2>5. Refunds</h2>
+  <p>You can get a full refund within 14 days of purchase, no questions asked. See the <a href="/legal/refunds">refund policy</a>. Nothing in these terms limits the rights you have under consumer protection law where you live.</p>
+
+  <h2>6. Your account</h2>
+  <p>Keep your account details and licence keys to yourself. You are responsible for what happens under your account. Tell us straight away if you think someone else has used it.</p>
+
+  <h2>7. Using this website</h2>
+  <p>You may browse this website and share links to it. Please don’t copy its artwork, text or audio for other uses without asking, try to break or overload it, or use it for anything unlawful. The website’s content belongs to {SITE.legalName}, except where the <a href="/legal/licences">licences page</a> says otherwise.</p>
+
+  <h2>8. Liability</h2>
+  <p>We take care to keep this website accurate and working, but it is provided as it is. To the extent the law allows, we are not liable for indirect or consequential losses, and our total liability for any purchase is limited to the price you paid for it. The EULA covers the software itself.</p>
+
+  <h2>9. Changes to these terms</h2>
+  <p>We may update these terms. The version in force when you buy applies to that purchase. The date at the top of the page shows the last change.</p>
+
+  <h2>10. Law</h2>
+  <p>These terms are governed by the laws of the Province of Ontario and the federal laws of Canada that apply there. If you are a consumer living elsewhere, you also keep any protections the laws of your country give you.</p>
+
+  <h2>11. Contact</h2>
+  <p>Questions about these terms go to <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>.</p>
 </LegalPage>

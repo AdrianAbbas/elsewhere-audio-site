@@ -1,0 +1,30 @@
+---
+import LegalPage from '../../components/LegalPage.astro';
+import { SITE } from '../../config/site';
+// TODO(legal): confirm the refund window and conditions. The draft below
+// offers 14 days, no questions asked, which is common for audio plugins.
+// Keep /support and the Terms in step with this page.
+const mail = `mailto:${SITE.supportEmail}?subject=Refund%20request`;
+---
+<LegalPage title="Refund Policy" description="How to get a refund on a Windward Audio purchase: 14 days from purchase, by email, back to your original payment method.">
+  <p>We want you to be happy with what you buy. WORLDBUILDER has a free Lite version, so you can try it in your own projects first.</p>
+
+  <h2>14 days, no questions asked</h2>
+  <p>If you change your mind, ask for a refund within 14 days of your purchase and we will refund the full price, including any sales tax you paid.</p>
+
+  <h2>How to ask</h2>
+  <ol>
+    <li>Email <a href={mail}>{SITE.supportEmail}</a> with “Refund request” in the subject.</li>
+    <li>Include your order number, or the email address you used at checkout.</li>
+  </ol>
+  <p>We will confirm by email. The money goes back to your original payment method; your bank may take 5 to 10 business days to show it.</p>
+
+  <h2>What happens to your licence</h2>
+  <p>When we refund an order, its licence key is deactivated. Please uninstall the software from your computers.</p>
+
+  <h2>After 14 days</h2>
+  <p>If something is wrong with the software and we can’t fix it, write to us anyway. We will look at every case fairly, and this policy doesn’t limit any rights you have under consumer protection law where you live.</p>
+
+  <h2>No hidden costs</h2>
+  <p>Prices are shown in US dollars. Sales tax, where it applies, is added at checkout and shown before you pay. There are no subscriptions, renewals or extra fees.</p>
+</LegalPage>

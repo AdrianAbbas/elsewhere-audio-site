@@ -7,6 +7,10 @@ export const SITE = {
   url: 'https://windwardaudio.ca',
   supportEmail: 'general@windwardaudio.ca',
   location: 'Ontario, Canada',
+  // TODO(legal): the business mailing address. Ontario's Consumer Protection Act
+  // asks online sellers to show it before a sale, so fill it in before the store
+  // opens. It appears on the Terms and Support pages once set.
+  mailingAddress: '',
   // TODO(social): replace with real profile URLs (or remove entries we don't use).
   social: [
     { label: 'YouTube', href: '#TODO-youtube' },
@@ -30,7 +34,10 @@ export const NAV = [
 ] as const;
 
 export const LEGAL_NAV = [
-  { label: 'EULA', href: '/legal/eula' },
-  { label: 'Privacy', href: '/legal/privacy' },
   { label: 'Terms', href: '/legal/terms' },
+  { label: 'Privacy', href: '/legal/privacy' },
+  { label: 'Cookies', href: '/legal/cookies' },
+  { label: 'Refunds', href: '/legal/refunds' },
+  { label: 'EULA', href: '/legal/eula' },
+  { label: 'Licences', href: '/legal/licences' },
 ] as const;

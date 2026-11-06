@@ -27,7 +27,7 @@ const year = new Date().getFullYear();
       <div class="site-footer__col">
         <h2 class="site-footer__heading">Instruments</h2>
         <ul role="list">
-          {PRODUCTS.map((p) => <li><a href={`/${p.slug}`}>{p.name}</a></li>)}
+          {PRODUCTS.map((p) => <li><a href={`/${p.slug}`} translate="no">{p.name}</a></li>)}
         </ul>
       </div>
 
@@ -40,19 +40,22 @@ const year = new Date().getFullYear();
       </nav>
 
       <div class="site-footer__col">
-        <h2 class="site-footer__heading">Windward</h2>
-        {/* TODO(social): real profile URLs live in src/config/site.ts */}
+        <h2 class="site-footer__heading">Contact</h2>
+        {/* TODO(social): real profile URLs live in src/config/site.ts; links show once they start with https:// */}
         <ul role="list">
-          {SITE.social.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
+          <li><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></li>
+          <li class="muted">{SITE.location}</li>
+          {SITE.social.filter((s) => s.href.startsWith('https://')).map((s) => <li><a href={s.href}>{s.label}</a></li>)}
         </ul>
       </div>
     </div>
 
     <div class="site-footer__legal">
-      <p>Windward Audio is a business name of {SITE.legalName}</p>
+      <p><span translate="no">Windward Audio</span> is a business name of <span translate="no">{SITE.legalName}</span>, {SITE.location}.</p>
       <p>
         <span>© {year} {SITE.legalName}</span>
         {LEGAL_NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+        {!preview && <button class="motion-toggle" type="button" aria-pressed="false" data-motion-toggle>Pause motion</button>}
       </p>
     </div>
   </div>
@@ -93,5 +96,10 @@ const year = new Date().getFullYear();
   .site-footer__legal p:last-child { display: flex; flex-wrap: wrap; gap: var(--space-m); }
   .site-footer__legal a { color: var(--ink-muted); text-decoration: underline; text-underline-offset: 0.2em; }
   .site-footer__legal a:hover { color: var(--ink); }
+  .motion-toggle {
+    padding: 0; border: 0; background: none; cursor: pointer;
+    color: var(--ink-muted); text-decoration: underline; text-underline-offset: 0.2em;
+  }
+  .motion-toggle:hover { color: var(--ink); }
   .site-footer :global(.ornament) { margin-block: 0 var(--space-xl); }
 </style>

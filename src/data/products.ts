@@ -79,9 +79,9 @@ const liminal: ProductDetail = {
   available: false,
   formats: 'AU / VST3 · macOS',
   tagline: 'Playable instruments inside empty places.',
-  summary: 'Twenty fragile instruments inside ten liminal spaces: a hospital corridor at night, a mall after closing, a pool where the water never moves.',
+  summary: '20 fragile instruments inside ten liminal spaces: a hospital corridor at night, a mall after closing, a pool where the water never moves.',
   card: { image: liminalHospital, alt: 'An empty hospital corridor under fluorescent light, rendered for LIMINAL.' },
-  lede: 'Pick a space, play a fragile piano melody, and hear it become part of the architecture. Twenty instruments, ten empty buildings, and the quiet hum of lights that never switch off.',
+  lede: 'Pick a space, play a fragile piano melody, and hear it become part of the architecture. 20 instruments, ten empty buildings, and the quiet hum of lights that never switch off.',
   facts: [['Places', '10'], ['Instruments', '20'], ['Characters', '30'], ['Presets', '114']],
   intro: {
     title: 'The room is the sound.',
@@ -99,19 +99,19 @@ const liminal: ProductDetail = {
     { image: liminalUi, alt: 'The LIMINAL interface: the hospital scene fills the window, with instrument controls on translucent strips like a camcorder viewfinder.', caption: 'The viewfinder: the place is the interface' },
   ],
   worlds: {
-    title: 'Ten empty buildings.',
+    title: '10 empty buildings.',
     lede: 'Each place reshapes every instrument, has its own room and its own rare sounds, and three Characters that change its light and mood.',
     groups: liminalPlaces.map(([name, chars, detail]) => ({ name, items: [{ name: chars }], note: detail })),
   },
   extra: {
-    title: 'Twenty instruments',
-    lede: 'Six slots, each able to play any of them, with its own effects and room.',
+    title: '20 instruments',
+    lede: '6 slots, each able to play any of them, with its own effects and room.',
     chips: ['Forgotten Piano', 'Faded Synth', 'Glass Memories', 'Empty Choir', 'Lost Music Box', 'Hollow Drone', 'Old Guitar', 'Faded Strings', 'Hallway Pizzicato', 'Toy Piano', 'Lounge E-Piano', 'Elevator Vibraphone', 'Mall Chimes', 'Solo Voice', 'Hummed Memory', 'Cassette Strings', 'Arcade Lead', 'Basement Bass', 'Warped Organ', 'Bowed Glass'],
   },
   features: [
     { title: 'Places with real acoustics', body: 'Each room has its own decay, reflections, damping and width, so the same melody sounds cold in the hospital, cavernous in the mall and close in the hotel.' },
-    { title: 'Thirty Characters', body: 'Three per place, from Sterile Silence to Something Wrong. Each changes the events, the mood and the picture’s colour grade.' },
-    { title: 'Four macros', body: 'Presence, Scale, Activity and Unreal: bring the instruments forward, stretch the room, invite rare events, or let the place come apart in its own way.' },
+    { title: 'Thirty Characters', body: '3 per place, from Sterile Silence to Something Wrong. Each changes the events, the mood and the picture’s colour grade.' },
+    { title: '4 macros', body: 'Presence, Scale, Activity and Unreal: bring the instruments forward, stretch the room, invite rare events, or let the place come apart in its own way.' },
     { title: 'Far Away', body: 'Hear the instruments from elsewhere in the building: over the PA in another wing, or through the wall from the next room.' },
     { title: 'Scenes A and B, and evolution', body: 'Morph between two settings, or let the place drift slowly on its own.' },
     { title: 'The viewfinder', body: 'Photographic scenes fill the window. Their lights flicker with the hum and swell with the notes, with controls on thin strips like an old camcorder.' },
@@ -143,7 +143,7 @@ const dungeon: ProductDetail = {
   available: false,
   formats: 'AU / VST3 · macOS',
   tagline: 'A dark realm under a red moon.',
-  summary: 'Forty places across a painted dark-fantasy map, from the Dungeon’s corridors to the Final Boss Lair. An instrument for every place, and an effect that puts any track there.',
+  summary: '40 places across a painted dark-fantasy map, from the Dungeon’s corridors to the Final Boss Lair. An instrument for every place, and an effect that puts any track there.',
   card: { image: dungeonMap, alt: 'The painted DUNGEON CRAWLER map: a dark realm lit red, with the Dungeon, Castle, Cathedral and other locations.' },
   lede: 'A painted map of a dark realm is the interface. Choose a place and you choose its instrument and its space together: a contrabass pizzicato in the Dungeon’s corridors, church bells in the bell tower, a ghost violin in the graveyard.',
   facts: [['Locations', '10'], ['Places', '40'], ['Instruments', '40'], ['Plug-ins', '2']],
@@ -166,21 +166,21 @@ const dungeon: ProductDetail = {
     { image: dungeonUi, alt: 'The DUNGEON CRAWLER instrument window: a painted castle tower above the instrument panel and an on-screen keyboard.', caption: 'The instrument: Castle · Tower Top, Heroic Horn' },
   ],
   worlds: {
-    title: 'Ten locations, forty places.',
+    title: '10 locations, forty places.',
     lede: 'Each location is a family of instruments; each place inside it has its own.',
     groups: dungeonLocations.map(([name, family, places, instruments]) => ({
       name, note: family, items: places.map((p) => ({ name: p })), footer: instruments,
     })),
   },
   features: [
-    { title: 'An instrument for every place', body: 'Forty instruments with five macros each, the sustain pedal, pitch bend and mod wheel. Choosing a place chooses its instrument; Lock instrument keeps it while you travel.' },
+    { title: 'An instrument for every place', body: '40 instruments with five macros each, the sustain pedal, pitch bend and mod wheel. Choosing a place chooses its instrument; Lock instrument keeps it while you travel.' },
     { title: 'Signature effects', body: 'Every place has one effect no other place uses, from ringing iron bars to a reverse swell in the Graveyard.' },
     { title: 'Smooth travel and journeys', body: 'Move between places instantly, over seconds or in tempo, level-matched and click-free. Journeys follow a route over bars; roaming wanders a location by itself.' },
     { title: 'Atmosphere', body: 'Optional, and off by default: sparse, quiet sounds of the place. Torches, drips, wind, crows, a distant bell, a far-off growl.' },
     { title: 'A painted world', body: 'The map and all forty places are painterly scenes. The view zooms in with parallax, mist drifts, embers rise, windows flicker and the moon’s glow breathes.' },
     { title: 'Presets for both', body: 'Every instrument in its own place, instruments placed somewhere unexpected (church bells in the Crystal Cavern), and journeys for the effect.' },
   ],
-  requirements: [['System', MAC], ['Formats', 'Two plug-ins, each as Audio Unit (AU) and VST3: the instrument and the effect'], ['Hosts', 'Logic Pro and GarageBand (tested), and other AU or VST3 hosts']],
+  requirements: [['System', MAC], ['Formats', '2 plug-ins, each as Audio Unit (AU) and VST3: the instrument and the effect'], ['Hosts', 'Logic Pro and GarageBand (tested), and other AU or VST3 hosts']],
 };
 
 // ── LIGHT SEEKER ──────────────────────────────────────────────────────
@@ -230,7 +230,7 @@ const light: ProductDetail = {
     { image: lightUi, alt: 'The LIGHT SEEKER instrument window: the sunlit map above the instrument panel and an on-screen keyboard.', caption: 'The instrument window' },
   ],
   worlds: {
-    title: `Ten locations, ${lightCount} places.`,
+    title: `10 locations, ${lightCount} places.`,
     lede: 'Each location is a family; each place has an instrument of its own, good dry and in its space.',
     groups: lightLocations.map(([name, family, places]) => ({
       name, note: family, items: places.map(([p, inst]) => ({ name: p, detail: inst })),
@@ -243,7 +243,7 @@ const light: ProductDetail = {
     { title: 'Signature spaces', body: 'Every place transforms the sound in a way no other place does.' },
     { title: 'A painted, sunlit world', body: 'A painterly map you zoom into, location by location, with scenes for every place.' },
   ],
-  requirements: [['System', MAC], ['Formats', 'Two plug-ins, each as Audio Unit (AU) and VST3: the instrument and the effect'], ['Hosts', 'Logic Pro and GarageBand (tested), and other AU or VST3 hosts']],
+  requirements: [['System', MAC], ['Formats', '2 plug-ins, each as Audio Unit (AU) and VST3: the instrument and the effect'], ['Hosts', 'Logic Pro and GarageBand (tested), and other AU or VST3 hosts']],
 };
 
 // ── The line-up ───────────────────────────────────────────────────────
@@ -256,8 +256,8 @@ export const WORLDBUILDER_CARD: Product = {
   status: 'Available now',
   available: true,
   formats: 'AU / VST3 · macOS',
-  tagline: 'Score a place, not a sound.',
-  summary: 'Twenty-six Places, from castles and taverns to spaceports and nebulae, each an ensemble of six instruments that plays in your song’s key and tempo.',
+  tagline: 'A place to score, in your key and tempo.',
+  summary: '26 Places, from castles and taverns to spaceports and nebulae, each an ensemble of six instruments that plays in your song’s key and tempo.',
   card: { image: threshold, alt: '' },
 };
 

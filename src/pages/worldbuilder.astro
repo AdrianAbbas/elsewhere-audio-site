@@ -23,7 +23,7 @@ const wb = STORE.products.worldbuilder;
 const groups = Object.keys(GROUP_LABEL) as Group[];
 const countIn = (g: Group) => PLACES.filter((p) => p.group === g).length;
 
-const description = `WORLDBUILDER scores a place, not a sound: ${PLACE_COUNT} Places, from castles and taverns to spaceports and nebulae, playing in your song's key and tempo. AU and VST3 for macOS.`;
+const description = `WORLDBUILDER: ${PLACE_COUNT} Places to score, from castles and taverns to spaceports and nebulae, playing in your song's key and tempo. AU and VST3 for macOS.`;
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -70,10 +70,10 @@ const schema = {
   <!-- Intro -->
   <section class="wb-intro wrap reveal" aria-labelledby="intro-title">
     <p class="eyebrow">How it works</p>
-    <h2 id="intro-title">Score a place, not a sound.</h2>
+    <h2 id="intro-title">Start with the place.</h2>
     {/* TODO(copy): intro */}
     <div class="wb-intro__text">
-      <p>Most instruments give you sounds and leave the scene to you. WORLDBUILDER starts with the scene. Choose a castle, a forge, a city at night or a nebula, and it plays music that belongs there: tonal, rhythmic and in your song’s key and tempo, over a living environment of wind, water, fire, ice and thunder.</p>
+      <p>Choose a castle, a forge, a city at night or a nebula, and it plays music that belongs there: tonal, rhythmic and in your song’s key and tempo, over a living environment of wind, water, fire, ice and thunder.</p>
       <p>Play up to four Places at once, shape them with one Score Intensity dial, and arrange the result into a cue you can export for picture or for a game.</p>
     </div>
     <dl class="wb-facts">
@@ -125,7 +125,7 @@ const schema = {
     </div>
     <ul class="wb-feature-grid" role="list">
       {FEATURES.map((f) => (
-        <li class="feature px-corners">
+        <li class="feature">
           <h3>{f.title}</h3>
           <p>{f.body}</p>
           <ul class="feature__points" role="list">{f.points.map((pt) => <li>{pt}</li>)}</ul>
@@ -165,8 +165,9 @@ const schema = {
       <div class="wb-plans">
         <article class="plan plan--full px-corners">
           <h3>WORLDBUILDER</h3>
-          <p class="plan__price"><span>{formatPrice(wb.introPrice)}</span> <s aria-label={`was ${formatPrice(wb.price)}`}>{formatPrice(wb.price)}</s></p>
-          <p class="plan__note">Introductory price</p>
+          <p class="plan__price"><span>{formatPrice(wb.introPrice)}</span></p>
+          {/* TODO(price): the date the introductory price ends */}
+          <p class="plan__note">Introductory price. The regular price will be {formatPrice(wb.price)}.</p>
           <ul role="list">{FULL_INCLUDES.map((x) => <li>{x}</li>)}</ul>
           <div class="plan__ctas"><BuyButton showPrice={false} /><AddToCartButton /></div>
         </article>
@@ -178,7 +179,7 @@ const schema = {
           <div class="plan__ctas"><DownloadLiteButton /></div>
         </article>
       </div>
-      <p class="wb-note">Prices in US dollars. Taxes may apply at checkout.</p>
+      <p class="wb-note">Prices in US dollars. Sales tax, where it applies, is shown before you pay. No subscription. See the <a href="/legal/refunds">refund policy</a>.</p>
     </div>
   </section>
 
@@ -296,13 +297,16 @@ const schema = {
 
   /* ── Features ─────────────────────────────────────────────────────── */
   .wb-features { padding-block: var(--space-2xl); }
-  .wb-feature-grid { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr)); }
-  /* Nine features fill a 3-column grid exactly. */
-  @media (min-width: 64rem) { .wb-feature-grid { grid-template-columns: repeat(3, 1fr); } }
-  .feature { display: grid; gap: var(--space-xs); align-content: start; padding: var(--space-l) var(--space-m); border: 1px solid var(--line); }
+  /* One feature per row: its name on the left, what it does on the right. */
+  .wb-feature-grid { list-style: none; padding: 0; margin: 0; display: grid; border-top: 1px solid var(--line); }
+  .feature { display: grid; gap: var(--space-xs) var(--space-xl); padding-block: var(--space-l); border-bottom: 1px solid var(--line); }
+  @media (min-width: 48rem) {
+    .feature { grid-template-columns: minmax(12rem, 1fr) 2fr; }
+    .feature h3 { grid-row: span 2; }
+  }
   .feature h3 { font-size: var(--step-2); }
-  .feature p { color: var(--ink-muted); font-size: var(--step--1); }
-  .feature__points { list-style: none; padding: 0; margin: var(--space-2xs) 0 0; display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
+  .feature p { color: var(--ink-muted); max-width: 62ch; }
+  .feature__points { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
   .feature__points li { font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25em 0.6em; border: 1px solid var(--line-strong); color: var(--ink); }
 
   /* ── Screenshots ──────────────────────────────────────────────────── */
@@ -328,7 +332,6 @@ const schema = {
   .plan h3 { font-size: var(--step-1); letter-spacing: 0.02em; }
   .plan__price { display: flex; align-items: baseline; gap: 0.5em; }
   .plan__price span { font-family: var(--font-display); font-size: var(--step-4); font-weight: 300; line-height: 1; }
-  .plan__price s { color: var(--ink-muted); }
   .plan__note { font-size: var(--step--1); color: var(--accent-text); }
   .plan ul { list-style: none; padding: 0; margin: var(--space-xs) 0; display: grid; gap: var(--space-2xs); font-size: var(--step--1); }
   .plan li { display: flex; gap: 0.7em; }
