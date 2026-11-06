@@ -1,12 +1,11 @@
 ---
 // All products, in the house realm. WORLDBUILDER now; the next worlds stay
 // unnamed until they are announced.
-import { Picture } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProductCard from '../components/ProductCard.astro';
 import { UPCOMING } from '../data/products';
 import BuyButton from '../components/store/BuyButton.astro';
-import keyArt from '../assets/art/threshold.webp';
+import shotWorld from '../assets/screens/worldbuilder-world-1x.webp';
 import { STORE, formatPrice } from '../config/store';
 import { PLACE_COUNT } from '../data/worldbuilder';
 
@@ -28,8 +27,8 @@ const wb = STORE.products.worldbuilder;
     <h2 id="available-title" class="section-label">Available now</h2>
     <article class="product">
       <a class="product__media" href="/worldbuilder" tabindex="-1" aria-hidden="true" data-vt="product-worldbuilder" data-vt-href="/worldbuilder">
-        {/* TODO(images): WORLDBUILDER key art (the painted horizon stands in). */}
-        <Picture src={keyArt} formats={['avif', 'webp']} fallbackFormat="webp" widths={[640, 960, 1280]} sizes="(min-width: 64rem) 55vw, 100vw" alt="" loading="eager" />
+        {/* The instrument's own window (native pixels, scaled up crisply). */}
+        <img src={shotWorld.src} width={shotWorld.width} height={shotWorld.height} alt="" loading="eager" decoding="async" />
       </a>
       <div class="product__body">
         <p class="product__meta">Instrument 01 · AU / VST3 · macOS</p>
@@ -70,7 +69,7 @@ const wb = STORE.products.worldbuilder;
     background: var(--surface); border: 1px solid var(--line);
   }
   .product__media { display: block; min-height: 18rem; overflow: hidden; background: #0b0c18; }
-  .product__media :global(picture), .product__media :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
+  .product__media :global(picture), .product__media :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; image-rendering: pixelated; }
   .product__body { display: grid; gap: var(--space-s); align-content: center; padding: var(--space-xl) clamp(1.25rem, 3vw, var(--space-xl)); min-width: 0; }
   .product__meta { font-size: var(--step--2); letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-text); }
   .product__name { font-size: min(var(--step-4), 9vw); letter-spacing: 0.03em; }

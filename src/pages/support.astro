@@ -86,7 +86,7 @@ const sections = [
       <h2 id="contact-title">Contact</h2>
       <p>Email us at</p>
       {/* TODO(email): the real support address, set in src/config/site.ts */}
-      <p class="contact__email"><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></p>
+      <p class="contact__email"><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail.split('@')[0]}@<wbr />{SITE.supportEmail.split('@')[1]}</a></p>
       <p class="muted">Please include your Mac model, macOS version, your DAW and its version, and what happened. A screenshot helps.</p>
       <h3 class="contact__sub">Business details</h3>
       <p class="muted">{SITE.name} is a business name of {SITE.legalName}, {SITE.location}.{SITE.mailingAddress && <><br />{SITE.mailingAddress}</>}</p>
@@ -120,6 +120,6 @@ const sections = [
   @media (min-width: 64rem) { .contact { position: sticky; top: var(--space-l); } }
   .contact h2 { font-size: var(--step-2); }
   .contact__sub { font-family: var(--font-body); font-size: var(--step--1); font-weight: 600; margin-top: var(--space-xs); }
-  .contact__email { font-family: var(--font-display); font-size: var(--step-1); overflow-wrap: anywhere; }
+  .contact__email { font-family: var(--font-display); font-size: var(--step-1); }
   .contact p.muted { font-size: var(--step--1); }
 </style>

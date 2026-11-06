@@ -4,7 +4,7 @@
 import type { ImageMetadata } from 'astro';
 import type { Realm } from '../config/site';
 
-import threshold from '../assets/art/threshold.webp';
+import worldShot from '../assets/screens/worldbuilder-world-1x.webp';
 import liminalHospital from '../assets/products/liminal-hospital.webp';
 import liminalPool from '../assets/products/liminal-pool.webp';
 import liminalMall from '../assets/products/liminal-mall.webp';
@@ -38,7 +38,8 @@ export interface Product {
   formats: string;
   tagline: string;
   summary: string;
-  card: { image: ImageMetadata; alt: string };
+  /** pixel: the image is pixel art at native size; shown as is and scaled up crisply. */
+  card: { image: ImageMetadata; alt: string; pixel?: boolean };
 }
 
 export interface ProductDetail extends Product {
@@ -258,7 +259,7 @@ export const WORLDBUILDER_CARD: Product = {
   formats: 'AU / VST3 · macOS',
   tagline: 'A place to score, in your key and tempo.',
   summary: '26 Places, from castles and taverns to spaceports and nebulae, each an ensemble of six instruments that plays in your song’s key and tempo.',
-  card: { image: threshold, alt: '' },
+  card: { image: worldShot, alt: 'The WORLDBUILDER window: world controls, the Living Globe and the active Places.', pixel: true },
 };
 
 export const UPCOMING: ProductDetail[] = [liminal, dungeon, light];
