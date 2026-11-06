@@ -1,13 +1,11 @@
 // Site-wide settings. Every TODO here is listed in TODO.md.
 
 export const SITE = {
-  name: 'Elsewhere Audio',
-  legalName: 'LJP Records Inc.',
+  name: 'Windward Audio',
+  legalName: 'LJP RECORDS INC.',
   tagline: "Instruments for places that don't exist.",
-  // TODO(domain): replace with the real production domain before launch.
-  url: 'https://elsewhere-audio.example',
-  // TODO(email): replace once the domain and mailbox exist.
-  supportEmail: 'support@[domain]',
+  url: 'https://windwardaudio.ca',
+  supportEmail: 'general@windwardaudio.ca',
   location: 'Ontario, Canada',
   // TODO(social): replace with real profile URLs (or remove entries we don't use).
   social: [

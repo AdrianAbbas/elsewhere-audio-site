@@ -1,5 +1,5 @@
 ---
-// The Elsewhere Audio logo, linking home. The horizontal lockup by default;
+// The Windward Audio logo, linking home. The horizontal lockup by default;
 // in a tight container (the phone nav) the small mark beside the wordmark.
 // Files come from public/brand/ (see its README); `tone` picks the version
 // for a light or dark background.
@@ -15,12 +15,12 @@ interface Props {
 }
 const { href = '/', size = 'md', tone = 'dark', compact = size === 'md' } = Astro.props;
 ---
-<a class:list={['logo', `logo--${size}`, { 'logo--compactable': compact }]} href={href} aria-label="Elsewhere Audio, home">
-  <img class="logo__full" src={`/brand/lockup/elsewhere-horizontal-for-${tone}.svg`} width="872" height="300" alt="Elsewhere Audio" loading="eager" decoding="async" />
+<a class:list={['logo', `logo--${size}`, { 'logo--compactable': compact }]} href={href} aria-label="Windward Audio, home">
+  <img class="logo__full" src={`/brand/lockup/windward-horizontal-for-${tone}.svg`} width="864" height="300" alt="Windward Audio" loading="eager" decoding="async" />
   {compact && (
     <span class="logo__compact">
       <LogoMark size={32} tone={tone} class="logo__mark" />
-      <img class="logo__name" src={`/brand/lockup/elsewhere-wordmark-for-${tone}.svg`} width="513" height="190" alt="Elsewhere Audio" loading="eager" decoding="async" />
+      <img class="logo__name" src={`/brand/lockup/windward-wordmark-for-${tone}.svg`} width="505" height="190" alt="Windward Audio" loading="eager" decoding="async" />
     </span>
   )}
 </a>

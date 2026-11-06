@@ -16,7 +16,7 @@ const H = 630;
 const INK = '#120E24'; // --brand-ink
 const TAGLINE = 'Instruments for places that don’t exist';
 const TAGLINE_COLOUR = '#A79FC4';
-const LOGO = 'public/brand/lockup/elsewhere-stacked-for-dark.svg';
+const LOGO = 'public/brand/lockup/windward-stacked-for-dark.svg';
 const OUT = 'public/og/default.jpg';
 
 // Layout: logo and tagline centred as one group, with generous margins.

@@ -1,6 +1,6 @@
 # elsewhere-audio-site
 
-The website for **Elsewhere Audio** (a business name of LJP Records Inc., Ontario, Canada).
+The website for **Windward Audio** (a business name of LJP Records Inc., Ontario, Canada).
 *Instruments for places that don't exist.*
 
 Built with [Astro](https://astro.build) as a fully static site, using plain CSS with custom properties and very little client-side JavaScript. It deploys to Cloudflare Pages.
