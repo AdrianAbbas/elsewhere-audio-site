@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api -X PUT repos/AdrianAbbas/windward-audio-site/pulls/*/merge)",
+      "Bash(gh api -X PUT repos/AdrianAbbas/windward-audio-site/pulls/*/merge *)",
+      "Bash(gh pr merge * --repo AdrianAbbas/windward-audio-site)",
+      "Bash(gh pr merge * --repo AdrianAbbas/windward-audio-site *)"
+    ]
+  }
+}
