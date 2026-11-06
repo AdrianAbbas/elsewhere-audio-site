@@ -15,9 +15,9 @@ const { preview = false, id = 'main', tone = 'dark' } = Astro.props;
 const Tag = preview ? 'div' : 'footer';
 const year = new Date().getFullYear();
 ---
-<Tag class="site-footer">
+<Tag class="site-footer" data-realm="house">
   <div class="wrap-wide">
-    <Ornament label="Windward · Ontario" />
+    <Ornament label="Windward · Ontario" house />
     <div class="site-footer__grid">
       <div class="site-footer__brand stack">
         <Logo size="sm" tone={tone} compact={false} />

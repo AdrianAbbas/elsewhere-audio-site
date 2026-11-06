@@ -1,0 +1,230 @@
+/*
+  Motion: page transitions, scroll reveals, hover touches and the ambient
+  layers behind each page. CSS first; src/scripts/motion.ts only marks
+  reveals as done and pauses animations that can't be seen.
+
+  Rules: animate transform and opacity only, and nothing moves under
+  prefers-reduced-motion.
+*/
+
+/* ── Page transitions (cross-document View Transitions) ───────────────
+   Browsers without support simply navigate. The nav and logo carry
+   view-transition-names (SiteNav), so they hold still while the content
+   cross-fades; product art morphs into its page's hero (product-<slug>). */
+@view-transition { navigation: auto; }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 250ms;
+  animation-timing-function: ease;
+}
+::view-transition-group(*) {
+  animation-duration: 320ms;
+  animation-timing-function: var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
+}
+
+/* ── Scroll reveals: fade up 12 px, once ──────────────────────────────
+   With scroll-driven animations the reveal follows the scroll for its
+   first 160 px; motion.ts then marks the section .is-revealed (when it is
+   170 px in), which drops the animation so it never plays again.
+   Without them, motion.ts does the same with a short transition. */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal:not(.is-revealed) {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0px entry 160px;
+    }
+  }
+  @supports not (animation-timeline: view()) {
+    .js .reveal { transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
+    .js .reveal:not(.is-revealed) { opacity: 0; transform: translateY(12px); }
+  }
+}
+
+/* ── Hover touches: cards lift, buttons glow ─────────────────────────── */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card, .pcard, .place, .feature, .plan, .pp-edition, .pp-world, .product {
+    transition: transform 350ms var(--ease-out);
+  }
+  .card:hover, .pcard:hover, .place:hover, .feature:hover, .plan:hover,
+  .pp-edition:hover, .pp-world:hover, .product:hover {
+    transform: translateY(-3px);
+  }
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: 0 0 22px 0 color-mix(in srgb, var(--primary) 50%, transparent);
+    opacity: 0;
+    transition: opacity 300ms var(--ease-out);
+  }
+  .btn:hover::after, .btn:focus-visible::after { opacity: 1; }
+}
+
+/* ── Ambient layers ───────────────────────────────────────────────────
+   Three empty layers fixed behind the page (BaseLayout: .ambient > i×3),
+   drawn with gradients and moved with transform/opacity only. Each realm
+   decides what they are; any other realm leaves them empty. */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+.ambient i { position: absolute; inset: 0; display: block; }
+
+/* House (main pages): two drifting star fields and a slow ember glow */
+[data-realm='house'] > .ambient i:nth-child(1) {
+  top: -300px;
+  background:
+    radial-gradient(circle at 37px 61px, rgb(242 232 213 / 0.5) 0 0.7px, transparent 1.2px),
+    radial-gradient(circle at 211px 143px, rgb(242 232 213 / 0.35) 0 0.6px, transparent 1.1px),
+    radial-gradient(circle at 129px 251px, rgb(167 159 196 / 0.45) 0 0.7px, transparent 1.2px);
+  background-size: 300px 300px;
+  --drift: 300px;
+  animation: drift 200s linear infinite;
+}
+[data-realm='house'] > .ambient i:nth-child(2) {
+  top: -420px;
+  background:
+    radial-gradient(circle at 97px 83px, rgb(224 168 72 / 0.55) 0 0.9px, transparent 1.6px),
+    radial-gradient(circle at 331px 297px, rgb(79 209 197 / 0.4) 0 0.8px, transparent 1.4px);
+  background-size: 420px 420px;
+  --drift: 420px;
+  animation: drift 300s linear infinite, breathe 9s ease-in-out infinite alternate;
+}
+[data-realm='house'] > .ambient i:nth-child(3) {
+  background:
+    radial-gradient(ellipse 55% 40% at 12% 100%, rgb(242 140 56 / 0.1), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 92% 4%, rgb(224 168 72 / 0.05), transparent 70%);
+  animation: breathe 16s ease-in-out infinite alternate;
+}
+
+/* WORLDBUILDER (scifi): faint scanlines and twinkling pixel stars */
+[data-realm='scifi'] > .ambient i:nth-child(1) {
+  background: repeating-linear-gradient(0deg, rgb(160 180 255 / 0.035) 0 1px, transparent 1px 3px);
+}
+[data-realm='scifi'] > .ambient i:nth-child(2),
+[data-realm='scifi'] > .ambient i:nth-child(3) {
+  background:
+    radial-gradient(circle at 41px 67px, rgb(200 240 255 / 0.8) 0 1px, transparent 1.1px),
+    radial-gradient(circle at 173px 29px, rgb(167 157 255 / 0.7) 0 1px, transparent 1.1px),
+    radial-gradient(circle at 109px 191px, rgb(111 227 214 / 0.7) 0 1px, transparent 1.1px);
+  background-size: 240px 240px;
+  animation: twinkle 3.2s steps(2, jump-none) infinite alternate;
+}
+[data-realm='scifi'] > .ambient i:nth-child(3) {
+  background-size: 370px 370px;
+  background-position: 120px 80px;
+  animation-duration: 4.4s;
+  animation-delay: -1.7s;
+}
+
+/* LIMINAL: slow drifting fog and an occasional fluorescent flicker */
+[data-realm='liminal'] > .ambient i:nth-child(1),
+[data-realm='liminal'] > .ambient i:nth-child(2) {
+  inset: 0 -20%;
+  background:
+    radial-gradient(ellipse 35% 28% at 25% 62%, rgb(255 255 255 / 0.4), transparent 70%),
+    radial-gradient(ellipse 30% 22% at 72% 38%, rgb(226 244 236 / 0.35), transparent 70%);
+  animation: fog 46s ease-in-out infinite alternate;
+}
+[data-realm='liminal'] > .ambient i:nth-child(2) {
+  background:
+    radial-gradient(ellipse 28% 24% at 55% 80%, rgb(255 255 255 / 0.3), transparent 70%),
+    radial-gradient(ellipse 32% 20% at 12% 25%, rgb(226 244 236 / 0.3), transparent 70%);
+  animation-duration: 63s;
+  animation-direction: alternate-reverse;
+}
+[data-realm='liminal'] > .ambient i:nth-child(3) {
+  background: rgb(240 255 248 / 0.6);
+  opacity: 0;
+  animation: flicker 11s linear infinite;
+}
+
+/* DUNGEON CRAWLER: torch-flicker on the glow and a few rising embers */
+[data-realm='dungeon'] > .ambient i:nth-child(1) {
+  background:
+    radial-gradient(ellipse 45% 35% at 82% 0%, rgb(220 50 30 / 0.2), transparent 70%),
+    radial-gradient(ellipse 50% 35% at 8% 100%, rgb(240 120 40 / 0.1), transparent 70%);
+  animation: torch 2.8s ease-in-out infinite;
+}
+[data-realm='dungeon'] > .ambient i:nth-child(2),
+[data-realm='dungeon'] > .ambient i:nth-child(3) {
+  bottom: -260px;
+  background:
+    radial-gradient(circle at 53px 211px, rgb(255 140 60 / 0.75) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 187px 97px, rgb(255 90 40 / 0.6) 0 0.8px, transparent 1.4px);
+  background-size: 260px 260px;
+  --drift: -260px;
+  animation: drift 24s linear infinite;
+}
+[data-realm='dungeon'] > .ambient i:nth-child(3) {
+  bottom: -340px;
+  background-size: 340px 340px;
+  background-position: 90px 0;
+  --drift: -340px;
+  animation-duration: 37s;
+  opacity: 0.7;
+}
+
+/* LIGHT SEEKER: slow light rays and floating dust motes */
+[data-realm='radiant'] > .ambient i:nth-child(1) {
+  inset: -20%;
+  background: repeating-conic-gradient(from 195deg at 20% 0%, rgb(255 236 190 / 0.16) 0 2.5deg, transparent 2.5deg 9deg);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 20% 0%, #000, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 60% at 20% 0%, #000, transparent 75%);
+  transform-origin: 20% 0%;
+  animation: rays 34s ease-in-out infinite alternate;
+}
+[data-realm='radiant'] > .ambient i:nth-child(2),
+[data-realm='radiant'] > .ambient i:nth-child(3) {
+  bottom: -220px;
+  background:
+    radial-gradient(circle at 61px 47px, rgb(217 166 58 / 0.55) 0 1.1px, transparent 1.8px),
+    radial-gradient(circle at 163px 151px, rgb(255 248 230 / 0.8) 0 0.9px, transparent 1.5px);
+  background-size: 220px 220px;
+  --drift: -220px;
+  animation: drift 70s linear infinite;
+}
+[data-realm='radiant'] > .ambient i:nth-child(3) {
+  bottom: -310px;
+  background-size: 310px 310px;
+  background-position: 140px 60px;
+  --drift: -310px;
+  animation: drift 105s linear infinite, breathe 8s ease-in-out infinite alternate;
+}
+
+@keyframes drift { to { transform: translate3d(0, var(--drift, 300px), 0); } }
+@keyframes breathe { from { opacity: 0.55; } to { opacity: 1; } }
+@keyframes twinkle { from { opacity: 0.3; } to { opacity: 0.9; } }
+@keyframes fog { from { transform: translate3d(-6%, 0, 0); } to { transform: translate3d(6%, 0, 0); } }
+@keyframes torch { 0%, 100% { opacity: 1; } 22% { opacity: 0.82; } 40% { opacity: 0.95; } 63% { opacity: 0.76; } 80% { opacity: 0.9; } }
+@keyframes rays { from { transform: rotate(-2deg); } to { transform: rotate(2.5deg); } }
+/* A tiny, rare flicker: low contrast and well under three flashes a second. */
+@keyframes flicker { 0%, 90%, 100% { opacity: 0; } 91% { opacity: 0.05; } 92% { opacity: 0.01; } 93.5% { opacity: 0.06; } 95% { opacity: 0; } }
+
+/* Pause what can't be seen: a hidden tab, or a [data-ambient] element offscreen. */
+:root[data-hidden] .ambient i,
+:root[data-hidden] [data-ambient] *,
+[data-ambient][data-offscreen] * { animation-play-state: paused !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient i { animation: none !important; }
+}

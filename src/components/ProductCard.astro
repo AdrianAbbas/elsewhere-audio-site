@@ -1,7 +1,7 @@
 ---
-// A product in the line-up. The card wears its product's own realm, so a
-// LIMINAL card stays fluorescent and a DUNGEON CRAWLER card stays red-moonlit
-// wherever it appears.
+// A product in the line-up, in the style of the page it sits on. Following
+// the card morphs its art into the product page's hero: motion.ts names the
+// art (data-vt) at the moment of navigation, so only that card morphs.
 import { Picture } from 'astro:assets';
 import type { Product } from '../data/products';
 
@@ -9,8 +9,8 @@ interface Props { product: Product; headingLevel?: 2 | 3; eager?: boolean }
 const { product: p, headingLevel = 3, eager = false } = Astro.props;
 const H = `h${headingLevel}` as 'h2' | 'h3';
 ---
-<article class="pcard" data-realm={p.realm}>
-  <div class="pcard__media">
+<article class="pcard">
+  <div class="pcard__media" data-vt={`product-${p.slug}`} data-vt-href={`/${p.slug}`}>
     <Picture src={p.card.image} formats={['avif', 'webp']} fallbackFormat="webp" widths={[480, 720, 960]} sizes="(min-width: 70rem) 30vw, (min-width: 40rem) 50vw, 100vw" alt={p.card.alt} loading={eager ? 'eager' : 'lazy'} />
   </div>
   <div class="pcard__body">
@@ -36,7 +36,6 @@ const H = `h${headingLevel}` as 'h2' | 'h3';
   .pcard:has(a:focus-visible) { outline: 2px solid var(--focus); outline-offset: 3px; }
   .pcard__name a:focus-visible { outline: none; }
   .pcard__tagline { font-family: var(--font-display); font-style: italic; color: var(--ink); }
-  :global([data-realm='liminal']).pcard .pcard__tagline { font-style: normal; }
   .pcard__summary { font-size: var(--step--1); color: var(--ink-muted); }
   .pcard__status { margin-top: auto; padding-top: var(--space-xs); font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); }
   .pcard__status--live { color: var(--accent-text); }
