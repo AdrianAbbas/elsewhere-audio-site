@@ -4,6 +4,9 @@ import ThresholdHero from '../components/art/ThresholdHero.astro';
 import Ornament from '../components/Ornament.astro';
 import AudioPlayer from '../components/AudioPlayer.astro';
 import ScreenshotFrame from '../components/ScreenshotFrame.astro';
+// The capture at its native pixel size (the plugin draws at 2x), as lossless WebP
+// (31 KB, smaller than any lossy encode). Served as is; CSS scales it up crisply.
+import worldShot from '../assets/screens/worldbuilder-world-1x.webp';
 import ProductCard from '../components/ProductCard.astro';
 import { UPCOMING } from '../data/products';
 import SignupForm from '../components/SignupForm.astro';
@@ -34,7 +37,7 @@ const schema = {
     <p class="eyebrow">Windward Audio</p>
     <h1 class="hero-line">Instruments for <em>places that don’t exist.</em></h1>
     {/* TODO(copy): hero sub-line */}
-    <p class="hero-sub">Instruments for film, TV and game composers. Each one is a doorway to somewhere else.</p>
+    <p class="hero-sub">Instrument plugins for film, TV and game composers. AU and VST3 for&nbsp;macOS.</p>
     <div class="hero-ctas">
       <a class="btn btn--primary" href="/worldbuilder">Enter WORLDBUILDER</a>
       <a class="btn" href="/worldbuilder#places">Hear the places</a>
@@ -44,7 +47,7 @@ const schema = {
   <!-- Intro -->
   <section class="intro wrap reveal" aria-labelledby="intro-title">
     <p class="eyebrow">A small workshop</p>
-    <h2 id="intro-title">We don’t make sounds. We make places.</h2>
+    <h2 id="intro-title">Music for the places in your story.</h2>
     {/* TODO(copy): intro paragraphs */}
     <div class="intro__text">
       <p>A castle hall at the end of a long war. A tavern where the fire never quite goes out. A spaceport that hums at 3&nbsp;a.m. Every Windward instrument starts with a place like that, and everything in it is there to help you score it.</p>
@@ -56,14 +59,14 @@ const schema = {
   <!-- Featured: WORLDBUILDER -->
   <section class="featured wrap-wide reveal" aria-labelledby="wb-title">
     <div class="featured__visual">
-      <ScreenshotFrame />
+      <ScreenshotFrame><img class="featured__shot" src={worldShot.src} width={worldShot.width} height={worldShot.height} loading="lazy" decoding="async" alt="The WORLDBUILDER window: world controls on the left, the Living Globe with a castle and village on a tiny planet in the middle, the active Places on the right." /></ScreenshotFrame>
     </div>
     <div class="featured__text">
       <p class="eyebrow">Our first world</p>
       <h2 id="wb-title" class="featured__name">WORLDBUILDER</h2>
-      <p class="lede">Score a place, not a sound.</p>
+      <p class="lede">A place to score, in your key and tempo.</p>
       {/* TODO(copy): WORLDBUILDER summary */}
-      <p>Twenty-six Places, from castles and taverns to spaceports and nebulae, each a complete musical setting in your song’s key and tempo. Write patterns, arrange them on a timeline, and export seamless loops, stems and stingers ready for your game or picture.</p>
+      <p>26 Places, from castles and taverns to spaceports and nebulae, each a complete musical setting in your song’s key and tempo. Write patterns, arrange them on a timeline, and export seamless loops, stems and stingers ready for your game or picture.</p>
       <ul class="featured__points" role="list">
         <li>26 Places, each with six instruments and three Characters</li>
         <li>Pattern editor, arrangement timeline and auto-arrange</li>
@@ -78,8 +81,8 @@ const schema = {
       <p class="featured__price">
         {/* TODO(price): confirm prices in src/config/store.ts */}
         <span>{formatPrice(wb.introPrice)} introductory price</span>
-        <span class="muted">(then {formatPrice(wb.price)})</span>
-        <span class="muted">· free Lite version available</span>
+        <span class="muted">(regular price {formatPrice(wb.price)}, in US dollars)</span>
+        <span class="muted">· free Lite version</span>
       </p>
       <div class="featured__ctas">
         <a class="btn btn--primary" href="/worldbuilder">Discover WORLDBUILDER</a>
@@ -97,7 +100,7 @@ const schema = {
       <p class="muted">An empty building at night, a dark realm under a red moon, and its sunlit twin. Each is a world of its own, in the workshop now.</p>
     </div>
     <div class="coming__grid">
-      {UPCOMING.map((p) => <ProductCard product={p} />)}
+      {UPCOMING.map((p) => <ProductCard product={p} row />)}
     </div>
   </section>
 
@@ -123,6 +126,7 @@ const schema = {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
     padding-block: var(--space-2xl);
   }
+  .featured__visual :global(.featured__shot), .featured__visual :global(img) { image-rendering: pixelated; }
   .featured__text { display: grid; gap: var(--space-s); max-width: 36rem; }
   .featured__name { font-size: var(--step-5); letter-spacing: 0.03em; }
   .featured__text .lede { font-family: var(--font-display); font-style: italic; color: var(--ink); }
@@ -137,13 +141,18 @@ const schema = {
 
   .coming { padding-block: var(--space-3xl) var(--space-2xl); }
   .coming__head { display: grid; gap: var(--space-xs); max-width: 40rem; margin-bottom: var(--space-xl); }
-  .coming__grid { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+  /* One instrument per row, art beside its words. */
+  .coming__grid { display: grid; gap: var(--space-l); }
+  @media (min-width: 48rem) {
+    .coming__grid :global(.pcard) { flex-direction: row; }
+    .coming__grid :global(.pcard__media) { flex: 0 0 46%; }
+    .coming__grid :global(.pcard__body) { align-content: center; padding: var(--space-l) var(--space-xl); }
+  }
 
   .signup-section {
     margin-block: var(--space-xl) var(--space-3xl);
     padding: var(--space-xl) clamp(1.25rem, 4vw, 3rem);
     border: 1px solid var(--line); border-radius: 2px;
-    background: radial-gradient(ellipse 60% 120% at 0% 0%, rgb(227 181 102 / 0.08), transparent 60%),
-      radial-gradient(ellipse 60% 120% at 100% 100%, rgb(111 214 203 / 0.07), transparent 60%), var(--surface);
+    background: var(--surface);
   }
 </style>

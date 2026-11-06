@@ -1,27 +1,64 @@
 ---
 import LegalPage from '../../components/LegalPage.astro';
 import { SITE } from '../../config/site';
-// TODO(legal): replace with the real privacy policy. The draft below describes
-// how the site is built today; update it when analytics, the newsletter and
-// Moonbase are connected.
+// TODO(legal): have a lawyer review this draft before launch. It describes how
+// the site is built today; update it when analytics, the newsletter provider
+// and Moonbase are connected (each has a TODO below).
+const mail = `mailto:${SITE.supportEmail}?subject=Privacy%20request`;
 ---
-<LegalPage title="Privacy Policy" description="How Windward Audio handles personal information. Draft placeholder.">
-  <p>[DRAFT – to be replaced] This policy explains what personal information {SITE.legalName} (doing business as {SITE.name}) collects, why, and what you can do about it.</p>
-  <h2>What this website collects</h2>
+<LegalPage title="Privacy Policy" description="What personal information Windward Audio collects, why, how long it is kept, and how to see, correct or delete it.">
+  <p>This policy explains what personal information {SITE.legalName}, doing business as {SITE.name} (“we”, “us”), collects through this website and our store, why we collect it, and what you can do about it. We follow Canada’s Personal Information Protection and Electronic Documents Act (PIPEDA), and we give the same rights to everyone, wherever you live.</p>
+
+  <h2>The short version</h2>
   <ul>
-    <li>No cookies and no third-party trackers or advertising.</li>
-    <li>[Placeholder: privacy-friendly, cookieless analytics, once chosen. Name the provider here.]</li>
-    <li>Our host, Cloudflare, keeps standard technical logs (such as IP addresses) to run and protect the site. [Placeholder: link to Cloudflare’s policy.]</li>
-    <li>Trailers load from YouTube’s privacy-enhanced service only after you press play.</li>
+    <li>This website sets no cookies and runs no trackers, advertising or analytics.</li>
+    <li>We only ask for what we need: an email address to send news, and the details needed to sell you a licence.</li>
+    <li>We never sell or rent personal information.</li>
+    <li>You can ask to see, correct or delete your information at any time.</li>
   </ul>
-  <h2>Newsletter</h2>
-  <p>[Placeholder: if you sign up, we keep your email address to send you news, using (provider). You can unsubscribe at any time.]</p>
-  <h2>Purchases and accounts</h2>
-  <p>[Placeholder: payments, licence keys, downloads and customer accounts are handled by Moonbase. Describe what Moonbase and its payment processor collect and link to their policies.]</p>
-  <h2>Support email</h2>
-  <p>[Placeholder: when you write to us, we keep your message and email address to help you.]</p>
+
+  <h2>What we collect, and why</h2>
+  <h3>When you browse this website</h3>
+  <p>The site is hosted by Cloudflare. To deliver pages and protect the site from abuse, Cloudflare processes technical data such as your IP address, browser type and the pages requested, and keeps it in short-lived logs. We don’t use this data to identify you. See <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare’s privacy policy</a>.</p>
+  <p>If you press “Pause motion”, your browser remembers that choice in its local storage. It stays on your device and is never sent to us.</p>
+  {/* TODO(analytics): if a cookieless analytics service is added, name it here and say what it measures. */}
+
+  <h3>When you play a trailer</h3>
+  <p>Trailers come from YouTube’s privacy-enhanced service (youtube-nocookie.com), and nothing loads from YouTube until you press play. Once you do, Google receives data about that visit. See <a href="https://policies.google.com/privacy">Google’s privacy policy</a>.</p>
+
+  <h3>When you sign up for news</h3>
+  <p>We collect your email address, with your consent, to tell you about new instruments and updates. Every email has an unsubscribe link, and you can also withdraw consent by writing to us. We keep your address until you unsubscribe.</p>
+  {/* TODO(signup): name the newsletter provider, where it stores data, and link its policy. Sign-up is not connected yet, so nothing is collected today. */}
+
+  <h3>When you buy, download Lite or use your account</h3>
+  <p>Checkout, licence keys, downloads and customer accounts are handled by our store provider, Moonbase, and its payment processor. They collect your name, email address, billing country and payment details to complete the sale, prevent fraud and meet tax rules. We receive your name, email address, order details and licence status, but never your full card number. We keep order records for as long as the law requires for tax and accounting (in Canada, generally six years).</p>
+  {/* TODO(moonbase): confirm what Moonbase collects, whether it is merchant of record, and link its privacy policy here before the store opens. */}
+
+  <h3>When you write to us</h3>
+  <p>We keep your message and email address so we can help you, and we delete support conversations once they are no longer needed, normally within two years.</p>
+
+  <h2>Who we share it with</h2>
+  <p>Only with the service providers named above (Cloudflare, Moonbase and its payment processor, and our email provider) so that they can do their jobs for us, or where the law requires it. Some of them store data outside Canada, including in the United States, where it may be accessible to authorities under local law.</p>
+
+  <h2>Children</h2>
+  <p>This website and our store are not directed at children under 13, and we don’t knowingly collect their personal information. If you believe a child has given us information, write to us and we will delete it. If you are under the age of majority where you live, please ask a parent or guardian before buying.</p>
+
   <h2>Your rights</h2>
-  <p>[Placeholder: access, correction and deletion under Canada’s PIPEDA, and GDPR rights for people in the EU and UK.]</p>
+  <p>You can ask us to:</p>
+  <ul>
+    <li>tell you what personal information we hold about you, and give you a copy;</li>
+    <li>correct anything that is wrong;</li>
+    <li>delete your information, unless we must keep it by law (for example, tax records of a purchase);</li>
+    <li>stop sending you email.</li>
+  </ul>
+  <p>To make a request, email <a href={mail}>{SITE.supportEmail}</a> with “Privacy request” in the subject. We may ask you to confirm your identity, and we will reply within 30 days. If you are not satisfied with our answer, you can complain to the <a href="https://www.priv.gc.ca/">Office of the Privacy Commissioner of Canada</a>, or to your local data protection authority if you live in the EU or UK.</p>
+
+  <h2>Security</h2>
+  <p>The site is served only over HTTPS. We limit access to personal information to the people who need it to run the business, and we use providers that protect data with industry-standard security.</p>
+
+  <h2>Changes</h2>
+  <p>If we change this policy, we will update the date at the top of this page. If a change matters, we will also tell newsletter subscribers by email.</p>
+
   <h2>Contact</h2>
-  <p>[Placeholder: privacy contact. For now: {SITE.supportEmail}.]</p>
+  <p>Privacy questions go to {SITE.legalName}, {SITE.location}: <a href={mail}>{SITE.supportEmail}</a>.</p>
 </LegalPage>

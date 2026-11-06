@@ -1,0 +1,24 @@
+---
+import LegalPage from '../../components/LegalPage.astro';
+import { SITE } from '../../config/site';
+// TODO(moonbase): before the store opens, check which cookies Moonbase's
+// storefront script sets. If any are not strictly necessary for checkout or
+// sign-in, list them here and add a consent choice before they are set.
+---
+<LegalPage title="Cookie Policy" description="Windward Audio's website sets no cookies. What it stores, and what changes when you check out.">
+  <p>This website sets no cookies. It has no analytics, advertising or tracking scripts, so there is no cookie banner to click through.</p>
+
+  <h2>What your browser does store</h2>
+  <ul>
+    <li><strong>Pause motion:</strong> if you press “Pause motion” in the footer, your browser keeps that choice in local storage under the name <code>motion</code>. It never leaves your device. You can clear it by pressing “Play motion” or by clearing this site’s data in your browser.</li>
+  </ul>
+
+  <h2>Trailers</h2>
+  <p>Trailers are not loaded until you press play. When you do, they come from YouTube’s privacy-enhanced service (youtube-nocookie.com), which may store data in your browser once the video plays. See <a href="https://policies.google.com/technologies/cookies">how Google uses cookies</a>.</p>
+
+  <h2>Checkout and your account</h2>
+  <p>When the store is open, checkout and the account page are provided by Moonbase. They may use cookies that are strictly necessary to keep your cart and keep you signed in. We will list them here before the store opens.</p>
+
+  <h2>Questions</h2>
+  <p>Write to <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>. See also our <a href="/legal/privacy">privacy policy</a>.</p>
+</LegalPage>

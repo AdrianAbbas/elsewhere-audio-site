@@ -49,3 +49,20 @@ addEventListener('pagereveal', (e) => {
   card.style.viewTransitionName = card.dataset.vt!;
   ev.viewTransition!.finished.finally(() => { card.style.viewTransitionName = ''; });
 });
+
+// 3. "Pause motion" in the footer: stops every decorative animation on the
+//    site, and remembers the choice in this browser (nothing is sent anywhere).
+for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-motion-toggle]')) {
+  const sync = () => {
+    const off = root.dataset.motion === 'off';
+    btn.setAttribute('aria-pressed', String(off));
+    btn.textContent = off ? 'Play motion' : 'Pause motion';
+  };
+  sync();
+  btn.addEventListener('click', () => {
+    const off = root.dataset.motion !== 'off';
+    if (off) root.dataset.motion = 'off'; else delete root.dataset.motion;
+    try { localStorage.setItem('motion', off ? 'off' : 'on'); } catch { /* storage blocked: still works for this page */ }
+    sync();
+  });
+}

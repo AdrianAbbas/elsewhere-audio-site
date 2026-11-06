@@ -12,7 +12,7 @@ const intro = 'introPrice' in p ? p.introPrice : undefined;
   <span>{label} {p.name}</span>
   {showPrice && (
     <span class="btn__price">
-      {intro ? <><s aria-label={`was ${formatPrice(p.price)}`}>{formatPrice(p.price)}</s> {formatPrice(intro)}</> : formatPrice(p.price)}
+      {formatPrice(intro ?? p.price)}
     </span>
   )}
 </StoreButton>

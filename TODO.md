@@ -51,14 +51,19 @@ This list grows as each page is built.
 - [ ] `TODO(copy)`: confirm every support answer (`src/pages/support.astro`): installer steps, activations per licence, moving a licence, offline activation steps, refund policy, reply time.
 - [ ] In the plugin repos (not this one): change the manufacturer from "Veil Audio" to "Windward Audio" in all four (WORLDBUILDER, LIMINAL, DUNGEON CRAWLER, LIGHT SEEKER). The support steps already say "AU Instruments → Windward Audio → …".
 - [ ] `TODO(moonbase)`: embed the customer portal on /account (`mountAccountPortal` in `src/scripts/store.ts`).
-- [ ] `TODO(legal)`: replace the EULA, Privacy Policy and Terms (`src/pages/legal/`). All three are marked "DRAFT – to be replaced". Update the privacy policy when analytics, the newsletter and Moonbase are connected.
+- [ ] `TODO(legal)`: have a lawyer review the six legal pages (`src/pages/legal/`): Terms, Privacy, Cookies, Refunds, EULA, Licences. They are full drafts now, still marked "DRAFT – to be replaced after legal review". Update Privacy and Cookies when analytics, the newsletter and Moonbase are connected.
+- [ ] `TODO(legal)`: the business mailing address (`mailingAddress` in `src/config/site.ts`). Ontario's Consumer Protection Act asks online sellers to show it before a sale. It appears on Terms and Support once filled in.
+- [ ] `TODO(legal)`: confirm the refund policy (drafted as 14 days, no questions asked, in `src/pages/legal/refunds.astro`, the support page and the WORLDBUILDER FAQ).
+- [ ] `TODO(legal)`: EULA: the number of computers per licence (drafted as [three]) and the update promise (drafted as free updates within a major version).
+- [ ] `TODO(moonbase)`: before the store opens, confirm whether Moonbase is merchant of record, what it collects, and which cookies its storefront sets. Link its privacy policy from Privacy. If it sets cookies that are not strictly necessary, list them on /legal/cookies and ask for consent before they are set (no banner is needed today: the site sets none).
+- [ ] `TODO(price)`: the date the WORLDBUILDER introductory price ends (pricing card on `/worldbuilder`). The site no longer shows the regular price struck through, since nothing has sold at it yet.
 
 ## Copy
 - [ ] `TODO(copy)`: home: hero sub-line, intro paragraphs, WORLDBUILDER summary (`src/pages/index.astro`).
 - [ ] `TODO(copy)`: sign-up blurb (`src/components/SignupForm.astro`).
 
 ## Sign-up
-- [ ] `TODO(signup)`: connect the email sign-up to a privacy-friendly newsletter provider (`src/components/SignupForm.astro`). It currently sends nothing.
+- [ ] `TODO(signup)`: connect the email sign-up to a privacy-friendly newsletter provider (`src/components/SignupForm.astro`). It currently sends nothing. The form already states consent in the way Canada's anti-spam law (CASL) expects: who is sending, why, and that you can unsubscribe. The provider must put an unsubscribe link and our contact details in every email, and keep a record of when each person signed up. Then name the provider in the privacy policy.
 
 ## Analytics
 - [ ] `TODO(analytics)`: choose a privacy-friendly, cookieless provider and paste its script where marked in `src/layouts/BaseLayout.astro`, then name it in the privacy policy.

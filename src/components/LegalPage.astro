@@ -5,7 +5,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { LEGAL_NAV, SITE } from '../config/site';
 
 interface Props { title: string; description: string; updated?: string }
-const { title, description, updated = 'TODO: date' } = Astro.props;
+// TODO(legal): set the real date when the reviewed text goes live.
+const DRAFTED = '2026-11-06';
+const { title, description, updated = new Intl.DateTimeFormat('en-CA', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(DRAFTED)) } = Astro.props;
 const path = Astro.url.pathname.replace(/\.html$/, '');
 ---
 <BaseLayout title={title} description={description} realm="house">
@@ -13,13 +15,13 @@ const path = Astro.url.pathname.replace(/\.html$/, '');
     <header class="legal__head">
       <p class="eyebrow">Legal</p>
       <h1>{title}</h1>
-      <p class="draft-flag" role="note">DRAFT – to be replaced</p>
+      <p class="draft-flag" role="note">DRAFT – to be replaced after legal review</p>
       <p class="muted legal__meta">{SITE.name} is a business name of {SITE.legalName}, {SITE.location}. Last updated: {updated}.</p>
     </header>
     <div class="doc">
       <slot />
     </div>
-    <p class="draft-flag legal__end" role="note">DRAFT – to be replaced. This placeholder is not legal advice and is not in force.</p>
+    <p class="draft-flag legal__end" role="note">DRAFT – to be replaced after legal review. This draft is not legal advice.</p>
     <nav class="legal__nav" aria-label="Legal documents">
       {LEGAL_NAV.map((l) => <a href={l.href} aria-current={path === l.href ? 'page' : undefined}>{l.label}</a>)}
     </nav>
@@ -32,6 +34,6 @@ const path = Astro.url.pathname.replace(/\.html$/, '');
   .legal__head h1 { font-size: var(--step-5); }
   .legal__meta { font-size: var(--step--1); }
   .legal__end { justify-self: start; }
-  .legal__nav { display: flex; gap: var(--space-l); padding-top: var(--space-m); border-top: 1px solid var(--line); font-size: var(--step--1); }
+  .legal__nav { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-l); padding-top: var(--space-m); border-top: 1px solid var(--line); font-size: var(--step--1); }
   .legal__nav a[aria-current='page'] { color: var(--ink); text-decoration: none; font-weight: 600; }
 </style>

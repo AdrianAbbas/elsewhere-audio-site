@@ -34,7 +34,7 @@ const {
   overlayNav = false,
 } = Astro.props;
 
-const fullTitle = title === SITE.name ? `${SITE.name} — ${SITE.tagline}` : `${title} · ${SITE.name}`;
+const fullTitle = title === SITE.name ? `${SITE.name} · ${SITE.tagline}` : `${title} · ${SITE.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogUrl = new URL(ogImage, Astro.site);
 ---
@@ -68,7 +68,7 @@ const ogUrl = new URL(ogImage, Astro.site);
     <link rel="preload" href={frauncesUrl} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={instrumentUrl} as="font" type="font/woff2" crossorigin />
 
-    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script is:inline>document.documentElement.classList.add('js');try{if(localStorage.getItem('motion')==='off')document.documentElement.dataset.motion='off'}catch(e){}</script>
 
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
 

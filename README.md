@@ -43,7 +43,7 @@ Then open <http://localhost:4321/styleguide>.
 | `/about` | fantasy (candlelit) | The story, who makes it, sounds recorded by hand, LJP Records |
 | `/support` | house | Installation, activation, offline activation, refunds, requirements, contact |
 | `/account` | house | Placeholder for the Moonbase customer portal (not indexed) |
-| `/legal/eula`, `/legal/privacy`, `/legal/terms` | house | Drafts, marked "DRAFT – to be replaced" |
+| `/legal/terms`, `/legal/privacy`, `/legal/cookies`, `/legal/refunds`, `/legal/eula`, `/legal/licences` | house | Full drafts, marked "DRAFT – to be replaced after legal review" |
 | `/404` | threshold | "This place doesn't exist… yet." |
 | `/styleguide` | house | Internal design reference (not linked, not indexed) |
 
@@ -51,7 +51,7 @@ WORLDBUILDER's content (Places, features, requirements, FAQ, trailer ID) lives i
 
 ## Quality checks
 
-At the last check every public page scored 96–100 for Lighthouse performance and 100 for accessibility, best practices and SEO, on mobile and desktop, with no automated accessibility (axe) violations and no horizontal scrolling at phone width. To re-check after changes:
+At the last check every public page scored 94–100 for Lighthouse performance and 100 for accessibility, best practices and SEO, on mobile and desktop, with no automated accessibility (axe) violations and no horizontal scrolling at phone width. To re-check after changes:
 
 ```bash
 npm run build && npm run preview
@@ -71,7 +71,7 @@ npx lighthouse http://localhost:4321/ --view
 - **Realms** (`src/styles/realms.css`) are themes made of CSS custom properties, chosen with `data-realm` on `<body>`. `house` is the logo's palette (ink, night, cream, ember, gold, teal) and is used by every main page, and by the nav and footer everywhere. Product pages keep their own (`scifi`, `liminal`, `dungeon`, `radiant`). Pages pick theirs through the layout, e.g. `<BaseLayout realm="fantasy">`. A realm can also be set on any element, which is how `/styleguide` shows realms side by side.
 - **Contrast**: `/styleguide` reads `realms.css` at build time and shows WCAG AA ratios for every realm. If you change a colour, check that page.
 - **Fonts** are open-licensed (SIL OFL) and self-hosted, bundled from npm by `src/styles/fonts.css`: Fraunces (display), Instrument Sans (body) and IBM Plex Mono (sci-fi labels).
-- **Motion** lives in `src/styles/motion.css` (plus about 0.6 KB of JS in `src/scripts/motion.ts`): cross-document View Transitions between pages (the nav holds still, product art morphs into its hero), scroll reveals that play once, hover lifts, and a few ambient layers per realm (`.ambient` in the layout). Only `transform` and `opacity` animate; it all pauses in a hidden tab and turns off under `prefers-reduced-motion`. Audio never autoplays.
+- **Motion** lives in `src/styles/motion.css` (plus about 1.5 KB of JS in `src/scripts/motion.ts`): cross-document View Transitions between pages (the nav holds still, product art morphs into its hero), scroll reveals that play once, and a few ambient layers on the later product pages (`.ambient` in the layout). Hover answers with colour and edges, never movement. Only `transform` and `opacity` animate; it all pauses in a hidden tab, stops with the footer's "Pause motion" button, and turns off under `prefers-reduced-motion`. Audio never autoplays.
 - **Pixel art** belongs to WORLDBUILDER surfaces only (`src/components/art/TinyPlanet.astro`). Never use it in site chrome.
 
 **Artwork.** The home hero and the teaser scenes are painted in code: SVG with filters (fractal clouds, haze, mist, bloom) in `scripts/art/`. `npm run art` renders them once, using a headless browser, into WebP sources in `src/assets/art/`, and Astro serves them as responsive AVIF/WebP. Visitors download a small image (the hero is about 25 KB as AVIF), never the filters. To change the art, edit `scripts/art/*.mjs` and run `npm run art`. It needs Playwright with Chromium (`npm i -D playwright` then `npx playwright install chromium`). Real artwork can replace any of these files directly.

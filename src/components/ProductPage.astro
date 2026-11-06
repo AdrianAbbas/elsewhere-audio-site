@@ -56,7 +56,7 @@ const schema = {
 
   {p.editions && (
     <section class="pp-editions wrap-wide reveal" aria-labelledby="editions-title">
-      <h2 id="editions-title" class="pp-h2">Two plug-ins, one world</h2>
+      <h2 id="editions-title" class="pp-h2">The instrument and its effect</h2>
       <div class="pp-editions__grid">
         {p.editions.map((e) => <article class="pp-edition"><h3>{e.name}</h3><p>{e.body}</p></article>)}
       </div>
@@ -179,7 +179,7 @@ const schema = {
 
   .pp-worlds { padding-block: var(--space-2xl); }
   .pp-worlds__grid { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-s); grid-template-columns: 1fr; }
-  /* Ten locations each: 2 or 5 columns divide them evenly */
+  /* 10 locations each: 2 or 5 columns divide them evenly */
   @media (min-width: 40rem) { .pp-worlds__grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 80rem) { .pp-worlds__grid { grid-template-columns: repeat(5, 1fr); } }
   .pp-world { display: grid; gap: var(--space-2xs); align-content: start; padding: var(--space-m); border: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 80%, transparent); }

@@ -38,7 +38,9 @@ export const STORE = {
 
 export type ProductKey = keyof typeof STORE.products;
 
+// Intl keeps the format right; en-CA prints "US$89".
+const usd = new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 export function formatPrice(amount: number): string {
   if (amount === 0) return 'Free';
-  return `US$${amount}`;
+  return usd.format(amount);
 }
