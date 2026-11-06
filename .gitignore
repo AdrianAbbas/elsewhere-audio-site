@@ -14,3 +14,5 @@ dist/
 *.aif
 *.aiff
 .review/
+# Playwright CLI output (may contain credentials)
+.playwright-cli/
