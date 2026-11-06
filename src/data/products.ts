@@ -50,7 +50,6 @@ export interface ProductDetail extends Product {
   worlds: { title: string; lede: string; groups: WorldGroup[] };
   extra?: { title: string; lede: string; chips: string[] };
   features: { title: string; body: string }[];
-  sound: string;
   requirements: [string, string][];
 }
 
@@ -117,7 +116,6 @@ const liminal: ProductDetail = {
     { title: 'Scenes A and B, and evolution', body: 'Morph between two settings, or let the place drift slowly on its own.' },
     { title: 'The viewfinder', body: 'Photographic scenes fill the window. Their lights flicker with the hum and swell with the notes, with controls on thin strips like an old camcorder.' },
   ],
-  sound: 'Most instruments play our own recordings; the rest are modelled in real time.',
   requirements: [['System', MAC], ['Formats', 'Audio Unit (AU) and VST3, plus a standalone app'], ['Hosts', 'Logic Pro and GarageBand (tested), and other AU or VST3 hosts'], ['Extras', '114 presets, ambience export to WAV, Eco, Standard and High quality']],
 };
 
@@ -182,7 +180,6 @@ const dungeon: ProductDetail = {
     { title: 'A painted world', body: 'The map and all forty places are painterly scenes. The view zooms in with parallax, mist drifts, embers rise, windows flicker and the moon’s glow breathes.' },
     { title: 'Presets for both', body: 'Every instrument in its own place, instruments placed somewhere unexpected (church bells in the Crystal Cavern), and journeys for the effect.' },
   ],
-  sound: 'Many instruments play our own recordings (guitar, violin, kalimba, voice, banjo, djembes, piano and a soft synth pad); the rest are modelled in real time.',
   requirements: [['System', MAC], ['Formats', 'Two plug-ins, each as Audio Unit (AU) and VST3: the instrument and the effect'], ['Hosts', 'Logic Pro and GarageBand (tested), and other AU or VST3 hosts']],
 };
 
@@ -243,11 +240,9 @@ const light: ProductDetail = {
     { title: 'An instrument for every place', body: 'From Fanfare Trumpets to a Bouncy Kalimba, each with Tone, Attack, Release and a Character control of its own: the trumpets’ piccolo, the choir’s descant, the harp’s glissando.' },
     { title: 'Choirs that grow', body: 'Vowel morphs through the sung vowels; Ensemble brings singers in one by one, up to eight, each its own take and place in the stereo field.' },
     { title: 'Punch', body: 'Gain on hit: each note starts a little louder and settles back, set per instrument, with a limiter so it never clips.' },
-    { title: 'Real brass', body: 'The trumpets and horns are real recordings, shaped into LIGHT SEEKER’s own sound, with a little synthesised brass underneath for weight and shine.' },
-    { title: 'Signature spaces', body: 'Every place transforms the sound in a way no other place does, some from our own effect captures rebuilt as impulse responses.' },
+    { title: 'Signature spaces', body: 'Every place transforms the sound in a way no other place does.' },
     { title: 'A painted, sunlit world', body: 'A painterly map you zoom into, location by location, with scenes for every place.' },
   ],
-  sound: 'Some instruments play our own recordings (classical guitar, kalimba, violin and a soft analog synth pad). The brass comes from VSCO 2 Community Edition by Versilian Studios, released into the public domain (CC0). The rest are modelled in real time.',
   requirements: [['System', MAC], ['Formats', 'Two plug-ins, each as Audio Unit (AU) and VST3: the instrument and the effect'], ['Hosts', 'Logic Pro and GarageBand (tested), and other AU or VST3 hosts']],
 };
 
