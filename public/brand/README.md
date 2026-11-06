@@ -1,23 +1,24 @@
-# Elsewhere Audio: logo files
+# Windward Audio: logo files
 
-The Stone Gate logo: a castle gateway with a gold keystone and two torches,
-opening onto a dusk sky. All text is converted to outlines, so the SVGs need
+The Stone Gate logo: a stone gateway with a gold keystone and two torches,
+opening onto a dusk sky where a lone ghost ship sits on still water, mirrored
+in its reflection under a pale moon. All text is converted to outlines, so the SVGs need
 no fonts installed.
 
 ## Which file to use
 
 | Need | File |
 | --- | --- |
-| Website header, emails, banners | `lockup/elsewhere-horizontal-for-dark.svg` (or `-for-light`) |
-| Splash screens, posters, about page | `lockup/elsewhere-stacked-for-dark.svg` (or `-for-light`) |
-| Name only, no picture | `lockup/elsewhere-wordmark-for-dark.svg` (or `-for-light`) |
-| The picture on its own | `mark/elsewhere-mark-for-dark.svg` (or `-for-light`) |
-| One colour (merch, embossing, stamps) | `mark/elsewhere-mark-mono-ink.svg`, `-mono-cream.svg`, `-mono-gold.svg` |
-| App icon, plugin icon | `icon/elsewhere-app-icon.svg`, PNGs at 1024 / 512 / 256 |
-| Social media avatar (circle crop) | `icon/elsewhere-avatar-800.png` / `-400.png` |
-| Browser favicon (small sizes) | `icon/elsewhere-favicon.svg`, `icon/favicon.ico`, `icon/favicon-32.png` |
+| Website header, emails, banners | `lockup/windward-horizontal-for-dark.svg` (or `-for-light`) |
+| Splash screens, posters, about page | `lockup/windward-stacked-for-dark.svg` (or `-for-light`) |
+| Name only, no picture | `lockup/windward-wordmark-for-dark.svg` (or `-for-light`) |
+| The picture on its own | `mark/windward-mark-for-dark.svg` (or `-for-light`) |
+| One colour (merch, embossing, stamps) | `mark/windward-mark-mono-ink.svg`, `-mono-cream.svg`, `-mono-gold.svg` |
+| App icon, plugin icon | `icon/windward-app-icon.svg`, PNGs at 1024 / 512 / 256 |
+| Social media avatar (circle crop) | `icon/windward-avatar-800.png` / `-400.png` |
+| Browser favicon (small sizes) | `icon/windward-favicon.svg`, `icon/favicon.ico`, `icon/favicon-32.png` |
 | iPhone home-screen icon | `icon/apple-touch-icon.png` (180 px) |
-| With the label credit (about page, press kit only) | `lockup/elsewhere-horizontal-with-credit-*.svg` |
+| With the label credit (about page, press kit only) | `lockup/windward-horizontal-with-credit-*.svg` |
 
 `-for-dark` files go on dark backgrounds; `-for-light` files go on light ones.
 Below about 48 px, use the simplified favicon, not the full mark.
@@ -36,9 +37,9 @@ Below about 48 px, use the simplified favicon, not the full mark.
 
 ## Fonts
 
-- "Elsewhere": **Grenze Gotisch**, SemiBold (600)
+- "Windward": **Grenze Gotisch**, SemiBold (600)
 - "AUDIO" and small capitals: **Cinzel**, SemiBold (600)
 
 Both are free under the SIL Open Font License and available on Google Fonts.
 
-Elsewhere Audio is a business name of LJP Records Inc.
+Windward Audio is a business name of LJP Records Inc.
